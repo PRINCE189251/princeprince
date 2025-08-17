@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Summaries</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(-45deg, #89f7fe, #66a6ff, #ffdde1, #ee9ca7);
+      background-size: 400% 400%;
+      animation: gradientBG 12s ease infinite;
+      color: #fff;
+      line-height: 1.6;
+    }
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 40px;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+    }
+    .search-box {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .search-box input {
+      padding: 10px;
+      width: 60%;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+    .card {
+      background: rgba(0,0,0,0.6);
+      border-radius: 15px;
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    }
+    .card img {
+      max-width: 150px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .card a {
+      display: block;
+      margin-top: 10px;
+      text-decoration: none;
+      padding: 8px 15px;
+      border-radius: 8px;
+      background: #ff9800;
+      color: #000;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    .card a:hover {
+      background: #fb8c00;
+    }
+    .nav-top { text-align: right; margin: 10px; }
+    .nav-top a {
+      text-decoration: none; padding: 8px 15px; border-radius: 8px;
+      background: #4caf50; color: #fff; font-weight: bold; transition: background 0.3s;
+    }
+    .nav-top a:hover { background: #388e3c; }
+  </style>
+  <script>
+    function searchBooks() {
+      let input = document.getElementById("searchInput").value.toLowerCase();
+      let cards = document.getElementsByClassName("card");
+      for (let i = 0; i < cards.length; i++) {
+        let title = cards[i].getElementsByTagName("h3")[0].innerText.toLowerCase();
+        if (title.includes(input)) {
+          cards[i].style.display = "block";
+        } else {
+          cards[i].style.display = "none";
+        }
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="nav-top"><a href="index.html">🏠 Home</a></div>
+  <div class="container">
+    <h1>Explore Book Summaries</h1>
+
+    <div class="search-box">
+      <input type="text" id="searchInput" onkeyup="searchBooks()" placeholder="🔍 Search for a book...">
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <img src="https://m.media-amazon.com/images/I/81l3rZK4lnL.jpg" alt="Ikigai">
+        <h3>Ikigai</h3>
+        <a href="summary1.html">Read Summary</a>
+      </div>
+      <div class="card">
+        <img src="https://m.media-amazon.com/images/I/91bYsX41DVL.jpg" alt="Atomic Habits">
+        <h3>Atomic Habits</h3>
+        <a href="summary2.html">Read Summary</a>
+      </div>
+      <div class="card">
+        <img src="https://m.media-amazon.com/images/I/81s6DUyQCZL.jpg" alt="Think Like a Monk">
+        <h3>Think Like a Monk</h3>
+        <a href="summary3.html">Read Summary</a>
+      </div>
+      <div class="card">
+        <img src="https://m.media-amazon.com/images/I/71aFt4+OTOL.jpg" alt="The Alchemist">
+        <h3>The Alchemist</h3>
+        <a href="summary4.html">Read Summary</a>
+      </div>
+      <div class="card">
+        <img src="https://m.media-amazon.com/images/I/81bsw6fnUiL.jpg" alt="Rich Dad Poor Dad">
+        <h3>Rich Dad Poor Dad</h3>
+        <a href="summary5.html">Read Summary</a>
+      </div>
+      <div class="card">
+        <img src="https://m.media-amazon.com/images/I/71vk6p-+ZrL.jpg" alt="Wings of Fire">
+        <h3>Wings of Fire</h3>
+        <a href="summary6.html">Read Summary</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

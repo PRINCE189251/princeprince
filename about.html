@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | Book Hub</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(-45deg, #d4fc79, #96e6a1, #84fab0, #8fd3f4);
+      background-size: 400% 400%;
+      animation: gradientBG 12s ease infinite;
+      color: #333;
+      line-height: 1.6;
+    }
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+    .nav-top { text-align: right; padding: 10px; }
+    .nav-top a {
+      text-decoration: none; padding: 8px 15px; border-radius: 8px;
+      background: #2e7d32; color: #fff; font-weight: bold; transition: background 0.3s;
+    }
+    .nav-top a:hover { background: #1b5e20; }
+    .hero {
+      text-align: center;
+      padding: 50px 20px;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      color: #2e7d32;
+      margin-bottom: 10px;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      color: #444;
+    }
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+    h2 {
+      margin-top: 40px;
+      color: #1565c0;
+      text-align: center;
+    }
+    .team {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 20px;
+      gap: 20px;
+    }
+    .member {
+      background: #f1f8e9;
+      border-radius: 15px;
+      padding: 20px;
+      width: 240px;
+      text-align: center;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .member:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    }
+    .member h3 {
+      margin: 10px 0 5px;
+      color: #2e7d32;
+    }
+    .member p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #555;
+    }
+    .quote {
+      text-align: center;
+      font-style: italic;
+      color: #ff5722;
+      margin: 40px auto;
+      font-size: 1.3rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="nav-top"><a href="index.html">🏠 Home</a></div>
+
+  <section class="hero">
+    <h1>About Us</h1>
+    <p>We are students on a mission to make knowledge simple, accessible, and inspiring for everyone.</p>
+  </section>
+
+  <div class="container">
+    <!-- Quote moved above Mission -->
+    <div class="quote">“Books are not just stories, they are bridges to infinite worlds.”</div>
+
+    <h2>🎯 Our Mission</h2>
+    <p style="text-align: center;">
+      We aim to share wisdom from books in bite-sized, engaging summaries that save time, inspire action, and help students and readers build lifelong learning habits.
+    </p>
+
+    <h2>🌟 Our Team</h2>
+    <div class="team">
+      <div class="member">
+        <h3> Piyush</h3>
+        <p>The Explorer – always curious, turning ideas into creative sparks.</p>
+      </div>
+      <div class="member">
+        <h3> Prince</h3>
+        <p>The Strategist – shaping our vision and giving direction to our journey.</p>
+      </div>
+      <div class="member">
+        <h3> Deepak</h3>
+        <p>The Problem Solver – bringing innovative and practical solutions to life.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
