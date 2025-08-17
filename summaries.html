@@ -4,35 +4,46 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Book Summaries</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
+    :root {
+      --bg-light: linear-gradient(-45deg, #89f7fe, #66a6ff, #ffdde1, #ee9ca7);
+      --bg-dark: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #1c1c2e);
+      --text-light: #000;
+      --text-dark: #fff;
+    }
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(-45deg, #89f7fe, #66a6ff, #ffdde1, #ee9ca7);
+      background: var(--bg-light);
       background-size: 400% 400%;
       animation: gradientBG 12s ease infinite;
-      color: #fff;
+      color: var(--text-light);
       line-height: 1.6;
+      transition: background 0.5s, color 0.5s;
+    }
+    body.dark-mode {
+      background: var(--bg-dark);
+      color: var(--text-dark);
     }
     @keyframes gradientBG {
       0% {background-position: 0% 50%;}
       50% {background-position: 100% 50%;}
       100% {background-position: 0% 50%;}
     }
+    .nav-top { text-align: right; margin: 10px; }
+    .nav-top a {
+      text-decoration: none; padding: 8px 15px; border-radius: 8px;
+      background: #4caf50; color: #fff; font-weight: bold; transition: background 0.3s;
+    }
+    .nav-top a:hover { background: #388e3c; }
     .container {
       max-width: 1000px;
       margin: auto;
       padding: 40px;
     }
-    h1 {
-      text-align: center;
-      font-size: 2.5rem;
-      margin-bottom: 30px;
-    }
-    .search-box {
-      text-align: center;
-      margin-bottom: 30px;
-    }
+    h1 { text-align: center; font-size: 2.5rem; margin-bottom: 30px; }
+    .search-box { text-align: center; margin-bottom: 30px; }
     .search-box input {
       padding: 10px;
       width: 60%;
@@ -40,6 +51,20 @@
       border-radius: 8px;
       font-size: 1rem;
     }
+    .toggle-buttons {
+      margin: 15px;
+      text-align: center;
+    }
+    .toggle-buttons button {
+      margin: 0 8px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .toggle-buttons button:hover { opacity: 0.8; }
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -61,6 +86,9 @@
       margin-bottom: 15px;
       border-radius: 10px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      object-fit: cover;
+      height: 220px;
+      width: 150px;
     }
     .card a {
       display: block;
@@ -73,16 +101,60 @@
       font-weight: bold;
       transition: background 0.3s;
     }
-    .card a:hover {
-      background: #fb8c00;
-    }
-    .nav-top { text-align: right; margin: 10px; }
-    .nav-top a {
-      text-decoration: none; padding: 8px 15px; border-radius: 8px;
-      background: #4caf50; color: #fff; font-weight: bold; transition: background 0.3s;
-    }
-    .nav-top a:hover { background: #388e3c; }
+    .card a:hover { background: #fb8c00; }
   </style>
+</head>
+<body>
+  <div class="nav-top">
+    <a href="index.html" data-en="🏠 Home">🏠 होम</a>
+  </div>
+
+  <div class="toggle-buttons">
+    <button id="langToggle">🌐 भाषा</button>
+    <button id="modeToggle">🌓 Dark/Light</button>
+  </div>
+
+  <div class="container">
+    <h1 data-en="Explore Book Summaries">किताबों के सारांश खोजें</h1>
+
+    <div class="search-box">
+      <input type="text" id="searchInput" onkeyup="searchBooks()" placeholder="🔍 Search for a book..." data-en="🔍 Search for a book...">
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <img src="https://m.media-amazon.com/images/I/81l3rZK4lnL.jpg" alt="Ikigai">
+        <h3 data-en="Ikigai">इकिगाई</h3>
+        <a href="summary1.html" data-en="Read Summary">सारांश पढ़ें</a>
+      </div>
+      <div class="card">
+        <img src="https://m.media-amazon.com/images/I/91bYsX41DVL.jpg" alt="Atomic Habits">
+        <h3 data-en="Atomic Habits">एटॉमिक हैबिट्स</h3>
+        <a href="summary2.html" data-en="Read Summary">सारांश पढ़ें</a>
+      </div>
+      <div class="card">
+        <img src="https://m.media-amazon.com/images/I/81s6DUyQCZL.jpg" alt="Think Like a Monk">
+        <h3 data-en="Think Like a Monk">साधु की तरह सोचें</h3>
+        <a href="summary3.html" data-en="Read Summary">सारांश पढ़ें</a>
+      </div>
+      <div class="card">
+        <img src="https://m.media-amazon.com/images/I/71aFt4+OTOL.jpg" alt="The Alchemist">
+        <h3 data-en="The Alchemist">द अल्केमिस्ट</h3>
+        <a href="summary4.html" data-en="Read Summary">सारांश पढ़ें</a>
+      </div>
+      <div class="card">
+        <img src="https://m.media-amazon.com/images/I/81bsw6fnUiL.jpg" alt="Rich Dad Poor Dad">
+        <h3 data-en="Rich Dad Poor Dad">रिच डैड पुअर डैड</h3>
+        <a href="summary5.html" data-en="Read Summary">सारांश पढ़ें</a>
+      </div>
+      <div class="card">
+        <img src="https://m.media-amazon.com/images/I/71vk6p-+ZrL.jpg" alt="Wings of Fire">
+        <h3 data-en="Wings of Fire">विंग्स ऑफ़ फायर</h3>
+        <a href="summary6.html" data-en="Read Summary">सारांश पढ़ें</a>
+      </div>
+    </div>
+  </div>
+
   <script>
     function searchBooks() {
       let input = document.getElementById("searchInput").value.toLowerCase();
@@ -96,49 +168,29 @@
         }
       }
     }
+
+    // Dark/Light Mode
+    const modeBtn = document.getElementById("modeToggle");
+    modeBtn.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+      localStorage.setItem("darkMode", document.body.classList.contains("dark-mode"));
+    });
+    if(localStorage.getItem("darkMode") === "true"){ document.body.classList.add("dark-mode"); }
+
+    // Hindi Language Toggle
+    const langBtn = document.getElementById("langToggle");
+    langBtn.addEventListener("click", () => {
+      const texts = document.querySelectorAll("[data-en]");
+      texts.forEach(el => {
+        if(el.dataset.active === "hi"){
+          el.innerText = el.dataset.en;
+          el.dataset.active = "en";
+        } else {
+          el.innerText = el.dataset.hi || el.innerText;
+          el.dataset.active = "hi";
+        }
+      });
+    });
   </script>
-</head>
-<body>
-  <div class="nav-top"><a href="index.html">🏠 Home</a></div>
-  <div class="container">
-    <h1>Explore Book Summaries</h1>
-
-    <div class="search-box">
-      <input type="text" id="searchInput" onkeyup="searchBooks()" placeholder="🔍 Search for a book...">
-    </div>
-
-    <div class="grid">
-      <div class="card">
-        <img src="https://m.media-amazon.com/images/I/81l3rZK4lnL.jpg" alt="Ikigai">
-        <h3>Ikigai</h3>
-        <a href="summary1.html">Read Summary</a>
-      </div>
-      <div class="card">
-        <img src="https://m.media-amazon.com/images/I/91bYsX41DVL.jpg" alt="Atomic Habits">
-        <h3>Atomic Habits</h3>
-        <a href="summary2.html">Read Summary</a>
-      </div>
-      <div class="card">
-        <img src="https://m.media-amazon.com/images/I/81s6DUyQCZL.jpg" alt="Think Like a Monk">
-        <h3>Think Like a Monk</h3>
-        <a href="summary3.html">Read Summary</a>
-      </div>
-      <div class="card">
-        <img src="https://m.media-amazon.com/images/I/71aFt4+OTOL.jpg" alt="The Alchemist">
-        <h3>The Alchemist</h3>
-        <a href="summary4.html">Read Summary</a>
-      </div>
-      <div class="card">
-        <img src="https://m.media-amazon.com/images/I/81bsw6fnUiL.jpg" alt="Rich Dad Poor Dad">
-        <h3>Rich Dad Poor Dad</h3>
-        <a href="summary5.html">Read Summary</a>
-      </div>
-      <div class="card">
-        <img src="https://m.media-amazon.com/images/I/71vk6p-+ZrL.jpg" alt="Wings of Fire">
-        <h3>Wings of Fire</h3>
-        <a href="summary6.html">Read Summary</a>
-      </div>
-    </div>
-  </div>
 </body>
 </html>
