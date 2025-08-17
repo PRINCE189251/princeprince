@@ -4,40 +4,60 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About Us | Book Hub</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
+    :root {
+      --bg-light: linear-gradient(-45deg, #d4fc79, #96e6a1, #84fab0, #8fd3f4);
+      --bg-dark: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #1c1c2e);
+      --text-light: #333;
+      --text-dark: #fff;
+    }
+
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(-45deg, #d4fc79, #96e6a1, #84fab0, #8fd3f4);
+      background: var(--bg-light);
       background-size: 400% 400%;
       animation: gradientBG 12s ease infinite;
-      color: #333;
+      color: var(--text-light);
       line-height: 1.6;
+      transition: background 0.5s, color 0.5s;
     }
+
+    body.dark-mode {
+      background: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
     @keyframes gradientBG {
       0% {background-position: 0% 50%;}
       50% {background-position: 100% 50%;}
       100% {background-position: 0% 50%;}
     }
+
     .nav-top { text-align: right; padding: 10px; }
     .nav-top a {
       text-decoration: none; padding: 8px 15px; border-radius: 8px;
       background: #2e7d32; color: #fff; font-weight: bold; transition: background 0.3s;
     }
     .nav-top a:hover { background: #1b5e20; }
-    .hero {
-      text-align: center;
-      padding: 50px 20px;
+
+    header { text-align: center; padding: 50px 20px; }
+    header h1 { font-size: 3rem; color: #2e7d32; margin-bottom: 10px; text-shadow: 0 0 10px rgba(0,0,0,0.3); }
+    header p { font-size: 1.2rem; color: inherit; }
+
+    .toggle-buttons { margin: 15px; text-align: center; }
+    .toggle-buttons button {
+      margin: 0 8px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
     }
-    .hero h1 {
-      font-size: 3rem;
-      color: #2e7d32;
-      margin-bottom: 10px;
-    }
-    .hero p {
-      font-size: 1.2rem;
-      color: #444;
-    }
+    .toggle-buttons button:hover { opacity: 0.8; }
+
     .container {
       max-width: 1000px;
       margin: auto;
@@ -46,11 +66,9 @@
       border-radius: 15px;
       box-shadow: 0 8px 25px rgba(0,0,0,0.15);
     }
-    h2 {
-      margin-top: 40px;
-      color: #1565c0;
-      text-align: center;
-    }
+
+    h2 { margin-top: 40px; color: #1565c0; text-align: center; }
+
     .team {
       display: flex;
       justify-content: center;
@@ -69,17 +87,21 @@
     }
     .member:hover {
       transform: translateY(-8px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      box-shadow: 0 0 20px #2e7d32;
     }
-    .member h3 {
-      margin: 10px 0 5px;
-      color: #2e7d32;
+    .member h3 { margin: 10px 0 5px; color: #2e7d32; }
+    .member p { margin: 0; font-size: 0.95rem; color: #555; }
+
+    .socials { margin-top: 12px; }
+    .socials a {
+      margin: 0 8px;
+      font-size: 1.3rem;
+      text-decoration: none;
+      color: #1565c0;
+      transition: color 0.3s;
     }
-    .member p {
-      margin: 0;
-      font-size: 0.95rem;
-      color: #555;
-    }
+    .socials a:hover { color: #ff5722; }
+
     .quote {
       text-align: center;
       font-style: italic;
@@ -87,40 +109,129 @@
       margin: 40px auto;
       font-size: 1.3rem;
     }
+
+    .journey { margin-top: 50px; text-align: center; }
+    .journey ul {
+      list-style: none;
+      padding: 0;
+      max-width: 700px;
+      margin: auto;
+    }
+    .journey li {
+      background: rgba(0,0,0,0.05);
+      margin: 12px 0;
+      padding: 12px 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      background: rgba(0,0,0,0.1);
+      font-size: 0.9rem;
+      color: inherit;
+    }
   </style>
 </head>
 <body>
-  <div class="nav-top"><a href="index.html">🏠 Home</a></div>
+  <div class="nav-top">
+    <a href="index.html" data-en="🏠 Home">🏠 होम</a>
+    <a href="summaries.html" data-en="📖 Summaries">📖 सारांश</a>
+  </div>
 
-  <section class="hero">
-    <h1>About Us</h1>
-    <p>We are students on a mission to make knowledge simple, accessible, and inspiring for everyone.</p>
-  </section>
+  <div class="toggle-buttons">
+    <button id="langToggle">🌐 भाषा</button>
+    <button id="modeToggle">🌓 Dark/Light</button>
+  </div>
+
+  <header>
+    <h1 data-en="About Us">हमारे बारे में</h1>
+    <p data-en="We are students on a mission to make knowledge simple, accessible, and inspiring for everyone.">
+      हम विद्यार्थी हैं जो ज्ञान को सरल, सुलभ और प्रेरणादायक बनाने के मिशन पर हैं।
+    </p>
+  </header>
 
   <div class="container">
-    <!-- Quote moved above Mission -->
-    <div class="quote">“Books are not just stories, they are bridges to infinite worlds.”</div>
+    <div class="quote" data-en="“Books are not just stories, they are bridges to infinite worlds.”">
+      “किताबें सिर्फ कहानियाँ नहीं हैं, ये अनंत दुनियाओं के सेतु हैं।” 
+    </div>
 
-    <h2>🎯 Our Mission</h2>
-    <p style="text-align: center;">
-      We aim to share wisdom from books in bite-sized, engaging summaries that save time, inspire action, and help students and readers build lifelong learning habits.
+    <h2 data-en="🎯 Our Mission">🎯 हमारा मिशन</h2>
+    <p style="text-align:center;" data-en="We aim to share wisdom from books in bite-sized, engaging summaries that save time, inspire action, and help students and readers build lifelong learning habits.">
+      हमारा लक्ष्य है कि हम किताबों से ज्ञान को छोटे, रोचक सारांशों के माध्यम से साझा करें जो समय बचाएँ, प्रेरणा दें और छात्रों तथा पाठकों को जीवन भर सीखने की आदत बनाने में मदद करें।
     </p>
 
-    <h2>🌟 Our Team</h2>
+    <h2 data-en="🌟 Our Team">🌟 हमारी टीम</h2>
     <div class="team">
       <div class="member">
-        <h3> Piyush</h3>
-        <p>The Explorer – always curious, turning ideas into creative sparks.</p>
+        <h3 data-en="Piyush">पियूष</h3>
+        <p data-en="The Explorer – always curious, turning ideas into creative sparks.">अन्वेषक – हमेशा जिज्ञासु, विचारों को रचनात्मक ऊर्जा में बदलना।</p>
+        <div class="socials">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
       </div>
       <div class="member">
-        <h3> Prince</h3>
-        <p>The Strategist – shaping our vision and giving direction to our journey.</p>
+        <h3 data-en="Prince">प्रिंस</h3>
+        <p data-en="The Strategist – shaping our vision and giving direction to our journey.">रणनीतिकार – हमारी दृष्टि को आकार देना और यात्रा को दिशा देना।</p>
+        <div class="socials">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
       </div>
       <div class="member">
-        <h3> Deepak</h3>
-        <p>The Problem Solver – bringing innovative and practical solutions to life.</p>
+        <h3 data-en="Deepak">दीपक</h3>
+        <p data-en="The Problem Solver – bringing innovative and practical solutions to life.">समस्या समाधानकर्ता – अभिनव और व्यावहारिक समाधान लाना।</p>
+        <div class="socials">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
       </div>
     </div>
+
+    <h2 data-en="📜 Our Journey">📜 हमारी यात्रा</h2>
+    <div class="journey">
+      <ul>
+        <li data-en="Started as curious students seeking knowledge.">जिज्ञासु छात्र के रूप में ज्ञान की खोज शुरू की।</li>
+        <li data-en="Created Book Hub to simplify learning for everyone.">सभी के लिए सीखने को सरल बनाने के लिए बुक हब बनाया।</li>
+        <li data-en="Shared hundreds of summaries and insights online.">सैकड़ों सारांश और अंतर्दृष्टियाँ ऑनलाइन साझा की।</li>
+        <li data-en="Continuously improving and growing the platform.">लगातार प्लेटफ़ॉर्म को सुधारते और बढ़ाते रहना।</li>
+      </ul>
+    </div>
   </div>
+
+  <footer>
+    <p data-en="✨ Created with passion by Piyush, Prince & Deepak ✨">✨ पियूष, प्रिंस और दीपक द्वारा प्यार और मेहनत से बनाया गया ✨</p>
+  </footer>
+
+  <script>
+    // Dark/Light Mode
+    const modeBtn = document.getElementById("modeToggle");
+    modeBtn.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+      localStorage.setItem("darkMode", document.body.classList.contains("dark-mode"));
+    });
+    if(localStorage.getItem("darkMode") === "true"){ document.body.classList.add("dark-mode"); }
+
+    // Hindi Language Toggle
+    const langBtn = document.getElementById("langToggle");
+    langBtn.addEventListener("click", () => {
+      const texts = document.querySelectorAll("[data-en]");
+      texts.forEach(el => {
+        if(el.dataset.active === "hi"){
+          el.innerText = el.dataset.en;
+          el.dataset.active = "en";
+        } else {
+          el.innerText = el.dataset.hi || el.innerText;
+          el.dataset.active = "hi";
+        }
+      });
+    });
+  </script>
 </body>
 </html>
