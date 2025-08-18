@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login / Signup</title>
 </head>
 <body>
@@ -13,56 +14,52 @@
   <button onclick="signup()">Sign Up</button>
   <button onclick="login()">Login</button>
 
-  <p id="message"></p>
+  <p id="msg"></p>
 
-  <script type="module">
-    // Firebase import
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
-    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword }
-      from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"></script>
 
-    // 👇 Yaha tum apna Firebase config paste karo (jo tumhe screenshot me mila tha)
+  <script>
+    // Your Firebase configuration (jo tumhare project ka hai)
     const firebaseConfig = {
-      apiKey: "AIzaSyDWvmUZS190zRhi6HmXe0UsRAsuIQxgWM",
+      apiKey: "AIzaSyDWwnUZ5i90ZvRhi6HMxeOOsURAsIQgxgM",
       authDomain: "pdpbookhubvgd.firebaseapp.com",
       projectId: "pdpbookhubvgd",
       storageBucket: "pdpbookhubvgd.appspot.com",
-      messagingSenderId: "248048452875",
-      appId: "1:248048452875:web:a22f7213f7c844aaf1280e",
-      measurementId: "G-52876CFHS2"
+      messagingSenderId: "248040452875",
+      appId: "1:248040452875:web:a22f7213f7c844aaf1280e"
     };
 
     // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
 
     // Sign Up function
-    window.signup = function() {
+    function signup() {
       const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
 
-      createUserWithEmailAndPassword(auth, email, password)
-        .then(userCredential => {
-          document.getElementById("message").innerText = "✅ Account Created!";
+      auth.createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          document.getElementById("msg").innerText = "✅ Signup Successful!";
         })
-        .catch(error => {
-          document.getElementById("message").innerText = "❌ " + error.message;
+        .catch((error) => {
+          document.getElementById("msg").innerText = "❌ " + error.message;
         });
     }
 
     // Login function
-    window.login = function() {
+    function login() {
       const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
 
-      signInWithEmailAndPassword(auth, email, password)
-        .then(userCredential => {
-          document.getElementById("message").innerText = "✅ Login Successful!";
-          // Redirect user to home page
-          window.location.href = "index.html"; 
+      auth.signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          document.getElementById("msg").innerText = "✅ Login Successful!";
         })
-        .catch(error => {
-          document.getElementById("message").innerText = "❌ " + error.message;
+        .catch((error) => {
+          document.getElementById("msg").innerText = "❌ " + error.message;
         });
     }
   </script>
