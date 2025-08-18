@@ -16,12 +16,14 @@
 
   <p id="msg"></p>
 
-  <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"></script>
+  <!-- Firebase SDKs (modular v10 style) -->
+  <script type="module">
+    // Import Firebase
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } 
+      from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-  <script>
-    // Your Firebase configuration (jo tumhare project ka hai)
+    // Your Firebase Config
     const firebaseConfig = {
       apiKey: "AIzaSyDWwnUZ5i90ZvRhi6HMxeOOsURAsIQgxgM",
       authDomain: "pdpbookhubvgd.firebaseapp.com",
@@ -32,15 +34,15 @@
     };
 
     // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
 
-    // Sign Up function
-    function signup() {
+    // Signup function
+    window.signup = function() {
       const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
 
-      auth.createUserWithEmailAndPassword(email, password)
+      createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           document.getElementById("msg").innerText = "✅ Signup Successful!";
         })
@@ -50,11 +52,11 @@
     }
 
     // Login function
-    function login() {
+    window.login = function() {
       const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
 
-      auth.signInWithEmailAndPassword(email, password)
+      signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           document.getElementById("msg").innerText = "✅ Login Successful!";
         })
