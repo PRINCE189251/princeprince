@@ -3,93 +3,68 @@
 <head>
   <meta charset="UTF-8">
   <title>Login - BookHub</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background: #f4f4f9;
-    }
-    .container {
-      background: white;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      width: 320px;
-      text-align: center;
-    }
-    h2 {
-      margin-bottom: 20px;
-    }
-    input {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
-    button {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-    .login-btn {
-      background: #28a745;
-      color: white;
-    }
-    .signup-btn {
-      background: #007bff;
-      color: white;
-    }
-    .login-btn:hover { background: #218838; }
-    .signup-btn:hover { background: #0056b3; }
-  </style>
 </head>
 <body>
-  <div class="container">
-    <h2>Login</h2>
-    <input type="email" id="loginEmail" placeholder="Email">
-    <input type="password" id="loginPassword" placeholder="Password">
-    <button class="login-btn" onclick="login()">Login</button>
+  <h2>Login</h2>
+  <input type="email" id="loginEmail" placeholder="Email">
+  <input type="password" id="loginPassword" placeholder="Password">
+  <button onclick="login()">Login</button>
 
-    <h2>Sign Up</h2>
-    <input type="email" id="signupEmail" placeholder="Email">
-    <input type="password" id="signupPassword" placeholder="Password">
-    <button class="signup-btn" onclick="signup()">Sign Up</button>
-  </div>
+  <h2>Sign Up</h2>
+  <input type="email" id="signupEmail" placeholder="Email">
+  <input type="password" id="signupPassword" placeholder="Password">
+  <button onclick="signup()">Sign Up</button>
 
-  <script>
-    // Redirect if already logged in
-    if (localStorage.getItem("loggedIn")) {
-      window.location.href = "index.html";
-    }
+  <script type="module">
+    // Import Firebase SDKs
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } 
+      from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
 
-    function login() {
-      let email = document.getElementById("loginEmail").value;
-      let pass = document.getElementById("loginPassword").value;
+    // 🔥 Your Firebase Config
+    const firebaseConfig = {
+      apiKey: "AIzaSyAPutXLS9PU_Bn6kM2WpJbMdZZbo",
+      authDomain: "pdpbookhubvgd-79153.firebaseapp.com",
+      projectId: "pdpbookhubvgd-79153",
+      storageBucket: "pdpbookhubvgd-79153.firebasestorage.app",
+      messagingSenderId: "1066900766247",
+      appId: "1:1066900766247:web:2d7587c63ff50935d8802",
+      measurementId: "G-N3TJ4H0KNF"
+    };
 
-      // Demo login (fixed email & password)
-      if (email === "test@gmail.com" && pass === "123456") {
-        localStorage.setItem("loggedIn", "true");
-        alert("Login successful!");
-        window.location.href = "index.html";
-      } else {
-        alert("Invalid email or password!");
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // Signup function
+    async function signup() {
+      const email = document.getElementById("signupEmail").value;
+      const password = document.getElementById("signupPassword").value;
+      try {
+        await createUserWithEmailAndPassword(auth, email, password);
+        alert("✅ Signup successful! Now login with same credentials.");
+      } catch (error) {
+        alert("❌ Signup error: " + error.message);
       }
     }
 
-    function signup() {
-      let email = document.getElementById("signupEmail").value;
-      let pass = document.getElementById("signupPassword").value;
-      // Demo signup
-      alert("Account created for " + email + " (demo only, not saved).");
+    // Login function
+    async function login() {
+      const email = document.getElementById("loginEmail").value;
+      const password = document.getElementById("loginPassword").value;
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        alert("✅ Login successful!");
+        // Redirect to home page after login
+        window.location.href = "index.html";
+      } catch (error) {
+        alert("❌ Login error: " + error.message);
+      }
     }
+
+    // Expose functions to window
+    window.signup = signup;
+    window.login = login;
   </script>
 </body>
 </html>
