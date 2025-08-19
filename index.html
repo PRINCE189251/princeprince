@@ -15,6 +15,9 @@
   <input type="password" id="signupPassword" placeholder="Password">
   <button onclick="signup()">Sign Up</button>
 
+  <h2>Logout</h2>
+  <button onclick="logout()">Logout</button>
+
   <p id="message"></p>
 
   <!-- Firebase SDKs -->
@@ -47,7 +50,7 @@
           setTimeout(() => window.location.href = "index.html", 1000);
         })
         .catch(error => {
-          document.getElementById("message").innerText = error.message;
+          document.getElementById("message").innerText = "❌ " + error.message;
         });
     }
 
@@ -61,33 +64,29 @@
           setTimeout(() => window.location.href = "index.html", 1000);
         })
         .catch(error => {
-          document.getElementById("message").innerText = error.message;
+          document.getElementById("message").innerText = "❌ " + error.message;
         });
     }
 
-    // Already logged in? Redirect to index.html
+    // Logout function
+    function logout() {
+      auth.signOut()
+        .then(() => {
+          document.getElementById("message").innerText = "✅ Logged out successfully";
+        })
+        .catch(error => {
+          document.getElementById("message").innerText = "❌ " + error.message;
+        });
+    }
+
+    // Redirect if already logged in
     auth.onAuthStateChanged(user => {
       if (user) {
-        window.location.href = "index.html";
+        console.log("User is logged in:", user.email);
+      } else {
+        console.log("No user logged in");
       }
     });
-  </script><!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-<script>
-  const firebaseConfig = {
-    apiKey: "AIzaSyDWwnUZ5i90ZvRhi6HMxeOOsURAsIQgxgM",
-    authDomain: "pdpbookhubvgd.firebaseapp.com",
-    projectId: "pdpbookhubvgd",
-    storageBucket: "pdpbookhubvgd.firebasestorage.app",
-    messagingSenderId: "248040452875",
-    appId: "1:248040452875:web:a22f7213f7c844aaf1280e",
-    measurementId: "G-52587CFHS2"
-  };
-
-  firebase.initializeApp(firebaseConfig);
-</script>
-
+  </script>
 </body>
 </html>
-
