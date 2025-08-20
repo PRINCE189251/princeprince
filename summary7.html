@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wings of Fire - Book Summary</title>
+  <title>The Power of Now - Book Summary</title>
   <style>
     body {
       margin: 0;
@@ -28,16 +28,38 @@
       box-shadow: 0 8px 25px rgba(0,0,0,0.3);
     }
     h1 { text-align: center; font-size: 2.2rem; margin-bottom: 20px; }
-    img { display: block; margin: 20px auto; max-width: 220px; border-radius: 12px; box-shadow: 0 6px 18px rgba(0,0,0,0.4); }
+    img { display: block; margin: 20px auto; max-width: 230px; border-radius: 12px; box-shadow: 0 6px 18px rgba(0,0,0,0.4); }
     h2 { margin-top: 25px; border-left: 5px solid #ff9800; padding-left: 10px; }
     ul { margin: 15px 0; padding-left: 20px; }
     .quote { font-style: italic; margin: 25px 0; text-align: center; font-size: 1.2rem; color: #ff9800; }
-    .nav-top { text-align: right; }
-    .nav-top a {
-      text-decoration: none; padding: 8px 15px; border-radius: 8px;
-      background: #ff9800; color: #000; font-weight: bold; transition: background 0.3s;
+
+    /* Top navigation */
+    .nav-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0,0,0,0.7);
+      padding: 12px 25px;
     }
-    .nav-top a:hover { background: #fb8c00; }
+    .nav-bar .left button {
+      background: #ff9800;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .nav-bar .left button:hover { background: #fb8c00; }
+    .nav-bar .right a {
+      text-decoration: none;
+      padding: 8px 15px;
+      border-radius: 8px;
+      background: #4caf50;
+      color: #fff;
+      font-weight: bold;
+    }
+    .nav-bar .right a:hover { background: #388e3c; }
+
     .back-btn { display: block; text-align: center; margin-top: 30px; }
     .back-btn a {
       text-decoration: none; padding: 10px 18px; border-radius: 8px;
@@ -47,34 +69,61 @@
   </style>
 </head>
 <body>
-  <div class="nav-top"><a href="index.html">🏠 Home</a></div>
+
+  <!-- Nav Bar -->
+  <div class="nav-bar">
+    <div class="left">
+      <button id="langToggle">🌐 भाषा</button>
+    </div>
+    <div class="right">
+      <a href="index.html" data-en="🏠 Home" data-hi="🏠 गृह">🏠 Home</a>
+    </div>
+  </div>
+
   <div class="container">
-    <h1>Wings of Fire – The Journey of A.P.J. Abdul Kalam</h1>
-    <img src="https://m.media-amazon.com/images/I/71KKZlVjbwL.jpg" alt="Wings of Fire Book Cover">
+    <h1 data-en="The Power of Now – Eckhart Tolle" data-hi="द पावर ऑफ नाउ – एकहार्ट टॉले">The Power of Now – Eckhart Tolle</h1>
+    <img src="C:\Users\ACM10\Downloads\the pow.jpeg">
 
-    <p>
-      <b>Wings of Fire</b> is the autobiography of Dr. A.P.J. Abdul Kalam, the “Missile Man of India” and former President. It narrates his humble beginnings in Rameswaram, his struggles, and his rise as one of India’s most respected scientists and visionaries.
-    </p>
-    <p>
-      The book highlights the values of hard work, perseverance, and the power of dreams. It tells the inspiring story of a boy from a small town who, through dedication and faith, contributed to India’s defense and space research programs.
-    </p>
-    <p>
-      Kalam’s journey shows that no dream is too big if pursued with determination, humility, and a never-give-up attitude.
+    <p data-en="The Power of Now by Eckhart Tolle is a spiritual guide that teaches us how to live fully in the present moment." 
+       data-hi="द पावर ऑफ नाउ एकहार्ट टॉले द्वारा लिखी गई एक आध्यात्मिक पुस्तक है, जो हमें वर्तमान क्षण में पूरी तरह जीना सिखाती है।">
+       The Power of Now by Eckhart Tolle is a spiritual guide that teaches us how to live fully in the present moment.
     </p>
 
-    <h2>Key Lessons</h2>
+    <p data-en="It emphasizes that most of our stress, anxiety, and unhappiness come from dwelling on the past or worrying about the future."
+       data-hi="यह बताती है कि हमारा अधिकतर तनाव, चिंता और दुख अतीत में उलझने या भविष्य की चिंता करने से आता है।">
+       It emphasizes that most of our stress, anxiety, and unhappiness come from dwelling on the past or worrying about the future.
+    </p>
+
+    <h2 data-en="Key Lessons" data-hi="मुख्य सीख">Key Lessons</h2>
     <ul>
-      <li>Dreams are the first step toward success—dream big, work hard.</li>
-      <li>Failures are not setbacks but stepping stones to achievement.</li>
-      <li>Discipline, teamwork, and perseverance lead to greatness.</li>
-      <li>Stay humble no matter how high you rise.</li>
+      <li data-en="The present moment is all we truly have—life happens only Now."
+          data-hi="वर्तमान क्षण ही हमारे पास है—जीवन केवल अभी घटित होता है।">The present moment is all we truly have—life happens only Now.</li>
+      <li data-en="The mind often creates unnecessary suffering through overthinking."
+          data-hi="मन अक्सर अधिक सोचकर अनावश्यक कष्ट पैदा करता है।">The mind often creates unnecessary suffering through overthinking.</li>
+      <li data-en="Awareness and mindfulness free us from stress and negativity."
+          data-hi="सचेतना और mindfulness हमें तनाव और नकारात्मकता से मुक्त करती है।">Awareness and mindfulness free us from stress and negativity.</li>
+      <li data-en="Inner peace comes from acceptance and presence, not external things."
+          data-hi="आंतरिक शांति स्वीकृति और उपस्थिति से आती है, बाहरी चीजों से नहीं।">Inner peace comes from acceptance and presence, not external things.</li>
     </ul>
 
-    <div class="quote">
-      "Dream, dream, dream. Dreams transform into thoughts and thoughts result in action." – A.P.J. Abdul Kalam
+    <div class="quote" data-en='"Realize deeply that the present moment is all you ever have. Make the Now the primary focus of your life." – Eckhart Tolle'
+         data-hi='"गहराई से समझो कि वर्तमान क्षण ही सब कुछ है। अब को अपने जीवन का मुख्य केंद्र बनाओ।" – एकहार्ट टॉले'>
+      "Realize deeply that the present moment is all you ever have. Make the Now the primary focus of your life." – Eckhart Tolle
     </div>
 
-    <div class="back-btn"><a href="summaries.html">🔙 Back to Summaries</a></div>
+    <div class="back-btn"><a href="summaries.html" data-en="🔙 Back to Summaries" data-hi="🔙 सारांश पर वापस जाएं">🔙 Back to Summaries</a></div>
   </div>
+
+  <script>
+    const toggleBtn = document.getElementById('langToggle');
+    let isHindi = false;
+    toggleBtn.addEventListener('click', () => {
+      isHindi = !isHindi;
+      document.querySelectorAll('[data-en]').forEach(el => {
+        el.textContent = isHindi ? el.getAttribute('data-hi') : el.getAttribute('data-en');
+      });
+    });
+  </script>
+
 </body>
 </html>
