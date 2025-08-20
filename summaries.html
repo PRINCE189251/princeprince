@@ -31,12 +31,35 @@
       50% {background-position: 100% 50%;}
       100% {background-position: 0% 50%;}
     }
-    .nav-top { text-align: right; margin: 10px; }
-    .nav-top a {
-      text-decoration: none; padding: 8px 15px; border-radius: 8px;
-      background: #4caf50; color: #fff; font-weight: bold; transition: background 0.3s;
+    .nav-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
     }
-    .nav-top a:hover { background: #388e3c; }
+    .nav-bar .left {
+      display: flex;
+      gap: 10px;
+    }
+    .nav-bar button, .nav-bar a {
+      text-decoration: none;
+      padding: 8px 15px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .nav-bar button:hover, .nav-bar a:hover { opacity: 0.8; }
+    .nav-bar button {
+      background: #2196f3;
+      color: #fff;
+    }
+    .nav-bar a {
+      background: #4caf50;
+      color: #fff;
+    }
+
     .container {
       max-width: 1000px;
       margin: auto;
@@ -51,20 +74,7 @@
       border-radius: 8px;
       font-size: 1rem;
     }
-    .toggle-buttons {
-      margin: 15px;
-      text-align: center;
-    }
-    .toggle-buttons button {
-      margin: 0 8px;
-      padding: 8px 14px;
-      border-radius: 8px;
-      border: none;
-      cursor: pointer;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-    .toggle-buttons button:hover { opacity: 0.8; }
+
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -105,55 +115,65 @@
   </style>
 </head>
 <body>
-  <div class="nav-top">
-    <a href="index.html" data-en="🏠 Home">🏠 होम</a>
-  </div>
-
-  <div class="toggle-buttons">
-    <button id="langToggle">🌐 भाषा</button>
+  <div class="nav-bar">
+  <div class="left">
     <button id="modeToggle">🌓 Dark/Light</button>
+    <button id="langToggle">🌐 भाषा</button>
+  </div>
+  <div class="right">
+    <a href="index.html" data-en="🏠 Home" data-hi="🏠 गृह">🏠 Home</a>
+    <a href="summaries.html" data-en="📖 Summaries" data-hi="📖 सारांश">📖 Summaries</a>
+    <a href="about.html" data-en="ℹ️ About Us" data-hi="ℹ️ हमारे बारे में">ℹ️ About Us</a>
+  </div>
+</div>
+
   </div>
 
   <div class="container">
-    <h1 data-en="Explore Book Summaries">किताबों के सारांश खोजें</h1>
+    <h1 data-en="Explore Book Summaries" data-hi="किताबों के सारांश खोजें">Explore Book Summaries</h1>
 
     <div class="search-box">
-      <input type="text" id="searchInput" onkeyup="searchBooks()" placeholder="🔍 Search for a book..." data-en="🔍 Search for a book...">
+      <input type="text" id="searchInput" onkeyup="searchBooks()" placeholder="🔍 Search for a book..." data-en="🔍 Search for a book..." data-hi="🔍 किताब खोजें...">
     </div>
 
-    <div class="grid">
-      <div class="card">
-        <img src="https://m.media-amazon.com/images/I/81l3rZK4lnL.jpg" alt="Ikigai">
-        <h3 data-en="Ikigai">इकिगाई</h3>
-        <a href="summary1.html" data-en="Read Summary">सारांश पढ़ें</a>
-      </div>
-      <div class="card">
-        <img src="https://m.media-amazon.com/images/I/91bYsX41DVL.jpg" alt="Atomic Habits">
-        <h3 data-en="Atomic Habits">एटॉमिक हैबिट्स</h3>
-        <a href="summary2.html" data-en="Read Summary">सारांश पढ़ें</a>
-      </div>
-      <div class="card">
-        <img src="https://m.media-amazon.com/images/I/81s6DUyQCZL.jpg" alt="Think Like a Monk">
-        <h3 data-en="Think Like a Monk">साधु की तरह सोचें</h3>
-        <a href="summary3.html" data-en="Read Summary">सारांश पढ़ें</a>
-      </div>
-      <div class="card">
-        <img src="https://m.media-amazon.com/images/I/71aFt4+OTOL.jpg" alt="The Alchemist">
-        <h3 data-en="The Alchemist">द अल्केमिस्ट</h3>
-        <a href="summary4.html" data-en="Read Summary">सारांश पढ़ें</a>
-      </div>
-      <div class="card">
-        <img src="https://m.media-amazon.com/images/I/81bsw6fnUiL.jpg" alt="Rich Dad Poor Dad">
-        <h3 data-en="Rich Dad Poor Dad">रिच डैड पुअर डैड</h3>
-        <a href="summary5.html" data-en="Read Summary">सारांश पढ़ें</a>
-      </div>
-      <div class="card">
-        <img src="https://m.media-amazon.com/images/I/71vk6p-+ZrL.jpg" alt="Wings of Fire">
-        <h3 data-en="Wings of Fire">विंग्स ऑफ़ फायर</h3>
-        <a href="summary6.html" data-en="Read Summary">सारांश पढ़ें</a>
-      </div>
-    </div>
+  <div class="grid">
+  <div class="card">
+    <img src="https://m.media-amazon.com/images/I/81l3rZK4lnL.jpg" alt="Ikigai">
+    <h3 data-en="Ikigai" data-hi="इकिगाई">Ikigai</h3>
+    <a href="summary1.html" data-en="Read Summary" data-hi="सारांश पढ़ें">Read Summary</a>
   </div>
+  <div class="card">
+    <img src="https://m.media-amazon.com/images/I/91bYsX41DVL.jpg" alt="Atomic Habits">
+    <h3 data-en="Atomic Habits" data-hi="एटॉमिक हैबिट्स">Atomic Habits</h3>
+    <a href="summary2.html" data-en="Read Summary" data-hi="सारांश पढ़ें">Read Summary</a>
+  </div>
+  <div class="card">
+    <img src="https://m.media-amazon.com/images/I/81s6DUyQCZL.jpg" alt="Think Like a Monk">
+    <h3 data-en="Think Like a Monk" data-hi="साधु की तरह सोचें">Think Like a Monk</h3>
+    <a href="summary3.html" data-en="Read Summary" data-hi="सारांश पढ़ें">Read Summary</a>
+  </div>
+  <div class="card">
+    <img src="https://m.media-amazon.com/images/I/71aFt4+OTOL.jpg" alt="The Alchemist">
+    <h3 data-en="The Alchemist" data-hi="द अल्केमिस्ट">The Alchemist</h3>
+    <a href="summary4.html" data-en="Read Summary" data-hi="सारांश पढ़ें">Read Summary</a>
+  </div>
+  <div class="card">
+    <img src="https://m.media-amazon.com/images/I/81bsw6fnUiL.jpg" alt="Rich Dad Poor Dad">
+    <h3 data-en="Rich Dad Poor Dad" data-hi="रिच डैड पुअर डैड">Rich Dad Poor Dad</h3>
+    <a href="summary5.html" data-en="Read Summary" data-hi="सारांश पढ़ें">Read Summary</a>
+  </div>
+  <div class="card">
+    <img src="https://m.media-amazon.com/images/I/71vk6p-+ZrL.jpg" alt="Wings of Fire">
+    <h3 data-en="Wings of Fire" data-hi="विंग्स ऑफ़ फायर">Wings of Fire</h3>
+    <a href="summary6.html" data-en="Read Summary" data-hi="सारांश पढ़ें">Read Summary</a>
+  </div>
+  <!-- ✅ New Book Added -->
+  <div class="card">
+    <img src="C:\Users\ACM10\Downloads"\The Power.jpg">
+    <h3 data-en="The Power of Now" data-hi="द पावर ऑफ नाउ">The Power of Now</h3>
+    <a href="summary7.html" data-en="Read Summary" data-hi="सारांश पढ़ें">Read Summary</a>
+  </div>
+</div>
 
   <script>
     function searchBooks() {
@@ -177,7 +197,7 @@
     });
     if(localStorage.getItem("darkMode") === "true"){ document.body.classList.add("dark-mode"); }
 
-    // Hindi Language Toggle
+    // Language Toggle
     const langBtn = document.getElementById("langToggle");
     langBtn.addEventListener("click", () => {
       const texts = document.querySelectorAll("[data-en]");
@@ -186,7 +206,7 @@
           el.innerText = el.dataset.en;
           el.dataset.active = "en";
         } else {
-          el.innerText = el.dataset.hi || el.innerText;
+          el.innerText = el.dataset.hi;
           el.dataset.active = "hi";
         }
       });
