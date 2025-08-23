@@ -322,6 +322,84 @@
         el.innerText = el.innerText === el.dataset.en ? el.dataset.hi : el.dataset.en;
       });
     });
-  </script>
+  </script><!-- Chatbot Widget -->
+<div id="chatbot-container" style="
+  position: fixed; 
+  bottom: 20px; 
+  right: 20px; 
+  z-index: 9999;
+">
+  <button id="chat-toggle" style="
+    background: #4f46e5; 
+    color: white; 
+    border: none; 
+    border-radius: 50%; 
+    width: 60px; 
+    height: 60px; 
+    font-size: 24px; 
+    cursor: pointer; 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  ">💬</button>
+  
+  <div id="chat-window" style="
+    display: none; 
+    flex-direction: column; 
+    position: absolute; 
+    bottom: 70px; 
+    right: 0; 
+    width: 300px; 
+    height: 400px; 
+    background: white; 
+    border-radius: 12px; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    overflow: hidden;
+  ">
+    <div style="background:#4f46e5; color:white; padding:10px; text-align:center; font-weight:bold;">
+      📚 BookHub Chatbot
+    </div>
+    <div id="chat-messages" style="flex:1; padding:10px; overflow-y:auto; font-size:14px;">
+      <p><b>Bot:</b> Hi Prince! 👋 Ask me anything about books...</p>
+    </div>
+    <div style="display:flex; border-top:1px solid #ddd;">
+      <input id="chat-input" type="text" placeholder="Type a message..." style="flex:1; padding:10px; border:none; outline:none; font-size:14px;">
+      <button id="send-btn" style="background:#4f46e5; color:white; border:none; padding:10px; cursor:pointer;">➤</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const toggleBtn = document.getElementById("chat-toggle");
+  const chatWindow = document.getElementById("chat-window");
+  const sendBtn = document.getElementById("send-btn");
+  const input = document.getElementById("chat-input");
+  const messages = document.getElementById("chat-messages");
+
+  toggleBtn.onclick = () => {
+    chatWindow.style.display = chatWindow.style.display === "none" ? "flex" : "none";
+  };
+
+  sendBtn.onclick = sendMessage;
+  input.addEventListener("keypress", function(e) {
+    if (e.key === "Enter") sendMessage();
+  });
+
+  function sendMessage() {
+    const text = input.value.trim();
+    if (text === "") return;
+    
+    // Show user message
+    messages.innerHTML += `<p><b>You:</b> ${text}</p>`;
+    input.value = "";
+
+    // Dummy bot response (later connect to AI API)
+    setTimeout(() => {
+      let reply = "Hmm... interesting! Soon I'll answer from BookHub summaries.";
+      messages.innerHTML += `<p><b>Bot:</b> ${reply}</p>`;
+      messages.scrollTop = messages.scrollHeight;
+    }, 500);
+  }
+</script>
+
 </body>
 </html>
+
