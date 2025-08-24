@@ -3,344 +3,590 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Book Hub</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: '#5E35B1',
-            secondary: '#FFAB00',
-            dark: '#121212',
-            light: '#F5F5F5',
-          },
-          fontFamily: {
-            sans: ['"Space Grotesk"', 'sans-serif'],
-          },
-          animation: {
-            'float': 'float 6s ease-in-out infinite',
-          },
-          keyframes: {
-            float: {
-              '0%, 100%': { transform: 'translateY(0)' },
-              '50%': { transform: 'translateY(-20px)' },
-            }
-          }
-        }
+  <title>About Us - BookHub</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --primary-dark: #4338ca;
+      --accent: #f97316;
+      --light-bg: #f8fafc;
+      --dark-bg: #0f172a;
+      --light-text: #1e293b;
+      --dark-text: #f1f5f9;
+      --card-light: #ffffff;
+      --card-dark: #1e293b;
+      --shadow-light: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+      --shadow-dark: 0 4px 6px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.2);
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: var(--light-bg);
+      color: var(--light-text);
+      line-height: 1.6;
+      transition: var(--transition);
+      min-height: 100vh;
+    }
+
+    body.dark-mode {
+      background: var(--dark-bg);
+      color: var(--dark-text);
+    }
+
+    h1, h2, h3, h4, h5 {
+      font-family: 'Merriweather', serif;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header Styles */
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      padding: 1rem 0;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+    }
+
+    .left-controls {
+      display: flex;
+      gap: 10px;
+    }
+
+    .left-controls button {
+      padding: 8px 16px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      transition: var(--transition);
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .left-controls button:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .right-nav {
+      display: flex;
+      gap: 10px;
+    }
+
+    .right-nav a {
+      text-decoration: none;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .right-nav a:hover {
+      background: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 80px 20px;
+      background: linear-gradient(rgba(79, 70, 229, 0.9), rgba(67, 56, 202, 0.9)), url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') center/cover;
+      color: white;
+      margin-bottom: 60px;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(to right, #fff, #ffd700);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      max-width: 800px;
+      margin: 0 auto;
+      opacity: 0.9;
+    }
+
+    /* Mission Section */
+    .mission {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+      margin: 60px auto;
+    }
+
+    .mission-card {
+      background: var(--card-light);
+      padding: 30px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: var(--shadow-light);
+      transition: var(--transition);
+    }
+
+    body.dark-mode .mission-card {
+      background: var(--card-dark);
+      box-shadow: var(--shadow-dark);
+    }
+
+    .mission-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .mission-card i {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+
+    .mission-card h3 {
+      margin-bottom: 15px;
+      font-size: 1.5rem;
+    }
+
+    /* Team Section */
+    .team {
+      margin: 80px auto;
+    }
+
+    .team h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 50px;
+      color: var(--primary);
+    }
+
+    body.dark-mode .team h2 {
+      color: var(--accent);
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .team-member {
+      background: var(--card-light);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-light);
+      transition: var(--transition);
+      text-align: center;
+    }
+
+    body.dark-mode .team-member {
+      background: var(--card-dark);
+      box-shadow: var(--shadow-dark);
+    }
+
+    .team-member:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .member-img {
+      height: 200px;
+      background: linear-gradient(45deg, var(--primary), var(--accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .member-img i {
+      font-size: 5rem;
+      color: white;
+    }
+
+    .member-info {
+      padding: 20px;
+    }
+
+    .member-info h3 {
+      font-size: 1.4rem;
+      margin-bottom: 5px;
+    }
+
+    .member-info p {
+      color: #666;
+      margin-bottom: 15px;
+    }
+
+    body.dark-mode .member-info p {
+      color: #ccc;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .social-links a {
+      color: var(--primary);
+      font-size: 1.2rem;
+      transition: var(--transition);
+    }
+
+    .social-links a:hover {
+      color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    /* Story Section */
+    .story {
+      background: var(--card-light);
+      padding: 50px;
+      border-radius: 12px;
+      margin: 60px auto;
+      box-shadow: var(--shadow-light);
+    }
+
+    body.dark-mode .story {
+      background: var(--card-dark);
+      box-shadow: var(--shadow-dark);
+    }
+
+    .story h2 {
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 30px;
+      color: var(--primary);
+    }
+
+    body.dark-mode .story h2 {
+      color: var(--accent);
+    }
+
+    .story-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .story-text {
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+
+    .story-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .stat {
+      text-align: center;
+      padding: 20px;
+      background: rgba(79, 70, 229, 0.1);
+      border-radius: 8px;
+    }
+
+    body.dark-mode .stat {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    body.dark-mode .stat-number {
+      color: var(--accent);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 30px;
+      margin-top: 50px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .topbar {
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      .left-controls, .right-nav {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .hero p {
+        font-size: 1.1rem;
+      }
+      
+      .mission {
+        grid-template-columns: 1fr;
+      }
+      
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .story-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .story-stats {
+        grid-template-columns: 1fr;
       }
     }
-  </script>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap">
-  <style>
-    @keyframes gradientBG {
-      0% { background-position: 0% 50% }
-      50% { background-position: 100% 50% }
-      100% { background-position: 0% 50% }
-    }
-   
-    .gradient-bg {
-      background: linear-gradient(-45deg, #7E57C2, #5E35B1, #3949AB, #FFAB00);
-      background-size: 400% 400%;
-      animation: gradientBG 15s ease infinite;
-    }
-   
-    .book-spine {
-      perspective: 1000px;
-    }
-   
-    .book-cover {
-      transform-style: preserve-3d;
-      transform: rotateY(15deg);
-      box-shadow: 20px 20px 50px rgba(0,0,0,0.3);
-    }
-   
-    .glass-morphism {
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
-      border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-    }
-   
-    .dark .glass-morphism {
-      background: rgba(0, 0, 0, 0.2);
-    }
-   
-    .ripple-btn {
-      position: relative;
-      overflow: hidden;
-    }
-   
-    .ripple-btn:after {
-      content: "";
-      display: block;
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      pointer-events: none;
-      background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
-      background-repeat: no-repeat;
-      background-position: 50%;
-      transform: scale(10, 10);
-      opacity: 0;
-      transition: transform .5s, opacity 1s;
-    }
-   
-    .ripple-btn:active:after {
-      transform: scale(0, 0);
-      opacity: 0.3;
-      transition: 0s;
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+      
+      .mission-card {
+        padding: 20px;
+      }
+      
+      .story {
+        padding: 30px 20px;
+      }
+      
+      .stat-number {
+        font-size: 2rem;
+      }
     }
   </style>
 </head>
-<body class="min-h-screen font-sans bg-light dark:bg-dark transition-colors duration-300">
-  <!-- 3D Navbar -->
-  <nav class="fixed top-0 left-0 right-0 z-50">
-    <div class="glass-morphism container mx-auto px-6 py-4 rounded-b-3xl shadow-lg">
-      <div class="flex justify-between items-center">
-        <div class="flex space-x-3">
-          <button id="langToggle" class="ripple-btn px-4 py-2 bg-primary text-white rounded-full font-medium transition-all hover:scale-105">
-            <span class="inline-block">🌐 हिंदी</span>
-          </button>
-          <button id="modeToggle" class="ripple-btn px-4 py-2 bg-gray-800 dark:bg-gray-300 dark:text-gray-800 text-white rounded-full font-medium transition-all hover:scale-105">
-            <span class="inline-block">🌓</span>
-          </button>
-        </div>
-       <div class="hidden md:flex space-x-3">
-  
- 
-</div>
-
-    </div>
-  </nav>
-
-  <!-- Animated Book Shelf -->
-  <div class="relative overflow-hidden h-screen">
-    <!-- Gradient Background -->
-    <div class="gradient-bg absolute inset-0 -z-10 opacity-60"></div>
-   
-    <!-- Floating Book Spines -->
-    <div class="absolute top-1/2 left-1/4 transform -translate-x-1/2 -translate-y-1/2">
-      <div class="book-spine">
-        <div class="book-cover w-24 h-64 bg-yellow-400 rounded-r-lg transform rotate-y-15 origin-left"></div>
+<body>
+  <header>
+    <div class="topbar">
+      <div class="left-controls">
+        <button id="langToggle"><i class="fas fa-language"></i> <span>हिंदी</span></button>
+        <button id="modeToggle"><i class="fas fa-moon"></i> <span>Dark Mode</span></button>
       </div>
+      <nav class="right-nav">
+        <a href="index.html"><i class="fas fa-home"></i> <span data-en="Home" data-hi="होम">Home</span></a>
+        <a href="summaries.html"><i class="fas fa-book"></i> <span data-en="Summaries" data-hi="सारांश">Summaries</span></a>
+        <a href="about.html"><i class="fas fa-info-circle"></i> <span data-en="About Us" data-hi="हमारे बारे में">About Us</span></a>
+      </nav>
     </div>
-   
-    <div class="absolute top-1/3 right-1/4 transform translate-x-1/2 -translate-y-1/2">
-      <div class="book-spine">
-        <div class="book-cover w-24 h-80 bg-red-500 rounded-r-lg transform rotate-y-15 origin-left"></div>
-      </div>
-    </div>
-   
-    <div class="absolute bottom-1/3 left-1/3 transform -translate-x-1/2">
-      <div class="book-spine">
-        <div class="book-cover w-24 h-72 bg-blue-500 rounded-r-lg transform rotate-y-15 origin-left"></div>
-      </div>
-    </div>
-   
-    <!-- Centered Content -->
-    <div class="glass-morphism absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-11/12 md:w-2/3 p-8 md:p-12 text-center">
-      <h1 data-en="About Book Hub" class="text-5xl md:text-7xl font-bold text-white mb-6">About Book Hub</h1>
-      <p data-en="Books are more than pages – they are windows to wisdom, and at Book Hub, we open those windows for readers across the world." class="text-xl md:text-2xl text-white mb-8">
-        Books are more than pages – they are windows to wisdom, and at Book Hub, we open those windows for readers across the world.
-      </p><!-- ✅ Buttons to go back -->
-<div class="flex justify-center space-x-6 mt-6">
-<nav class="right-nav">
-  <a href="index.html" class="px-6 py-3 bg-indigo-600 text-white rounded-full font-medium transition-all hover:scale-105 hover:bg-indigo-800">
-    Go to Home
-  </a>
+  </header>
 
-  <a href="summaries.html" class="px-6 py-3 bg-yellow-300 text-black rounded-full font-medium transition-all hover:scale-105 hover:bg-yellow-500 hover:text-white">
-    View Summaries
-  </a>
- </nav>
-</div>
-
-    <div class="flex justify-center space-x-8 mb-8">
-        <div class="animate-float">
-          <img src="https://img.icons8.com/color/96/books.png" alt="Colorful stack of books" class="w-16 h-16 md:w-20 md:h-20">
-        </div>
-        <div class="animate-float animation-delay-100">
-          <img src="https://img.icons8.com/color/96/open-book--v2.png" alt="Open book with glowing light" class="w-16 h-16 md:w-20 md:h-20">
-        </div>
-        <div class="animate-float animation-delay-200">
-          <img src="https://img.icons8.com/color/96/reading.png" alt="Person enjoying reading a book" class="w-16 h-16 md:w-20 md:h-20">
-        </div>
-      </div>
-    </div>
+  <div class="hero">
+    <h1 data-en="About BookHub" data-hi="बुकहब के बारे में">About BookHub</h1>
+    <p data-en="We're passionate about making knowledge accessible to everyone through concise book summaries" data-hi="हम संक्षिप्त पुस्तक सारांशों के माध्यम से सभी के लिए ज्ञान को सुलभ बनाने के लिए भावुक हैं">
+      We're passionate about making knowledge accessible to everyone through concise book summaries
+    </p>
   </div>
 
-  <!-- 3D Flip Cards Section -->
-  <div class="container mx-auto px-6 py-16 md:py-24">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-      <div class="glass-morphism p-8 rounded-3xl transform transition-all hover:-translate-y-2 hover:z-10">
-        <h2 data-en="Our Mission" class="text-3xl font-bold text-primary dark:text-secondary mb-6">Our Mission</h2>
-        <p data-en="To inspire young minds with powerful book summaries, spark curiosity, and build a culture where knowledge is shared, respected, and loved." class="text-lg">
+  <div class="container">
+    <section class="mission">
+      <div class="mission-card">
+        <i class="fas fa-bullseye"></i>
+        <h3 data-en="Our Mission" data-hi="हमारा मिशन">Our Mission</h3>
+        <p data-en="To inspire young minds with powerful book summaries, spark curiosity, and build a culture where knowledge is shared, respected, and loved." data-hi="युवा दिमागों को प्रेरित करना, जिज्ञासा जगाना और ऐसा वातावरण बनाना जहाँ ज्ञान साझा किया जाए, सम्मानित हो और प्रिय बने।">
           To inspire young minds with powerful book summaries, spark curiosity, and build a culture where knowledge is shared, respected, and loved.
         </p>
       </div>
-     
-      <div class="glass-morphism p-8 rounded-3xl transform transition-all hover:-translate-y-2 hover:z-10">
-        <h2 data-en="Why Readers Love Us" class="text-3xl font-bold text-primary dark:text-secondary mb-6">Why Readers Love Us</h2>
-        <p data-en="We deliver concise, clear, and engaging summaries. For every reader, Book Hub is not just a website, but a companion on their journey to wisdom." class="text-lg">
-          We deliver concise, clear, and engaging summaries. For every reader, Book Hub is not just a website, but a companion on their journey to wisdom.
+      
+      <div class="mission-card">
+        <i class="fas fa-eye"></i>
+        <h3 data-en="Our Vision" data-hi="हमारी दृष्टि">Our Vision</h3>
+        <p data-en="To become the world's most trusted platform for book summaries, helping millions of readers gain knowledge in less time." data-hi="पुस्तक सारांशों के लिए दुनिया का सबसे विश्वसनीय प्लेटफ़ॉर्म बनना, लाखों पाठकों को कम समय में ज्ञान प्राप्त करने में मदद करना।">
+          To become the world's most trusted platform for book summaries, helping millions of readers gain knowledge in less time.
         </p>
       </div>
-    </div>
+      
+      <div class="mission-card">
+        <i class="fas fa-heart"></i>
+        <h3 data-en="Why Choose Us" data-hi="हमें क्यों चुनें">Why Choose Us</h3>
+        <p data-en="We deliver concise, clear, and engaging summaries. For every reader, BookHub is not just a website, but a companion on their journey to wisdom." data-hi="हम संक्षिप्त, स्पष्ट और रोचक सारांश प्रस्तुत करते हैं। हर पाठक के लिए, बुकहब केवल एक वेबसाइट नहीं बल्कि ज्ञान की यात्रा में साथी है।">
+          We deliver concise, clear, and engaging summaries. For every reader, BookHub is not just a website, but a companion on their journey to wisdom.
+        </p>
+      </div>
+    </section>
+
+    <section class="team">
+      <h2 data-en="Our Team" data-hi="हमारी टीम">Our Team</h2>
+      <div class="team-grid">
+        <div class="team-member">
+          <div class="member-img">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="member-info">
+            <h3>Piyush</h3>
+            <p data-en="The Visionary" data-hi="दूरदर्शी">The Visionary</p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-linkedin"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="team-member">
+          <div class="member-img">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="member-info">
+            <h3>Prince</h3>
+            <p data-en="The Innovator" data-hi="नवप्रवर्तक">The Innovator</p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-linkedin"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="team-member">
+          <div class="member-img">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="member-info">
+            <h3>Deepak</h3>
+            <p data-en="The Strategist" data-hi="रणनीतिकार">The Strategist</p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-linkedin"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="story">
+      <h2 data-en="Our Story" data-hi="हमारी कहानी">Our Story</h2>
+      <div class="story-content">
+        <div class="story-text">
+          <p data-en="BookHub was born from a simple idea: that everyone should have access to the knowledge contained in great books, regardless of how busy their schedule might be. We started as three friends with a passion for reading and sharing knowledge." data-hi="बुकहब एक साधारण विचार से पैदा हुआ था: हर किसी के पास महान पुस्तकों में निहित ज्ञान तक पहुंच होनी चाहिए, चाहे उनका कार्यक्रम कितना भी व्यस्त क्यों न हो। हमने पढ़ने और ज्ञान साझा करने के जुनून के साथ तीन दोस्तों के रूप में शुरुआत की।">
+            BookHub was born from a simple idea: that everyone should have access to the knowledge contained in great books, regardless of how busy their schedule might be. We started as three friends with a passion for reading and sharing knowledge.
+          </p>
+          <p data-en="Today, we're proud to have helped thousands of readers discover new ideas, improve their lives, and develop a love for learning through our carefully crafted book summaries." data-hi="आज, हमें इस बात पर गर्व है कि हमने हजारों पाठकों को नए विचारों की खोज करने, उनके जीवन को बेहतर बनाने और हमारे सावधानीपूर्वक तैयार किए गए पुस्तक सारांशों के माध्यम से सीखने के लिए प्यार विकसित करने में मदद की है।">
+            Today, we're proud to have helped thousands of readers discover new ideas, improve their lives, and develop a love for learning through our carefully crafted book summaries.
+          </p>
+        </div>
+        <div class="story-stats">
+          <div class="stat">
+            <div class="stat-number">500+</div>
+            <div data-en="Book Summaries" data-hi="पुस्तक सारांश">Book Summaries</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">50K+</div>
+            <div data-en="Happy Readers" data-hi="खुश पाठक">Happy Readers</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">3</div>
+            <div data-en="Dedicated Team Members" data-hi="समर्पित टीम के सदस्य">Dedicated Team Members</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">2023</div>
+            <div data-en="Year Founded" data-hi="स्थापना वर्ष">Year Founded</div>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 
-  <!-- Hexagonal Team Grid -->
-  <div class="container mx-auto px-6 py-16">
-    <h2 class="text-4xl font-bold text-center mb-16 text-primary dark:text-secondary">Our Team</h2>
-   
-    <div class="flex flex-wrap justify-center gap-10">
-      <div class="hexagon w-48 h-56 relative" style="clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);">
-        <div class="absolute inset-0 bg-gradient-to-br from-primary to-secondary opacity-90 flex flex-col justify-center items-center p-4">
-          <h3 class="text-2xl font-bold text-white">Piyush</h3>
-          <p class="text-white text-center">The Visionary</p>
-        </div>
-      </div>
-     
-      <div class="hexagon w-48 h-56 relative mt-12 md:mt-0" style="clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);">
-        <div class="absolute inset-0 bg-gradient-to-br from-secondary to-orange-500 opacity-90 flex flex-col justify-center items-center p-4">
-          <h3 class="text-2xl font-bold text-white">Prince</h3>
-          <p class="text-white text-center">The Innovator</p>
-        </div>
-      </div>
-     
-      <div class="hexagon w-48 h-56 relative" style="clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);">
-        <div class="absolute inset-0 bg-gradient-to-br from-purple-500 to-primary opacity-90 flex flex-col justify-center items-center p-4">
-          <h3 class="text-2xl font-bold text-white">Deepak</h3>
-          <p class="text-white text-center">The Strategist</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Curved Footer -->
-  <div class="relative mt-24">
-    <svg class="w-full" viewBox="0 0 1440 320" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0 176L48 181.3C96 187 192 197 288 208C384 219 480 229 576 197.3C672 165 768 91 864 85.3C960 80 1056 144 1152 170.7C1248 197 1344 187 1392 181.3L1440 176V320H1392C1344 320 1248 320 1152 320C1056 320 960 320 864 320C768 320 672 320 576 320C480 320 384 320 288 320C192 320 96 320 48 320H0V176Z" fill="#5E35B1" class="dark:fill-gray-900"/>
-    </svg>
-    <div class="bg-primary dark:bg-gray-900 pb-16">
-      <div class="container mx-auto px-6 text-center text-white">
-        <p class="text-lg">© 2025 Book Hub | Built with passion for readers</p>
-        <div class="flex justify-center space-x-6 mt-8">
-          <a href="#" class="w-10 h-10 rounded-full bg-white bg-opacity-20 flex items-center justify-center hover:bg-opacity-30 transition-all">
-            📚
-          </a>
-          <a href="#" class="w-10 h-10 rounded-full bg-white bg-opacity-20 flex items-center justify-center hover:bg-opacity-30 transition-all">
-            🔍
-          </a>
-          <a href="#" class="w-10 h-10 rounded-full bg-white bg-opacity-20 flex items-center justify-center hover:bg-opacity-30 transition-all">
-            ✉
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
+  <footer>
+    <p data-en="Created with passion by Piyush, Prince & Deepak" data-hi="पियूष, प्रिंस और दीपक द्वारा उत्साह के साथ बनाया गया">
+      Created with passion by Piyush, Prince & Deepak
+    </p>
+  </footer>
 
   <script>
-    // Language Toggle
-    const langBtn = document.getElementById('langToggle');
-    const elements = document.querySelectorAll('[data-en]');
-    let hindi = false;
-
-    const translations = {
-      "About Book Hub": "बुक हब के बारे में",
-      "Books are more than pages – they are windows to wisdom, and at Book Hub, we open those windows for readers across the world.":
-        "किताबें सिर्फ पन्ने नहीं हैं – वे ज्ञान की खिड़कियाँ हैं, और बुक हब में हम दुनिया भर के पाठकों के लिए इन खिड़कियों को खोलते हैं।",
-      "Our Mission": "हमारा मिशन",
-      "To inspire young minds with powerful book summaries, spark curiosity, and build a culture where knowledge is shared, respected, and loved.":
-        "युवा दिमागों को प्रेरित करना, जिज्ञासा जगाना और ऐसा वातावरण बनाना जहाँ ज्ञान साझा किया जाए, सम्मानित हो और प्रिय बने।",
-      "Why Readers Love Us": "पाठक हमें क्यों पसंद करते हैं",
-      "We deliver concise, clear, and engaging summaries. For every reader, Book Hub is not just a website, but a companion on their journey to wisdom.":
-        "हम संक्षिप्त, स्पष्ट और रोचक सारांश प्रस्तुत करते हैं। हर पाठक के लिए, बुक हब केवल एक वेबसाइट नहीं बल्कि ज्ञान की यात्रा में साथी है।",
-      "Home": "होम",
-      "Summaries": "सारांश",
-      "About": "हमारे बारे में"
-    };
-
-    langBtn.addEventListener('click', () => {
-      hindi = !hindi;
+    // Language management
+    let currentLang = 'en';
+    
+    // Set up language toggle
+    const langBtn = document.getElementById("langToggle");
+    const langText = langBtn.querySelector('span');
+    langBtn.addEventListener("click", toggleLanguage);
+    
+    function toggleLanguage() {
+      currentLang = currentLang === 'en' ? 'hi' : 'en';
+      updateLanguage();
+      
+      // Update button text
+      langText.textContent = currentLang === 'en' ? 'हिंदी' : 'English';
+    }
+    
+    function updateLanguage() {
+      const elements = document.querySelectorAll("[data-en], [data-hi]");
       elements.forEach(el => {
-        const key = el.dataset.en;
-        if (hindi && translations[key]) {
-          el.textContent = translations[key];
-        } else {
-          el.textContent = key;
+        if (el.dataset[currentLang]) {
+          el.textContent = el.dataset[currentLang];
         }
       });
-      langBtn.innerHTML = hindi ? '🌐 English' : '🌐 हिंदी';
-     
-      // Add animation effect
-      document.body.classList.add('transition-all', 'duration-500');
-      setTimeout(() => {
-        document.body.classList.remove('transition-all', 'duration-500');
-      }, 500);
-    });
-
-    // Dark Mode Toggle
-    const modeToggle = document.getElementById('modeToggle');
-    modeToggle.addEventListener('click', () => {
-      document.documentElement.classList.toggle('dark');
-      localStorage.setItem('darkMode', document.documentElement.classList.contains('dark'));
-     
-      // Button icon change
-      if (document.documentElement.classList.contains('dark')) {
-        modeToggle.innerHTML = '🌞';
-      } else {
-        modeToggle.innerHTML = '🌓';
-      }
-    });
-
-    // Initialize dark mode based on localStorage or preference
-    if (localStorage.getItem('darkMode') === 'true' ||
-        (window.matchMedia('(prefers-color-scheme: dark)').matches && localStorage.getItem('darkMode') !== 'false')) {
-      document.documentElement.classList.add('dark');
-      modeToggle.innerHTML = '🌞';
     }
-
-    // Make books float on scroll
-    window.addEventListener('scroll', () => {
-      const scrollPosition = window.scrollY;
-      const bookElements = document.querySelectorAll('.book-spine');
-     
-      bookElements.forEach((book, index) => {
-        const speed = 0.5;
-        const rotation = scrollPosition * speed * 0.05 * (index + 1);
-        book.style.transform = `translateY(${scrollPosition * speed * 0.1}px) rotateY(${15 + rotation}deg)`;
-      });
-    });
-
-    // Ripple effect for buttons
-    document.querySelectorAll('.ripple-btn').forEach(button => {
-      button.addEventListener('click', function(e) {
-        e.preventDefault();
-        const rect = this.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-       
-        const ripple = document.createElement('span');
-        ripple.className = 'ripple';
-        ripple.style.left = `${x}px`;
-        ripple.style.top = `${y}px`;
-        this.appendChild(ripple);
-       
-        setTimeout(() => {
-          ripple.remove();
-        }, 1000);
-      });
-    });
+    
+    // Dark/Light Mode
+    const modeBtn = document.getElementById("modeToggle");
+    const modeText = modeBtn.querySelector('span');
+    const modeIcon = modeBtn.querySelector('i');
+    modeBtn.addEventListener("click", toggleMode);
+    
+    function toggleMode() {
+      document.body.classList.toggle("dark-mode");
+      const isDarkMode = document.body.classList.contains("dark-mode");
+      localStorage.setItem("darkMode", isDarkMode);
+      
+      // Update button text and icon
+      if (isDarkMode) {
+        modeText.textContent = 'Light Mode';
+        modeIcon.className = 'fas fa-sun';
+      } else {
+        modeText.textContent = 'Dark Mode';
+        modeIcon.className = 'fas fa-moon';
+      }
+    }
+    
+    // Initialize dark mode if previously set
+    if (localStorage.getItem("darkMode") === "true") {
+      document.body.classList.add("dark-mode");
+      modeText.textContent = 'Light Mode';
+      modeIcon.className = 'fas fa-sun';
+    }
   </script>
 </body>
 </html>
-
-
-
-
-
-
