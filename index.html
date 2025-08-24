@@ -3,90 +3,165 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Book Summaries - Home</title>
+  <title>BookHub - Professional Book Summaries</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-light: linear-gradient(-45deg, #a1c4fd, #c2e9fb, #fbc2eb, #a6c1ee);
-      --bg-dark: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #1c1c2e);
-      --text-light: #000;
-      --text-dark: #fff;
+      --primary: #4f46e5;
+      --primary-dark: #4338ca;
+      --accent: #f97316;
+      --light-bg: #f8fafc;
+      --dark-bg: #0f172a;
+      --light-text: #1e293b;
+      --dark-text: #f1f5f9;
+      --card-light: #ffffff;
+      --card-dark: #1e293b;
+      --shadow-light: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+      --shadow-dark: 0 4px 6px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.2);
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
     body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: var(--bg-light);
-      background-size: 400% 400%;
-      animation: gradientBG 12s ease infinite;
-      color: var(--text-light);
-      transition: background 0.5s, color 0.5s;
+      font-family: 'Montserrat', sans-serif;
+      background: var(--light-bg);
+      color: var(--light-text);
+      line-height: 1.6;
+      transition: var(--transition);
+      min-height: 100vh;
     }
 
     body.dark-mode {
-      background: var(--bg-dark);
-      color: var(--text-dark);
+      background: var(--dark-bg);
+      color: var(--dark-text);
     }
 
-    @keyframes gradientBG {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
+    h1, h2, h3, h4, h5 {
+      font-family: 'Merriweather', serif;
+      font-weight: 700;
+      margin-bottom: 1rem;
     }
 
-    header { text-align: center; padding: 30px 10px; }
-    header h1 { font-size: 2.5rem; margin: 0; }
-    header p { font-size: 1.2rem; }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
 
-    /* 🔹 Topbar styling */
+    /* Header Styles */
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      padding: 1rem 0;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
     .topbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 20px;
+      padding: 0 20px;
+    }
+
+    .left-controls {
+      display: flex;
+      gap: 10px;
     }
 
     .left-controls button {
-      margin-right: 8px;
-      padding: 8px 14px;
-      border-radius: 8px;
+      padding: 8px 16px;
+      border-radius: 50px;
       border: none;
       cursor: pointer;
-      font-weight: bold;
-      transition: 0.3s;
+      font-weight: 600;
+      transition: var(--transition);
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
-    .left-controls button:hover { opacity: 0.8; }
+
+    .left-controls button:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .right-nav {
+      display: flex;
+      gap: 10px;
+    }
 
     .right-nav a {
       text-decoration: none;
-      margin: 0 10px;
-      font-weight: bold;
-      padding: 8px 15px;
-      border-radius: 8px;
-      background: rgba(0,0,0,0.3);
-      color: inherit;
-      transition: 0.3s;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
-    .right-nav a:hover { background: #ff9800; color: #fff; }
 
+    .right-nav a:hover {
+      background: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .hero {
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(to right, #fff, #ffd700);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto;
+      opacity: 0.9;
+    }
+
+    /* Book Gallery */
     .gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 25px;
-      max-width: 1200px;
-      margin: 40px auto;
-      padding: 0 20px;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 30px;
+      margin: 50px auto;
     }
-    .book-card { perspective: 1000px; }
+
+    .book-card {
+      perspective: 1000px;
+      height: 380px;
+      cursor: pointer;
+    }
+
     .book-inner {
       position: relative;
       width: 100%;
-      height: 260px;
+      height: 100%;
       text-align: center;
       transition: transform 0.8s;
       transform-style: preserve-3d;
     }
-    .book-card:hover .book-inner { transform: rotateY(180deg); }
+
+    .book-card:hover .book-inner {
+      transform: rotateY(180deg);
+    }
 
     .book-front, .book-back {
       position: absolute;
@@ -94,314 +169,761 @@
       height: 100%;
       backface-visibility: hidden;
       border-radius: 12px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+      box-shadow: var(--shadow-light);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
     }
+
+    body.dark-mode .book-front,
+    body.dark-mode .book-back {
+      box-shadow: var(--shadow-dark);
+    }
+
     .book-front img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 12px;
-    }
-    .book-back {
-      background: rgba(0,0,0,0.7);
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transform: rotateY(180deg);
-      padding: 10px;
-      font-size: 0.9rem;
-      text-align: center;
-      border-radius: 12px;
+      transition: var(--transition);
     }
 
+    .book-card:hover .book-front img {
+      transform: scale(1.05);
+    }
+
+    .book-back {
+      background: var(--primary);
+      color: white;
+      transform: rotateY(180deg);
+      padding: 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .book-title {
+      font-weight: 700;
+      margin-bottom: 10px;
+      font-size: 1.3rem;
+    }
+
+    .book-description {
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    /* Quotes Section */
     .quotes {
       max-width: 800px;
-      margin: 50px auto;
+      margin: 60px auto;
       text-align: center;
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       font-style: italic;
-      padding: 20px;
-      background: rgba(0,0,0,0.2);
+      padding: 30px;
+      background: var(--card-light);
       border-radius: 12px;
       color: inherit;
+      transition: opacity 0.5s ease;
+      box-shadow: var(--shadow-light);
     }
 
+    body.dark-mode .quotes {
+      background: var(--card-dark);
+      box-shadow: var(--shadow-dark);
+    }
+
+    /* Info Section */
     .info-section {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-      max-width: 1000px;
-      margin: 50px auto;
-      padding: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      margin: 60px auto;
     }
+
     .info-card {
-      background: rgba(0,0,0,0.3);
-      padding: 20px;
+      background: var(--card-light);
+      padding: 25px;
       border-radius: 12px;
       text-align: center;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.4);
-      transition: transform 0.3s;
+      box-shadow: var(--shadow-light);
+      transition: var(--transition);
     }
-    .info-card:hover { transform: translateY(-5px); }
-    .info-card h3 { margin-bottom: 10px; }
 
+    body.dark-mode .info-card {
+      background: var(--card-dark);
+      box-shadow: var(--shadow-dark);
+    }
+
+    .info-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .info-card i {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 15px;
+    }
+
+    .info-card h3 {
+      margin-bottom: 15px;
+      font-size: 1.3rem;
+    }
+
+    /* Submit Section */
     .submit-summary {
       text-align: center;
-      margin: 50px 0;
+      margin: 60px auto;
+      padding: 40px;
+      background: var(--card-light);
+      border-radius: 12px;
+      box-shadow: var(--shadow-light);
     }
+
+    body.dark-mode .submit-summary {
+      background: var(--card-dark);
+      box-shadow: var(--shadow-dark);
+    }
+
+    .submit-summary h2 {
+      margin-bottom: 15px;
+    }
+
+    .submit-summary p {
+      margin-bottom: 25px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
     .submit-summary a {
-      padding: 14px 28px;
-      background: #1565c0;
-      color: #fff;
-      border-radius: 10px;
+      padding: 15px 35px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50px;
       text-decoration: none;
       font-size: 1.1rem;
-      font-weight: bold;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
-      transition: 0.3s;
+      font-weight: 600;
+      box-shadow: var(--shadow-light);
+      transition: var(--transition);
+      display: inline-block;
     }
-    .submit-summary a:hover { background: #0d47a1; }
 
+    .submit-summary a:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Footer */
     footer {
       text-align: center;
-      padding: 20px;
-      margin-top: 30px;
-      background: rgba(0,0,0,0.2);
-      font-size: 0.9rem;
-      color: inherit;
+      padding: 30px;
+      margin-top: 50px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+    }
+
+    /* Chatbot Styles */
+    #chatbot-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+
+    #chat-toggle {
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      transition: var(--transition);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #chat-toggle:hover {
+      background: var(--primary-dark);
+      transform: scale(1.05);
+    }
+
+    #chat-toggle.pulse {
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.7); }
+      70% { box-shadow: 0 0 0 10px rgba(79, 70, 229, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0); }
+    }
+
+    #chat-window {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      bottom: 70px;
+      right: 0;
+      width: 350px;
+      height: 450px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    body.dark-mode #chat-window {
+      background: var(--card-dark);
+      color: var(--dark-text);
+    }
+
+    .chat-header {
+      background: var(--primary);
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .chat-header button {
+      background: transparent;
+      border: none;
+      color: white;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    #chat-messages {
+      flex: 1;
+      padding: 15px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .message {
+      max-width: 80%;
+      padding: 12px 16px;
+      border-radius: 18px;
+      line-height: 1.4;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .user-message {
+      align-self: flex-end;
+      background: var(--primary);
+      color: white;
+      border-bottom-right-radius: 5px;
+    }
+
+    .bot-message {
+      align-self: flex-start;
+      background: #f1f5f9;
+      color: #334155;
+      border-bottom-left-radius: 5px;
+    }
+
+    body.dark-mode .bot-message {
+      background: #475569;
+      color: #e2e8f0;
+    }
+
+    .chat-input-container {
+      display: flex;
+      padding: 15px;
+      border-top: 1px solid #e2e8f0;
+      background: #f8fafc;
+    }
+
+    body.dark-mode .chat-input-container {
+      background: #1e293b;
+      border-top: 1px solid #475569;
+    }
+
+    #chat-input {
+      flex: 1;
+      padding: 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 20px;
+      outline: none;
+      font-size: 14px;
+      background: white;
+    }
+
+    body.dark-mode #chat-input {
+      background: #374151;
+      border-color: #4b5563;
+      color: #e2e8f0;
+    }
+
+    #send-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      margin-left: 10px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #send-btn:hover {
+      background: var(--primary-dark);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .topbar {
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      .left-controls, .right-nav {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .gallery {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 20px;
+      }
+      
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+      
+      .quotes {
+        font-size: 1.2rem;
+        padding: 20px;
+      }
+      
+      #chat-window {
+        width: 300px;
+        right: -10px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .gallery {
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+      }
+      
+      .left-controls {
+        flex-wrap: wrap;
+      }
+      
+      .info-section {
+        grid-template-columns: 1fr;
+      }
+      
+      #chat-window {
+        width: 280px;
+        height: 400px;
+      }
+      
+      .hero h1 {
+        font-size: 1.8rem;
+      }
     }
   </style>
 </head>
 <body>
   <header>
-    <!-- 🔹 Topbar with buttons (left) & nav (right) -->
     <div class="topbar">
       <div class="left-controls">
-        <button id="langToggle">🌐 हिंदी</button>
-        <button id="modeToggle">🌓 Dark/Light</button>
+        <button id="langToggle"><i class="fas fa-language"></i> <span>हिंदी</span></button>
+        <button id="modeToggle"><i class="fas fa-moon"></i> <span>Dark Mode</span></button>
       </div>
       <nav class="right-nav">
-              <a href="summaries.html" data-en="📖 Summaries">📖 Summaries</a>
-        <a href="about.html" data-en="ℹ️ About Us">ℹ️ About Us</a>
+        <a href="index.html"><i class="fas fa-home"></i> <span data-en="Home" data-hi="होम">Home</span></a>
+        <a href="summaries.html"><i class="fas fa-book"></i> <span data-en="Summaries" data-hi="सारांश">Summaries</span></a>
+        <a href="about.html"><i class="fas fa-info-circle"></i> <span data-en="About Us" data-hi="हमारे बारे में">About Us</span></a>
       </nav>
     </div>
 
-    <h1 data-en="📚 Welcome to Book Hub">📚 Welcome to Book Hub</h1>
-    <p data-en="Explore life-changing books with short and meaningful summaries">
-      Explore life-changing books with short and meaningful summaries
-    </p>
+    <div class="hero">
+      <h1 data-en="Welcome to BookHub" data-hi="बुकहब में आपका स्वागत है">Welcome to BookHub</h1>
+      <p data-en="Explore life-changing books with short and meaningful summaries" data-hi="संक्षिप्त और सार्थक सारांश के साथ जीवन बदलने वाली किताबें खोजें">
+        Explore life-changing books with short and meaningful summaries
+      </p>
+    </div>
   </header>
 
-  <section class="gallery">
-    <div class="book-card">
-      <div class="book-inner">
-        <div class="book-front">
-          <a href="summary1.html"><img src="https://m.media-amazon.com/images/I/81l3rZK4lnL.jpg" alt="Ikigai"></a>
-        </div>
-        <div class="book-back" data-en="Discover your purpose with the Japanese secret to a long and happy life.">
-          Discover your purpose with the Japanese secret to a long and happy life.
-        </div>
-      </div>
-    </div>
-    <div class="book-card">
-      <div class="book-inner">
-        <div class="book-front">
-          <a href="summary2.html"><img src="https://m.media-amazon.com/images/I/91bYsX41DVL.jpg" alt="Atomic Habits"></a>
-        </div>
-        <div class="book-back" data-en="Learn how small habits build massive success in life.">
-          Learn how small habits build massive success in life.
+  <div class="container">
+    <section class="gallery">
+      <div class="book-card">
+        <div class="book-inner">
+          <div class="book-front">
+            <img src="https://m.media-amazon.com/images/I/81l3rZK4lnL.jpg" alt="Ikigai: The Japanese Secret to a Long and Happy Life">
+          </div>
+          <div class="book-back">
+            <div class="book-title" data-en="Ikigai" data-hi="इकिगाई">Ikigai</div>
+            <div class="book-description" data-en="Discover your purpose with the Japanese secret to a long and happy life." data-hi="जापानी रहस्य के साथ अपना उद्देश्य खोजें और लंबा खुशहाल जीवन पाएं।">
+              Discover your purpose with the Japanese secret to a long and happy life.
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="book-card">
-      <div class="book-inner">
-        <div class="book-front">
-          <a href="summary3.html"><img src="https://m.media-amazon.com/images/I/81s6DUyQCZL.jpg" alt="Think Like a Monk"></a>
-        </div>
-        <div class="book-back" data-en="Find peace, purpose, and meaning by thinking like a monk.">
-          Find peace, purpose, and meaning by thinking like a monk.
-        </div>
-      </div>
-    </div>
-    <div class="book-card">
-      <div class="book-inner">
-        <div class="book-front">
-          <a href="summary4.html"><img src="https://m.media-amazon.com/images/I/71aFt4+OTOL.jpg" alt="The Alchemist"></a>
-        </div>
-        <div class="book-back" data-en="A magical journey of following your dreams and destiny.">
-          A magical journey of following your dreams and destiny.
+      
+      <div class="book-card">
+        <div class="book-inner">
+          <div class="book-front">
+            <img src="https://m.media-amazon.com/images/I/91bYsX41DVL.jpg" alt="Atomic Habits: An Easy & Proven Way to Build Good Habits & Break Bad Ones">
+          </div>
+          <div class="book-back">
+            <div class="book-title" data-en="Atomic Habits" data-hi="ऐटमिक हैबिट्स">Atomic Habits</div>
+            <div class="book-description" data-en="Learn how small habits build massive success in life." data-hi="जानें कि कैसे छोटे आदतें जीवन में बड़ी सफलता बनाती हैं।">
+              Learn how small habits build massive success in life.
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="book-card">
-      <div class="book-inner">
-        <div class="book-front">
-          <a href="summary5.html"><img src="https://m.media-amazon.com/images/I/81bsw6fnUiL.jpg" alt="Rich Dad Poor Dad"></a>
-        </div>
-        <div class="book-back" data-en="Master money mindset and financial independence lessons.">
-          Master money mindset and financial independence lessons.
+      
+      <div class="book-card">
+        <div class="book-inner">
+          <div class="book-front">
+            <img src="https://m.media-amazon.com/images/I/81s6DUyQCZL.jpg" alt="Think Like a Monk: Train Your Mind for Peace and Purpose Every Day">
+          </div>
+          <div class="book-back">
+            <div class="book-title" data-en="Think Like a Monk" data-hi="मुनि की तरह सोचें">Think Like a Monk</div>
+            <div class="book-description" data-en="Find peace, purpose, and meaning by thinking like a monk." data-hi="भिक्षु की तरह सोचकर शांति, उद्देश्य और अर्थ पाएं।">
+              Find peace, purpose, and meaning by thinking like a monk.
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+      
+      <div class="book-card">
+        <div class="book-inner">
+          <div class="book-front">
+            <img src="https://m.media-amazon.com/images/I/71aFt4+OTOL.jpg" alt="The Alchemist by Paulo Coelho">
+          </div>
+          <div class="book-back">
+            <div class="book-title" data-en="The Alchemist" data-hi="द अलकेमिस्ट">The Alchemist</div>
+            <div class="book-description" data-en="A magical journey of following your dreams and destiny." data-hi="अपने सपनों और भाग्य का अनुसरण करने की जादुई यात्रा।">
+              A magical journey of following your dreams and destiny.
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="book-card">
+        <div class="book-inner">
+          <div class="book-front">
+            <img src="https://m.media-amazon.com/images/I/81bsw6fnUiL.jpg" alt="Rich Dad Poor Dad: What the Rich Teach Their Kids About Money That the Poor and Middle Class Do Not!">
+          </div>
+          <div class="book-back">
+            <div class="book-title" data-en="Rich Dad Poor Dad" data-hi="रिच डैड पुअर डैड">Rich Dad Poor Dad</div>
+            <div class="book-description" data-en="Master money mindset and financial independence lessons." data-hi="पैसे की मानसिकता और वित्तीय स्वतंत्रता के पाठ सीखें।">
+              Master money mindset and financial independence lessons.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <section class="quotes" id="quoteBox" data-en='"A reader lives a thousand lives before he dies." – George R.R. Martin'>
-    "A reader lives a thousand lives before he dies." – George R.R. Martin
-  </section>
+    <section class="quotes" id="quoteBox" data-en='"A reader lives a thousand lives before he dies." – George R.R. Martin' data-hi='"एक पाठक मरने से पहले हज़ार जीवन जीता है।" – जॉर्ज आर.आर. मार्टिन'>
+      "A reader lives a thousand lives before he dies." – George R.R. Martin
+    </section>
 
-  <section class="info-section">
-    <div class="info-card"><h3 data-en="⏱ Save Time">⏱ Save Time</h3><p data-en="Get the key insights of great books in minutes instead of hours.">Get the key insights of great books in minutes instead of hours.</p></div>
-    <div class="info-card"><h3 data-en="💡 Learn Faster">💡 Learn Faster</h3><p data-en="Summaries highlight lessons you can apply in real life quickly.">Summaries highlight lessons you can apply in real life quickly.</p></div>
-    <div class="info-card"><h3 data-en="📖 Discover More">📖 Discover More</h3><p data-en="Explore books before deciding to read the full version.">Explore books before deciding to read the full version.</p></div>
-    <div class="info-card"><h3 data-en="🌍 Grow Every Day">🌍 Grow Every Day</h3><p data-en="Expand your knowledge and mindset step by step.">Expand your knowledge and mindset step by step.</p></div>
-  </section>
+    <section class="info-section">
+      <div class="info-card">
+        <i class="fas fa-hourglass-half"></i>
+        <h3 data-en="Save Time" data-hi="समय बचाएँ">Save Time</h3>
+        <p data-en="Get the key insights of great books in minutes instead of hours." data-hi="घंटों के बजाय मिनटों में महान किताबों की मुख्य बातें जानें।">
+          Get the key insights of great books in minutes instead of hours.
+        </p>
+      </div>
+      
+      <div class="info-card">
+        <i class="fas fa-brain"></i>
+        <h3 data-en="Learn Faster" data-hi="तेज़ी से सीखें">Learn Faster</h3>
+        <p data-en="Summaries highlight lessons you can apply in real life quickly." data-hi="सारांश उन पाठों को उजागर करते हैं जिन्हें आप जल्दी अपने जीवन में लागू कर सकते हैं।">
+          Summaries highlight lessons you can apply in real life quickly.
+        </p>
+      </div>
+      
+      <div class="info-card">
+        <i class="fas fa-binoculars"></i>
+        <h3 data-en="Discover More" data-hi="और खोजें">Discover More</h3>
+        <p data-en="Explore books before deciding to read the full version." data-hi="पूर्ण संस्करण पढ़ने से पहले किताबों का अन्वेषण करें।">
+          Explore books before deciding to read the full version.
+        </p>
+      </div>
+      
+      <div class="info-card">
+        <i class="fas fa-seedling"></i>
+        <h3 data-en="Grow Every Day" data-hi="हर दिन बढ़ें">Grow Every Day</h3>
+        <p data-en="Expand your knowledge and mindset step by step." data-hi="अपने ज्ञान और मानसिकता को कदम दर कदम बढ़ाएँ।">
+          Expand your knowledge and mindset step by step.
+        </p>
+      </div>
+    </section>
 
-  <section class="submit-summary">
-    <h2 data-en="✍️ Submit Your Summary">✍️ Submit Your Summary</h2>
-    <p data-en="Have a favorite book? Share your own summary with us and get featured!">Have a favorite book? Share your own summary with us and get featured!</p>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdDQVbyCEyDv03QfrDQjlMy8it75LlQBgIGALN1eACL7hUFWw/viewform?usp=preview" target="_blank" data-en="🚀 Submit Here">🚀 Submit Here</a>
-  </section>
+    <section class="submit-summary">
+      <h2 data-en="Submit Your Summary" data-hi="अपना सारांश सबमिट करें">Submit Your Summary</h2>
+      <p data-en="Have a favorite book? Share your own summary with us and get featured!" data-hi="क्या आपकी कोई पसंदीदा किताब है? अपना सारांश हमारे साथ साझा करें और फीचर पाएं!">
+        Have a favorite book? Share your own summary with us and get featured!
+      </p>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdDQVbyCEyDv03QfrDQjlMy8it75LlQBgIGALN1eACL7hUFWw/viewform?usp=preview" target="_blank" data-en="Submit Here" data-hi="यहाँ सबमिट करें">Submit Here</a>
+    </section>
+  </div>
 
   <footer>
-    <p data-en="✨ Created with passion by Piyush, Prince & Deepak ✨">✨ Created with passion by Piyush, Prince & Deepak ✨</p>
+    <p data-en="Created with passion by Piyush, Prince & Deepak" data-hi="पियूष, प्रिंस और दीपक द्वारा उत्साह के साथ बनाया गया">
+      Created with passion by Piyush, Prince & Deepak
+    </p>
   </footer>
 
-  <script>
-    // Quotes carousel
-    const quotes = [
-      `"A reader lives a thousand lives before he dies." – George R.R. Martin`,
-      `"So many books, so little time." – Frank Zappa`,
-      `"Reading is essential for those who seek to rise above the ordinary." – Jim Rohn`,
-      `"The man who does not read has no advantage over the man who cannot read." – Mark Twain`,
-      `"Once you learn to read, you will be forever free." – Frederick Douglass`
-    ];
-    let i = 0;
-    setInterval(() => {
-      document.getElementById("quoteBox").innerText = quotes[i];
-      i = (i + 1) % quotes.length;
-    }, 4000);
-
-    // Dark/Light Mode
-    const modeBtn = document.getElementById("modeToggle");
-    modeBtn.addEventListener("click", () => {
-      document.body.classList.toggle("dark-mode");
-      localStorage.setItem("darkMode", document.body.classList.contains("dark-mode"));
-    });
-    if(localStorage.getItem("darkMode") === "true"){ document.body.classList.add("dark-mode"); }
-
-    // Hindi Language Toggle
-    const langBtn = document.getElementById("langToggle");
-    langBtn.addEventListener("click", () => {
-      const elements = document.querySelectorAll("[data-en]");
-      elements.forEach(el => {
-        if(!el.dataset.hi) {
-          // Hindi translations
-          el.dataset.hi = el.dataset.en === "📚 Welcome to Book Hub" ? "📚 बुक हब में आपका स्वागत है" :
-                         el.dataset.en === "Explore life-changing books with short and meaningful summaries" ? "संक्षिप्त और सार्थक सारांश के साथ जीवन बदलने वाली किताबें खोजें" :
-                                                 el.dataset.en === "📖 Summaries" ? "📖 सारांश" :
-                         el.dataset.en === "ℹ️ About Us" ? "ℹ️ हमारे बारे में" :
-                         el.dataset.en === "Discover your purpose with the Japanese secret to a long and happy life." ? "जापानी रहस्य के साथ अपना उद्देश्य खोजें और लंबा खुशहाल जीवन पाएं।" :
-                         el.dataset.en === "Learn how small habits build massive success in life." ? "जानें कि कैसे छोटे आदतें जीवन में बड़ी सफलता बनाती हैं।" :
-                         el.dataset.en === "Find peace, purpose, and meaning by thinking like a monk." ? "भिक्षु की तरह सोचकर शांति, उद्देश्य और अर्थ पाएं।" :
-                         el.dataset.en === "A magical journey of following your dreams and destiny." ? "अपने सपनों और भाग्य का अनुसरण करने की जादुई यात्रा।" :
-                         el.dataset.en === "Master money mindset and financial independence lessons." ? "पैसे की मानसिकता और वित्तीय स्वतंत्रता के पाठ सीखें।" :
-                         el.dataset.en === "⏱ Save Time" ? "⏱ समय बचाएँ" :
-                         el.dataset.en === "Get the key insights of great books in minutes instead of hours." ? "घंटों के बजाय मिनटों में महान किताबों की मुख्य बातें जानें।" :
-                         el.dataset.en === "💡 Learn Faster" ? "💡 तेज़ी से सीखें" :
-                         el.dataset.en === "Summaries highlight lessons you can apply in real life quickly." ? "सारांश उन पाठों को उजागर करते हैं जिन्हें आप जल्दी अपने जीवन में लागू कर सकते हैं।" :
-                         el.dataset.en === "📖 Discover More" ? "📖 और खोजें" :
-                         el.dataset.en === "Explore books before deciding to read the full version." ? "पूर्ण संस्करण पढ़ने से पहले किताबों का अन्वेषण करें।" :
-                         el.dataset.en === "🌍 Grow Every Day" ? "🌍 हर दिन बढ़ें" :
-                         el.dataset.en === "Expand your knowledge and mindset step by step." ? "अपने ज्ञान और मानसिकता को कदम दर कदम बढ़ाएँ।" :
-                         el.dataset.en === "✍️ Submit Your Summary" ? "✍️ अपना सारांश सबमिट करें" :
-                         el.dataset.en === "Have a favorite book? Share your own summary with us and get featured!" ? "क्या आपकी कोई पसंदीदा किताब है? अपना सारांश हमारे साथ साझा करें और फीचर पाएं!" :
-                         el.dataset.en === "🚀 Submit Here" ? "🚀 यहाँ सबमिट करें" :
-                         el.dataset.en === "✨ Created with passion by Piyush, Prince & Deepak ✨" ? "✨ पियूष, प्रिंस और दीपक द्वारा उत्साह के साथ बनाया गया ✨" : el.dataset.en;
-        }
-        el.innerText = el.innerText === el.dataset.en ? el.dataset.hi : el.dataset.en;
-      });
-    });
-  </script><!-- Chatbot Widget -->
-<div id="chatbot-container" style="
-  position: fixed; 
-  bottom: 20px; 
-  right: 20px; 
-  z-index: 9999;
-">
-  <button id="chat-toggle" style="
-    background: #4f46e5; 
-    color: white; 
-    border: none; 
-    border-radius: 50%; 
-    width: 60px; 
-    height: 60px; 
-    font-size: 24px; 
-    cursor: pointer; 
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-  ">💬</button>
-  
-  <div id="chat-window" style="
-    display: none; 
-    flex-direction: column; 
-    position: absolute; 
-    bottom: 70px; 
-    right: 0; 
-    width: 300px; 
-    height: 400px; 
-    background: white; 
-    border-radius: 12px; 
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    overflow: hidden;
-  ">
-    <div style="background:#4f46e5; color:white; padding:10px; text-align:center; font-weight:bold;">
-      📚 BookHub Chatbot
-    </div>
-    <div id="chat-messages" style="flex:1; padding:10px; overflow-y:auto; font-size:14px;">
-      <p><b>Bot:</b> Hi Prince! 👋 Ask me anything about books...</p>
-    </div>
-    <div style="display:flex; border-top:1px solid #ddd;">
-      <input id="chat-input" type="text" placeholder="Type a message..." style="flex:1; padding:10px; border:none; outline:none; font-size:14px;">
-      <button id="send-btn" style="background:#4f46e5; color:white; border:none; padding:10px; cursor:pointer;">➤</button>
+  <!-- Enhanced Chatbot Widget -->
+  <div id="chatbot-container">
+    <button id="chat-toggle" class="pulse">
+      <i class="fas fa-comments"></i>
+    </button>
+    
+    <div id="chat-window">
+      <div class="chat-header">
+        <span>BookHub Assistant</span>
+        <button id="chat-close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div id="chat-messages">
+        <div class="message bot-message">
+          <strong>BookBot:</strong> Hello! I'm here to help you explore our book summaries. What would you like to know?
+        </div>
+      </div>
+      <div class="chat-input-container">
+        <input id="chat-input" type="text" placeholder="Type your message here...">
+        <button id="send-btn">
+          <i class="fas fa-paper-plane"></i>
+        </button>
+      </div>
     </div>
   </div>
-</div>
 
-<script>
-  const toggleBtn = document.getElementById("chat-toggle");
-  const chatWindow = document.getElementById("chat-window");
-  const sendBtn = document.getElementById("send-btn");
-  const input = document.getElementById("chat-input");
-  const messages = document.getElementById("chat-messages");
-
-  toggleBtn.onclick = () => {
-    chatWindow.style.display = chatWindow.style.display === "none" ? "flex" : "none";
-  };
-
-  sendBtn.onclick = sendMessage;
-  input.addEventListener("keypress", function(e) {
-    if (e.key === "Enter") sendMessage();
-  });
-
-  function sendMessage() {
-    const text = input.value.trim();
-    if (text === "") return;
+  <script>
+    // Language management
+    let currentLang = 'en';
     
-    // Show user message
-    messages.innerHTML += `<p><b>You:</b> ${text}</p>`;
-    input.value = "";
-
-    // Dummy bot response (later connect to AI API)
-    setTimeout(() => {
-      let reply = "Hmm... interesting! Soon I'll answer from BookHub summaries.";
-      messages.innerHTML += `<p><b>Bot:</b> ${reply}</p>`;
+    // Set up language toggle
+    const langBtn = document.getElementById("langToggle");
+    const langText = langBtn.querySelector('span');
+    langBtn.addEventListener("click", toggleLanguage);
+    
+    function toggleLanguage() {
+      currentLang = currentLang === 'en' ? 'hi' : 'en';
+      updateLanguage();
+      
+      // Update button text
+      langText.textContent = currentLang === 'en' ? 'हिंदी' : 'English';
+    }
+    
+    function updateLanguage() {
+      const elements = document.querySelectorAll("[data-en], [data-hi]");
+      elements.forEach(el => {
+        if (el.dataset[currentLang]) {
+          el.textContent = el.dataset[currentLang];
+        }
+      });
+    }
+    
+    // Dark/Light Mode
+    const modeBtn = document.getElementById("modeToggle");
+    const modeText = modeBtn.querySelector('span');
+    const modeIcon = modeBtn.querySelector('i');
+    modeBtn.addEventListener("click", toggleMode);
+    
+    function toggleMode() {
+      document.body.classList.toggle("dark-mode");
+      const isDarkMode = document.body.classList.contains("dark-mode");
+      localStorage.setItem("darkMode", isDarkMode);
+      
+      // Update button text and icon
+      if (isDarkMode) {
+        modeText.textContent = 'Light Mode';
+        modeIcon.className = 'fas fa-sun';
+      } else {
+        modeText.textContent = 'Dark Mode';
+        modeIcon.className = 'fas fa-moon';
+      }
+    }
+    
+    // Initialize dark mode if previously set
+    if (localStorage.getItem("darkMode") === "true") {
+      document.body.classList.add("dark-mode");
+      modeText.textContent = 'Light Mode';
+      modeIcon.className = 'fas fa-sun';
+    }
+    
+    // Quotes carousel
+    const quotes = [
+      {
+        en: `"A reader lives a thousand lives before he dies." – George R.R. Martin`,
+        hi: `"एक पाठक मरने से पहले हज़ार जीवन जीता है।" – जॉर्ज आर.आर. मार्टिन`
+      },
+      {
+        en: `"So many books, so little time." – Frank Zappa`,
+        hi: `"इतनी किताबें, इतना कम समय।" – फ्रैंक ज़ैपा`
+      },
+      {
+        en: `"Reading is essential for those who seek to rise above the ordinary." – Jim Rohn`,
+        hi: `"जो साधारण से ऊपर उठना चाहते हैं, उनके लिए पढ़ना जरूरी है।" – जिम रॉन`
+      },
+      {
+        en: `"The man who does not read has no advantage over the man who cannot read." – Mark Twain`,
+        hi: `"जो आदमी नहीं पढ़ता, उसका उस आदमी पर कोई फायदा नहीं होता जो पढ़ नहीं सकता।" – मार्क ट्वेन`
+      },
+      {
+        en: `"Once you learn to read, you will be forever free." – Frederick Douglass`,
+        hi: `"एक बार जब आप पढ़ना सीख जाते हैं, तो आप हमेशा के लिए आज़ाद हो जाते हैं।" – फ्रेडरिक डगलस`
+      }
+    ];
+    
+    let quoteIndex = 0;
+    const quoteBox = document.getElementById("quoteBox");
+    
+    function updateQuote() {
+      quoteBox.style.opacity = 0;
+      
+      setTimeout(() => {
+        quoteBox.textContent = quotes[quoteIndex][currentLang];
+        quoteBox.style.opacity = 1;
+        quoteIndex = (quoteIndex + 1) % quotes.length;
+      }, 500);
+    }
+    
+    setInterval(updateQuote, 5000);
+    
+    // Enhanced Chatbot functionality
+    const toggleBtn = document.getElementById("chat-toggle");
+    const chatClose = document.getElementById("chat-close");
+    const chatWindow = document.getElementById("chat-window");
+    const sendBtn = document.getElementById("send-btn");
+    const input = document.getElementById("chat-input");
+    const messages = document.getElementById("chat-messages");
+    
+    toggleBtn.addEventListener("click", toggleChat);
+    chatClose.addEventListener("click", toggleChat);
+    sendBtn.addEventListener("click", sendMessage);
+    input.addEventListener("keypress", function(e) {
+      if (e.key === "Enter") sendMessage();
+    });
+    
+    function toggleChat() {
+      const isVisible = chatWindow.style.display === "flex";
+      chatWindow.style.display = isVisible ? "none" : "flex";
+      toggleBtn.classList.toggle("pulse", isVisible);
+      
+      if (!isVisible) {
+        input.focus();
+      }
+    }
+    
+    function sendMessage() {
+      const text = input.value.trim();
+      if (text === "") return;
+      
+      // Show user message
+      addMessage(text, 'user');
+      input.value = "";
+      
+      // Process message and generate response
+      setTimeout(() => {
+        const response = generateResponse(text);
+        addMessage(response, 'bot');
+      }, 600);
+    }
+    
+    function addMessage(text, sender) {
+      const messageEl = document.createElement("div");
+      messageEl.classList.add("message", `${sender}-message`);
+      
+      if (sender === 'bot') {
+        messageEl.innerHTML = `<strong>BookBot:</strong> ${text}`;
+      } else {
+        messageEl.innerHTML = `<strong>You:</strong> ${text}`;
+      }
+      
+      messages.appendChild(messageEl);
       messages.scrollTop = messages.scrollHeight;
-    }, 500);
-  }
-</script>
-
+    }
+    
+    function generateResponse(text) {
+      const lowerText = text.toLowerCase();
+      
+      // Greeting detection
+      if (lowerText.includes('hi') || lowerText.includes('hello') || lowerText.includes('hey')) {
+        return currentLang === 'en' 
+          ? "Hello! How can I help you with book summaries today?" 
+          : "नमस्ते! मैं आज आपकी पुस्तक सारांश में कैसे मदद कर सकता हूँ?";
+      }
+      
+      // Book-specific queries
+      if (lowerText.includes('ikigai')) {
+        return currentLang === 'en' 
+          ? "Ikigai is a Japanese concept that means 'a reason for being'. This book explores the secrets to longevity and happiness from the residents of Okinawa." 
+          : "इकिगाई एक जापानी अवधारणा है जिसका अर्थ है 'अस्तित्व का कारण'। यह पुस्तक ओकिनावा के निवासियों से दीर्घायु और खुशहाल जीवन के रहस्यों का पता लगाती है।";
+      }
+      
+      if (lowerText.includes('atomic') || lowerText.includes('habit')) {
+        return currentLang === 'en' 
+          ? "Atomic Habits teaches how tiny changes can grow into remarkable results. James Clear provides practical strategies for forming good habits and breaking bad ones." 
+          : "ऐटमिक हैबिट्स सिखाती है कि कैसे छोटे बदलाव उल्लेखनीय परिणाम दे सकते हैं। जेम्स क्लियर अच्छी आदतें बनाने और बुरी आदतों को तोड़ने के लिए व्यावहारिक रणनीतियाँ प्रदान करते हैं।";
+      }
+      
+      if (lowerText.includes('monk')) {
+        return currentLang === 'en' 
+          ? "In Think Like a Monk, Jay Shetty shares how to apply monk wisdom to everyday life. He teaches how to overcome negativity and find purpose." 
+          : "थिंक लाइक अ मोंक में, जय शेट्टी बताते हैं कि कैसे मठ के ज्ञान को रोजमर्रा की जिंदगी में लागू किया जाए। वह सिखाते हैं कि नकारात्मकता को कैसे दूर किया जाए और उद्देश्य कैसे पाया जाए।";
+      }
+      
+      if (lowerText.includes('alchemist')) {
+        return currentLang === 'en' 
+          ? "The Alchemist is a philosophical novel about a young shepherd who travels to Egypt in search of treasure. The story teaches about following your dreams." 
+          : "द अलकेमिस्ट एक दार्शनिक उपन्यास है जो एक युवा चरवाहे के बारे में है जो खजाने की तलाश में मिस्र की यात्रा करता है। कहानी अपने सपनों का पालन करने के बारे में सिखाती है।";
+      }
+      
+      if (lowerText.includes('rich') || lowerText.includes('poor') || lowerText.includes('dad')) {
+        return currentLang === 'en' 
+          ? "Rich Dad Poor Dad is Robert Kiyosaki's story of growing up with two dads. The book explains how to make money work for you, rather than working for money." 
+          : "रिच डैड पुअर डैड रॉबर्ट कियोसाकी की दो पिता के साथ बड़े होने की कहानी है। किताब बताती है कि पैसे को अपने लिए कैसे काम करना है, बजाय पैसे के लिए काम करने के।";
+      }
+      
+      // Default response
+      return currentLang === 'en' 
+        ? "I'm not sure how to answer that. I can tell you about our book summaries though! Try asking about a specific book like 'Ikigai' or 'Atomic Habits'." 
+        : "मुझे यकीन नहीं है कि इसका जवाब कैसे दूं। हालाँकि, मैं आपको हमारे पुस्तक सारांशों के बारे में बता सकता हूँ! 'इकिगाई' या 'ऐटमिक हैबिट्स' जैसी किसी विशिष्ट पुस्तक के बारे में पूछने का प्रयास करें।";
+    }
+    
+    // Initialize page with a slight delay for a polished feel
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(() => {
+        document.body.style.opacity = 1;
+      }, 100);
+    });
+  </script>
 </body>
 </html>
-
-
-
