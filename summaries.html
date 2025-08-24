@@ -3,214 +3,749 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Book Summaries</title>
+  <title>Book Summaries - BookHub</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-light: linear-gradient(-45deg, #89f7fe, #66a6ff, #ffdde1, #ee9ca7);
-      --bg-dark: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #1c1c2e);
-      --text-light: #000;
-      --text-dark: #fff;
+      --primary: #4f46e5;
+      --primary-dark: #4338ca;
+      --accent: #f97316;
+      --light-bg: #f8fafc;
+      --dark-bg: #0f172a;
+      --light-text: #1e293b;
+      --dark-text: #f1f5f9;
+      --card-light: #ffffff;
+      --card-dark: #1e293b;
+      --shadow-light: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+      --shadow-dark: 0 4px 6px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.2);
+      --transition: all 0.3s ease;
     }
-    body {
+
+    * {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: var(--bg-light);
-      background-size: 400% 400%;
-      animation: gradientBG 12s ease infinite;
-      color: var(--text-light);
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: var(--light-bg);
+      color: var(--light-text);
       line-height: 1.6;
-      transition: background 0.5s, color 0.5s;
+      transition: var(--transition);
+      min-height: 100vh;
     }
+
     body.dark-mode {
-      background: var(--bg-dark);
-      color: var(--text-dark);
+      background: var(--dark-bg);
+      color: var(--dark-text);
     }
-    @keyframes gradientBG {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
-    }
-    .nav-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 20px;
-    }
-    .nav-bar .left {
-      display: flex;
-      gap: 10px;
-    }
-    .nav-bar button, .nav-bar a {
-      text-decoration: none;
-      padding: 8px 15px;
-      border-radius: 8px;
-      border: none;
-      cursor: pointer;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-    .nav-bar button:hover, .nav-bar a:hover { opacity: 0.8; }
-    .nav-bar button {
-      background: #2196f3;
-      color: #fff;
-    }
-    .nav-bar a {
-      background: #4caf50;
-      color: #fff;
+
+    h1, h2, h3, h4, h5 {
+      font-family: 'Merriweather', serif;
+      font-weight: 700;
+      margin-bottom: 1rem;
     }
 
     .container {
-      max-width: 1000px;
-      margin: auto;
-      padding: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
     }
-    h1 { text-align: center; font-size: 2.5rem; margin-bottom: 30px; }
-    .search-box { text-align: center; margin-bottom: 30px; }
-    .search-box input {
-      padding: 10px;
-      width: 60%;
+
+    /* Header Styles */
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      padding: 1rem 0;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+    }
+
+    .left-controls {
+      display: flex;
+      gap: 10px;
+    }
+
+    .left-controls button {
+      padding: 8px 16px;
+      border-radius: 50px;
       border: none;
-      border-radius: 8px;
-      font-size: 1rem;
+      cursor: pointer;
+      font-weight: 600;
+      transition: var(--transition);
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
+    .left-controls button:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
     }
-    .card {
-      background: rgba(0,0,0,0.6);
-      border-radius: 15px;
-      padding: 20px;
-      text-align: center;
-      transition: transform 0.3s, box-shadow 0.3s;
+
+    .right-nav {
+      display: flex;
+      gap: 10px;
     }
-    .card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-    }
-    .card img {
-      max-width: 150px;
-      margin-bottom: 15px;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      object-fit: cover;
-      height: 220px;
-      width: 150px;
-    }
-    .card a {
-      display: block;
-      margin-top: 10px;
+
+    .right-nav a {
       text-decoration: none;
-      padding: 8px 15px;
-      border-radius: 8px;
-      background: #ff9800;
-      color: #000;
-      font-weight: bold;
-      transition: background 0.3s;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
-    .card a:hover { background: #fb8c00; }
-  </style>
-</head>
-<body>
-  <div class="nav-bar">
-  <div class="left">
-    <button id="modeToggle">🌓 Dark/Light</button>
-    <button id="langToggle">🌐 भाषा</button>
-  </div>
-  <div class="right">
-    <a href="index.html" data-en="🏠 Home" data-hi="🏠 गृह">🏠 Home</a>
-    <a href="summaries.html" data-en="📖 Summaries" data-hi="📖 सारांश">📖 Summaries</a>
-    <a href="about.html" data-en="ℹ️ About Us" data-hi="ℹ️ हमारे बारे में">ℹ️ About Us</a>
-  </div>
-</div>
 
-  </div>
+    .right-nav a:hover {
+      background: var(--accent);
+      transform: translateY(-2px);
+    }
 
-  <div class="container">
-    <h1 data-en="Explore Book Summaries" data-hi="किताबों के सारांश खोजें">Explore Book Summaries</h1>
+    .hero {
+      text-align: center;
+      padding: 60px 20px;
+    }
 
-    <div class="search-box">
-      <input type="text" id="searchInput" onkeyup="searchBooks()" placeholder="🔍 Search for a book..." data-en="🔍 Search for a book..." data-hi="🔍 किताब खोजें...">
-    </div>
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-  <div class="grid">
-  <div class="card">
-    <img src="https://m.media-amazon.com/images/I/81l3rZK4lnL.jpg" alt="Ikigai">
-    <h3 data-en="Ikigai" data-hi="इकिगाई">Ikigai</h3>
-    <a href="summary1.html" data-en="Read Summary" data-hi="सारांश पढ़ें">Read Summary</a>
-  </div>
-  <div class="card">
-    <img src="https://m.media-amazon.com/images/I/91bYsX41DVL.jpg" alt="Atomic Habits">
-    <h3 data-en="Atomic Habits" data-hi="एटॉमिक हैबिट्स">Atomic Habits</h3>
-    <a href="summary2.html" data-en="Read Summary" data-hi="सारांश पढ़ें">Read Summary</a>
-  </div>
-  <div class="card">
-    <img src="https://m.media-amazon.com/images/I/81s6DUyQCZL.jpg" alt="Think Like a Monk">
-    <h3 data-en="Think Like a Monk" data-hi="साधु की तरह सोचें">Think Like a Monk</h3>
-    <a href="summary3.html" data-en="Read Summary" data-hi="सारांश पढ़ें">Read Summary</a>
-  </div>
-  <div class="card">
-    <img src="https://m.media-amazon.com/images/I/71aFt4+OTOL.jpg" alt="The Alchemist">
-    <h3 data-en="The Alchemist" data-hi="द अल्केमिस्ट">The Alchemist</h3>
-    <a href="summary4.html" data-en="Read Summary" data-hi="सारांश पढ़ें">Read Summary</a>
-  </div>
-  <div class="card">
-    <img src="https://m.media-amazon.com/images/I/81bsw6fnUiL.jpg" alt="Rich Dad Poor Dad">
-    <h3 data-en="Rich Dad Poor Dad" data-hi="रिच डैड पुअर डैड">Rich Dad Poor Dad</h3>
-    <a href="summary5.html" data-en="Read Summary" data-hi="सारांश पढ़ें">Read Summary</a>
-  </div>
-  <div class="card">
-    <img src="https://m.media-amazon.com/images/I/71vk6p-+ZrL.jpg" alt="Wings of Fire">
-    <h3 data-en="Wings of Fire" data-hi="विंग्स ऑफ़ फायर">Wings of Fire</h3>
-    <a href="summary6.html" data-en="Read Summary" data-hi="सारांश पढ़ें">Read Summary</a>
-  </div>
-  <!-- ✅ New Book Added -->
-  <div class="card">
-    <img src="C:\Users\ACM10\Downloads"\The Power.jpg">
-    <h3 data-en="The Power of Now" data-hi="द पावर ऑफ नाउ">The Power of Now</h3>
-    <a href="summary7.html" data-en="Read Summary" data-hi="सारांश पढ़ें">Read Summary</a>
-  </div>
-</div>
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto;
+      opacity: 0.9;
+    }
 
-  <script>
-    function searchBooks() {
-      let input = document.getElementById("searchInput").value.toLowerCase();
-      let cards = document.getElementsByClassName("card");
-      for (let i = 0; i < cards.length; i++) {
-        let title = cards[i].getElementsByTagName("h3")[0].innerText.toLowerCase();
-        if (title.includes(input)) {
-          cards[i].style.display = "block";
-        } else {
-          cards[i].style.display = "none";
-        }
+    /* Search Box */
+    .search-box {
+      max-width: 600px;
+      margin: 30px auto;
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 15px 20px;
+      border-radius: 50px;
+      border: 2px solid #e2e8f0;
+      font-size: 1rem;
+      outline: none;
+      transition: var(--transition);
+      box-shadow: var(--shadow-light);
+    }
+
+    body.dark-mode .search-box input {
+      background: var(--card-dark);
+      border-color: #475569;
+      color: var(--dark-text);
+      box-shadow: var(--shadow-dark);
+    }
+
+    .search-box input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.3);
+    }
+
+    .search-box i {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #94a3b8;
+    }
+
+    /* Book Grid */
+    .book-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 30px;
+      margin: 50px auto;
+    }
+
+    .book-card {
+      background: var(--card-light);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-light);
+      transition: var(--transition);
+    }
+
+    body.dark-mode .book-card {
+      background: var(--card-dark);
+      box-shadow: var(--shadow-dark);
+    }
+
+    .book-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .book-img {
+      height: 250px;
+      overflow: hidden;
+    }
+
+    .book-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .book-card:hover .book-img img {
+      transform: scale(1.05);
+    }
+
+    .book-info {
+      padding: 20px;
+    }
+
+    .book-info h3 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      color: var(--primary);
+    }
+
+    body.dark-mode .book-info h3 {
+      color: var(--accent);
+    }
+
+    .book-info p {
+      color: #64748b;
+      margin-bottom: 15px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    body.dark-mode .book-info p {
+      color: #cbd5e1;
+    }
+
+    .book-info a {
+      display: inline-block;
+      padding: 10px 20px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .book-info a:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    /* Category Filter */
+    .category-filter {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 30px 0;
+    }
+
+    .category-btn {
+      padding: 8px 16px;
+      background: var(--card-light);
+      border: 2px solid #e2e8f0;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    body.dark-mode .category-btn {
+      background: var(--card-dark);
+      border-color: #475569;
+      color: var(--dark-text);
+    }
+
+    .category-btn:hover, .category-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 30px;
+      margin-top: 50px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .topbar {
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      .left-controls, .right-nav {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .hero h1 {
+        font-size: 2rem;
+      }
+      
+      .book-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
       }
     }
 
-    // Dark/Light Mode
-    const modeBtn = document.getElementById("modeToggle");
-    modeBtn.addEventListener("click", () => {
-      document.body.classList.toggle("dark-mode");
-      localStorage.setItem("darkMode", document.body.classList.contains("dark-mode"));
-    });
-    if(localStorage.getItem("darkMode") === "true"){ document.body.classList.add("dark-mode"); }
+    @media (max-width: 480px) {
+      .book-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+      
+      .category-filter {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .category-btn {
+        width: 200px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="topbar">
+      <div class="left-controls">
+        <button id="langToggle"><i class="fas fa-language"></i> <span>हिंदी</span></button>
+        <button id="modeToggle"><i class="fas fa-moon"></i> <span>Dark Mode</span></button>
+      </div>
+      <nav class="right-nav">
+        <a href="index.html"><i class="fas fa-home"></i> <span data-en="Home" data-hi="होम">Home</span></a>
+        <a href="summaries.html"><i class="fas fa-book"></i> <span data-en="Summaries" data-hi="सारांश">Summaries</span></a>
+        <a href="about.html"><i class="fas fa-info-circle"></i> <span data-en="About Us" data-hi="हमारे बारे में">About Us</span></a>
+      </nav>
+    </div>
 
-    // Language Toggle
+    <div class="hero">
+      <h1 data-en="Book Summaries" data-hi="पुस्तक सारांश">Book Summaries</h1>
+      <p data-en="Discover key insights from the world's best books" data-hi="दुनिया की सर्वश्रेष्ठ पुस्तकों से मुख्य अंतर्दृष्टि खोजें">
+        Discover key insights from the world's best books
+      </p>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Search for books..." data-en="Search for books..." data-hi="पुस्तकें खोजें...">
+      <i class="fas fa-search"></i>
+    </div>
+
+    <div class="category-filter">
+      <button class="category-btn active" data-category="all" data-en="All" data-hi="सभी">All</button>
+      <button class="category-btn" data-category="self-help" data-en="Self-Help" data-hi="स्व-सहायता">Self-Help</button>
+      <button class="category-btn" data-category="business" data-en="Business" data-hi="व्यवसाय">Business</button>
+      <button class="category-btn" data-category="psychology" data-en="Psychology" data-hi="मनोविज्ञान">Psychology</button>
+      <button class="category-btn" data-category="fiction" data-en="Fiction" data-hi="कल्पना">Fiction</button>
+    </div>
+
+    <div class="book-grid">
+      <!-- Original Books -->
+      <div class="book-card" data-category="self-help">
+        <div class="book-img">
+          <img src="https://m.media-amazon.com/images/I/81l3rZK4lnL.jpg" alt="Ikigai">
+        </div>
+        <div class="book-info">
+          <h3 data-en="Ikigai" data-hi="इकिगाई">Ikigai</h3>
+          <p data-en="Discover your purpose with the Japanese secret to a long and happy life." data-hi="जापानी रहस्य के साथ अपना उद्देश्य खोजें और लंबा खुशहाल जीवन पाएं।">
+            Discover your purpose with the Japanese secret to a long and happy life.
+          </p>
+          <a href="summary1.html" data-en="Read Summary" data-hi="सारांश पढ़ें">Read Summary</a>
+        </div>
+      </div>
+
+      <div class="book-card" data-category="self-help">
+        <div class="book-img">
+          <img src="https://m.media-amazon.com/images/I/91bYsX41DVL.jpg" alt="Atomic Habits">
+        </div>
+        <div class="book-info">
+          <h3 data-en="Atomic Habits" data-hi="ऐटमिक हैबिट्स">Atomic Habits</h3>
+          <p data-en="Learn how small habits build massive success in life." data-hi="जानें कि कैसे छोटे आदतें जीवन में बड़ी सफलता बनाती हैं।">
+            Learn how small habits build massive success in life.
+          </p>
+          <a href="summary2.html" data-en="Read Summary" data-hi="सारांश पढ़ें">Read Summary</a>
+        </div>
+      </div>
+
+      <div class="book-card" data-category="self-help">
+        <div class="book-img">
+          <img src="https://m.media-amazon.com/images/I/81s6DUyQCZL.jpg" alt="Think Like a Monk">
+        </div>
+        <div class="book-info">
+          <h3 data-en="Think Like a Monk" data-hi="मुनि की तरह सोचें">Think Like a Monk</h3>
+          <p data-en="Find peace, purpose, and meaning by thinking like a monk." data-hi="भिक्षु की तरह सोचकर शांति, उद्देश्य और अर्थ पाएं।">
+            Find peace, purpose, and meaning by thinking like a monk.
+          </p>
+          <a href="summary3.html" data-en="Read Summary" data-hi="सारांश पढ़ें">Read Summary</a>
+        </div>
+      </div>
+
+      <div class="book-card" data-category="fiction">
+        <div class="book-img">
+          <img src="https://m.media-amazon.com/images/I/71aFt4+OTOL.jpg" alt="The Alchemist">
+        </div>
+        <div class="book-info">
+          <h3 data-en="The Alchemist" data-hi="द अलकेमिस्ट">The Alchemist</h3>
+          <p data-en="A magical journey of following your dreams and destiny." data-hi="अपने सपनों और भाग्य का अनुसरण करने की जादुई यात्रा।">
+            A magical journey of following your dreams and destiny.
+          </p>
+          <a href="summary4.html" data-en="Read Summary" data-hi="सारांश पढ़ें">Read Summary</a>
+        </div>
+      </div>
+
+      <div class="book-card" data-category="business">
+        <div class="book-img">
+          <img src="https://m.media-amazon.com/images/I/81bsw6fnUiL.jpg" alt="Rich Dad Poor Dad">
+        </div>
+        <div class="book-info">
+          <h3 data-en="Rich Dad Poor Dad" data-hi="रिच डैड पुअर डैड">Rich Dad Poor Dad</h3>
+          <p data-en="Master money mindset and financial independence lessons." data-hi="पैसे की मानसिकता और वित्तीय स्वतंत्रता के पाठ सीखें।">
+            Master money mindset and financial independence lessons.
+          </p>
+          <a href="summary5.html" data-en="Read Summary" data-hi="सारांश पढ़ें">Read Summary</a>
+        </div>
+      </div>
+
+      <!-- Additional Books -->
+      <div class="book-card" data-category="psychology">
+        <div class="book-img">
+          <img src="https://m.media-amazon.com/images/I/71aFt4+OTOL.jpg" alt="The Power of Now">
+        </div>
+        <div class="book-info">
+          <h3 data-en="The Power of Now" data-hi="वर्तमान की शक्ति">The Power of Now</h3>
+          <p data-en="A guide to spiritual enlightenment focusing on the importance of living in the present moment." data-hi="वर्तमान क्षण में जीने के महत्व पर केंद्रित आध्यात्मिक ज्ञानोदय के लिए एक मार्गदर्शिका।">
+            A guide to spiritual enlightenment focusing on the importance of living in the present moment.
+          </p>
+          <a href="summary6.html" data-en="Read Summary" data-hi="सारांश पढ़ें">Read Summary</a>
+        </div>
+      </div>
+
+      <div class="book-card" data-category="business">
+        <div class="book-img">
+          <img src="https://m.media-amazon.com/images/I/71aFt4+OTOL.jpg" alt="The Lean Startup">
+        </div>
+        <div class="book-info">
+          <h3 data-en="The Lean Startup" data-hi="लीन स्टार्टअप">The Lean Startup</h3>
+          <p data-en="How today's entrepreneurs use continuous innovation to create radically successful businesses." data-hi="आज के उद्यमी निरंतर नवाचार का उपयोग करके मौलिक रूप से सफल व्यवसाय कैसे बनाते हैं।">
+            How today's entrepreneurs use continuous innovation to create radically successful businesses.
+          </p>
+          <a href="summary7.html" data-en="Read Summary" data-hi="सारांश पढ़ें">Read Summary</a>
+        </div>
+      </div>
+
+      <div class="book-card" data-category="psychology">
+        <div class="book-img">
+          <img src="https://m.media-amazon.com/images/I/71aFt4+OTOL.jpg" alt="Thinking, Fast and Slow">
+        </div>
+        <div class="book-info">
+          <h3 data-en="Thinking, Fast and Slow" data-hi="सोच, तेज और धीमी">Thinking, Fast and Slow</h3>
+          <p data-en="Explores the two systems that drive the way we think and make choices." data-hi="उन दो प्रणालियों का अन्वेषण करता है जो हमारे सोचने और चुनाव करने के तरीके को संचालित करती हैं।">
+            Explores the two systems that drive the way we think and make choices.
+          </p>
+          <a href="summary8.html" data-en="Read Summary" data-hi="सारांश पढ़ें">Read Summary</a>
+        </div>
+      </div>
+
+      <div class="book-card" data-category="self-help">
+        <div class="book-img">
+          <img src="https://m.media-amazon.com/images/I/71aFt4+OTOL.jpg" alt="The 7 Habits of Highly Effective People">
+        </div>
+        <div class="book-info">
+          <h3 data-en="The 7 Habits" data-hi="7 आदतें">The 7 Habits</h3>
+          <p data-en="Powerful lessons in personal change and effectiveness." data-hi="व्यक्तिगत परिवर्तन और प्रभावशीलता में शक्तिशाली सबक।">
+            Powerful lessons in personal change and effectiveness.
+          </p>
+          <a href="summary9.html" data-en="Read Summary" data-hi="सारांश पढ़ें">Read Summary</a>
+        </div>
+      </div>
+
+      <div class="book-card" data-category="business">
+        <div class="book-img">
+          <img src="https://m.media-amazon.com/images/I/71aFt4+OTOL.jpg" alt="Good to Great">
+        </div>
+        <div class="book-info">
+          <h3 data-en="Good to Great" data-hi="अच्छे से महान">Good to Great</h3>
+          <p data-en="Why some companies make the leap and others don't." data-hi="क्यों कुछ कंपनियां छलांग लगाती हैं और अन्य नहीं।">
+            Why some companies make the leap and others don't.
+          </p>
+          <a href="summary10.html" data-en="Read Summary" data-hi="सारांश पढ़ें">Read Summary</a>
+        </div>
+      </div>
+
+      <div class="book-card" data-category="psychology">
+        <div class="book-img">
+          <img src="https://m.media-amazon.com/images/I/71aFt4+OTOL.jpg" alt="Influence: The Psychology of Persuasion">
+        </div>
+        <div class="book-info">
+          <h3 data-en="Influence" data-hi="प्रभाव">Influence</h3>
+          <p data-en="The psychology behind why people say yes and how to apply these understandings." data-hi="लोग हाँ क्यों कहते हैं और इन समझों को कैसे लागू करें, इसके पीछे का मनोविज्ञान।">
+            The psychology behind why people say yes and how to apply these understandings.
+          </p>
+          <a href="summary11.html" data-en="Read Summary" data-hi="सारांश पढ़ें">Read Summary</a>
+        </div>
+      </div>
+
+      <div class="book-card" data-category="self-help">
+        <div class="book-img">
+          <img src="https://m.media-amazon.com/images/I/71aFt4+OTOL.jpg" alt="The Subtle Art of Not Giving a F*ck">
+        </div>
+        <div class="book-info">
+          <h3 data-en="The Subtle Art" data-hi="सूक्ष्म कला">The Subtle Art</h3>
+          <p data-en="A counterintuitive approach to living a good life." data-hi="अच्छा जीवन जीने के लिए एक प्रतिसहजतापूर्ण दृष्टिकोण।">
+            A counterintuitive approach to living a good life.
+          </p>
+          <a href="summary12.html" data-en="Read Summary" data-hi="सारांश पढ़ें">Read Summary</a>
+        </div>
+      </div>
+
+      <div class="book-card" data-category="business">
+        <div class="book-img">
+          <img src="https://m.media-amazon.com/images/I/71aFt4+OTOL.jpg" alt="Zero to One">
+        </div>
+        <div class="book-info">
+          <h3 data-en="Zero to One" data-hi="शून्य से एक">Zero to One</h3>
+          <p data-en="Notes on startups, or how to build the future." data-hi="स्टार्टअप्स पर नोट्स, या भविष्य कैसे बनाएं।">
+            Notes on startups, or how to build the future.
+          </p>
+          <a href="summary13.html" data-en="Read Summary" data-hi="सारांश पढ़ें">Read Summary</a>
+        </div>
+      </div>
+
+      <div class="book-card" data-category="psychology">
+        <div class="book-img">
+          <img src="https://m.media-amazon.com/images/I/71aFt4+OTOL.jpg" alt="Emotional Intelligence">
+        </div>
+        <div class="book-info">
+          <h3 data-en="Emotional Intelligence" data-hi="भावनात्मक बुद्धिमत्ता">Emotional Intelligence</h3>
+          <p data-en="Why it can matter more than IQ." data-hi="यह आईक्यू से अधिक महत्वपूर्ण क्यों हो सकता है।">
+            Why it can matter more than IQ.
+          </p>
+          <a href="summary14.html" data-en="Read Summary" data-hi="सारांश पढ़ें">Read Summary</a>
+        </div>
+      </div>
+
+      <div class="book-card" data-category="self-help">
+        <div class="book-img">
+          <img src="https://m.media-amazon.com/images/I/71aFt4+OTOL.jpg" alt="The 5 AM Club">
+        </div>
+        <div class="book-info">
+          <h3 data-en="The 5 AM Club" data-hi="5 AM क्लब">The 5 AM Club</h3>
+          <p data-en="Own your morning, elevate your life." data-hi="अपनी सुबह के मालिक बनें, अपने जीवन को ऊंचा उठाएं।">
+            Own your morning, elevate your life.
+          </p>
+          <a href="summary15.html" data-en="Read Summary" data-hi="सारांश पढ़ें">Read Summary</a>
+        </div>
+      </div>
+
+      <div class="book-card" data-category="business">
+        <div class="book-img">
+          <img src="https://m.media-amazon.com/images/I/71aFt4+OTOL.jpg" alt="The $100 Startup">
+        </div>
+        <div class="book-info">
+          <h3 data-en="The $100 Startup" data-hi="$100 स्टार्टअप">The $100 Startup</h3>
+          <p data-en="Reinvent the way you make a living, do what you love, and create a new future." data-hi="अपनी आजीविका कमाने, अपनी पसंद का काम करने और एक नया भविष्य बनाने के तरीके को पुनर्जीवित करें।">
+            Reinvent the way you make a living, do what you love, and create a new future.
+          </p>
+          <a href="summary16.html" data-en="Read Summary" data-hi="सारांश पढ़ें">Read Summary</a>
+        </div>
+      </div>
+
+      <div class="book-card" data-category="psychology">
+        <div class="book-img">
+          <img src="https://m.media-amazon.com/images/I/71aFt4+OTOL.jpg" alt="Mindset: The New Psychology of Success">
+        </div>
+        <div class="book-info">
+          <h3 data-en="Mindset" data-hi="माइंडसेट">Mindset</h3>
+          <p data-en="How we can learn to fulfill our potential." data-hi="हम अपनी क्षमता को पूरा करना कैसे सीख सकते हैं।">
+            How we can learn to fulfill our potential.
+          </p>
+          <a href="summary17.html" data-en="Read Summary" data-hi="सारांश पढ़ें">Read Summary</a>
+        </div>
+      </div>
+
+      <div class="book-card" data-category="self-help">
+        <div class="book-img">
+          <img src="https://m.media-amazon.com/images/I/71aFt4+OTOL.jpg" alt="The Four Agreements">
+        </div>
+        <div class="book-info">
+          <h3 data-en="The Four Agreements" data-hi="चार समझौते">The Four Agreements</h3>
+          <p data-en="A practical guide to personal freedom." data-hi="व्यक्तिगत स्वतंत्रता के लिए एक व्यावहारिक मार्गदर्शिका।">
+            A practical guide to personal freedom.
+          </p>
+          <a href="summary18.html" data-en="Read Summary" data-hi="सारांश पढ़ें">Read Summary</a>
+        </div>
+      </div>
+
+      <div class="book-card" data-category="business">
+        <div class="book-img">
+          <img src="https://m.media-amazon.com/images/I/71aFt4+OTOL.jpg" alt="Start with Why">
+        </div>
+        <div class="book-info">
+          <h3 data-en="Start with Why" data-hi="क्यों से शुरू करें">Start with Why</h3>
+          <p data-en="How great leaders inspire everyone to take action." data-hi="महान नेता हर किसी को कार्रवाई करने के लिए कैसे प्रेरित करते हैं।">
+            How great leaders inspire everyone to take action.
+          </p>
+          <a href="summary19.html" data-en="Read Summary" data-hi="सारांश पढ़ें">Read Summary</a>
+        </div>
+      </div>
+
+      <div class="book-card" data-category="fiction">
+        <div class="book-img">
+          <img src="https://m.media-amazon.com/images/I/71aFt4+OTOL.jpg" alt="The Kite Runner">
+        </div>
+        <div class="book-info">
+          <h3 data-en="The Kite Runner" data-hi="काइट रनर">The Kite Runner</h3>
+          <p data-en="A powerful story of friendship, betrayal, and redemption." data-hi="दोस्ती, विश्वासघात और मोचन की एक शक्तिशाली कहानी।">
+            A powerful story of friendship, betrayal, and redemption.
+          </p>
+          <a href="summary20.html" data-en="Read Summary" data-hi="सारांश पढ़ें">Read Summary</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p data-en="Created with passion by Piyush, Prince & Deepak" data-hi="पियूष, प्रिंस और दीपक द्वारा उत्साह के साथ बनाया गया">
+      Created with passion by Piyush, Prince & Deepak
+    </p>
+  </footer>
+
+  <script>
+    // Language management
+    let currentLang = 'en';
+    
+    // Set up language toggle
     const langBtn = document.getElementById("langToggle");
-    langBtn.addEventListener("click", () => {
-      const texts = document.querySelectorAll("[data-en]");
-      texts.forEach(el => {
-        if(el.dataset.active === "hi"){
-          el.innerText = el.dataset.en;
-          el.dataset.active = "en";
-        } else {
-          el.innerText = el.dataset.hi;
-          el.dataset.active = "hi";
+    const langText = langBtn.querySelector('span');
+    langBtn.addEventListener("click", toggleLanguage);
+    
+    function toggleLanguage() {
+      currentLang = currentLang === 'en' ? 'hi' : 'en';
+      updateLanguage();
+      
+      // Update button text
+      langText.textContent = currentLang === 'en' ? 'हिंदी' : 'English';
+    }
+    
+    function updateLanguage() {
+      const elements = document.querySelectorAll("[data-en], [data-hi]");
+      elements.forEach(el => {
+        if (el.dataset[currentLang]) {
+          el.textContent = el.dataset[currentLang];
         }
       });
+    }
+    
+    // Dark/Light Mode
+    const modeBtn = document.getElementById("modeToggle");
+    const modeText = modeBtn.querySelector('span');
+    const modeIcon = modeBtn.querySelector('i');
+    modeBtn.addEventListener("click", toggleMode);
+    
+    function toggleMode() {
+      document.body.classList.toggle("dark-mode");
+      const isDarkMode = document.body.classList.contains("dark-mode");
+      localStorage.setItem("darkMode", isDarkMode);
+      
+      // Update button text and icon
+      if (isDarkMode) {
+        modeText.textContent = 'Light Mode';
+        modeIcon.className = 'fas fa-sun';
+      } else {
+        modeText.textContent = 'Dark Mode';
+        modeIcon.className = 'fas fa-moon';
+      }
+    }
+    
+    // Initialize dark mode if previously set
+    if (localStorage.getItem("darkMode") === "true") {
+      document.body.classList.add("dark-mode");
+      modeText.textContent = 'Light Mode';
+      modeIcon.className = 'fas fa-sun';
+    }
+    
+    // Search functionality
+    const searchInput = document.getElementById("searchInput");
+    searchInput.addEventListener("keyup", searchBooks);
+    
+    function searchBooks() {
+      const searchTerm = searchInput.value.toLowerCase();
+      const books = document.querySelectorAll(".book-card");
+      
+      books.forEach(book => {
+        const title = book.querySelector("h3").textContent.toLowerCase();
+        const description = book.querySelector("p").textContent.toLowerCase();
+        
+        if (title.includes(searchTerm) || description.includes(searchTerm)) {
+          book.style.display = "block";
+        } else {
+          book.style.display = "none";
+        }
+      });
+    }
+    
+    // Category filtering
+    const categoryBtns = document.querySelectorAll(".category-btn");
+    categoryBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        // Remove active class from all buttons
+        categoryBtns.forEach(b => b.classList.remove("active"));
+        // Add active class to clicked button
+        btn.classList.add("active");
+        
+        const category = btn.dataset.category;
+        filterBooks(category);
+      });
     });
+    
+    function filterBooks(category) {
+      const books = document.querySelectorAll(".book-card");
+      
+      books.forEach(book => {
+        if (category === "all" || book.dataset.category === category) {
+          book.style.display = "block";
+        } else {
+          book.style.display = "none";
+        }
+      });
+    }
   </script>
 </body>
 </html>
