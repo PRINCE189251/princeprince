@@ -3,23 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BookHub - Professional Book Summaries</title>
+  <title>NexusVerse TechFest - Where Ideas Collide</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Exo+2:wght@100;200;300;400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #4f46e5;
-      --primary-dark: #4338ca;
-      --accent: #f97316;
-      --light-bg: #f8fafc;
-      --dark-bg: #0f172a;
-      --light-text: #1e293b;
-      --dark-text: #f1f5f9;
-      --card-light: #ffffff;
-      --card-dark: #1e293b;
+      --primary: #6c5ce7;
+      --primary-dark: #5649c9;
+      --accent: #00d2ff;
+      --accent2: #ff3860;
+      --accent3: #ffcc00;
+      --accent4: #9d4edd;
+      --light-bg: #0f172a;
+      --dark-bg: #0a0e1a;
+      --light-text: #f1f5f9;
+      --dark-text: #cbd5e1;
+      --tech-gradient: linear-gradient(135deg, #6c5ce7 0%, #00d2ff 100%);
+      --tech-gradient2: linear-gradient(135deg, #ff3860 0%, #ffcc00 100%);
+      --tech-gradient3: linear-gradient(135deg, #9d4edd 0%, #4cc9f0 100%);
       --shadow-light: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
       --shadow-dark: 0 4px 6px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.2);
       --transition: all 0.3s ease;
+      --transition-slow: all 0.7s ease;
     }
 
     * {
@@ -29,37 +34,77 @@
     }
 
     body {
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'Exo 2', sans-serif;
       background: var(--light-bg);
       color: var(--light-text);
       line-height: 1.6;
       transition: var(--transition);
       min-height: 100vh;
+      opacity: 0;
+      animation: fadeIn 1.2s ease forwards;
+      overflow-x: hidden;
     }
 
-    body.dark-mode {
-      background: var(--dark-bg);
-      color: var(--dark-text);
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes glitch {
+      0% { transform: translate(0); }
+      20% { transform: translate(-2px, 2px); }
+      40% { transform: translate(-2px, -2px); }
+      60% { transform: translate(2px, 2px); }
+      80% { transform: translate(2px, -2px); }
+      100% { transform: translate(0); }
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(108, 92, 231, 0.7); }
+      70% { box-shadow: 0 0 0 15px rgba(108, 92, 231, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(108, 92, 231, 0); }
     }
 
     h1, h2, h3, h4, h5 {
-      font-family: 'Merriweather', serif;
+      font-family: 'Orbitron', sans-serif;
       font-weight: 700;
       margin-bottom: 1rem;
     }
 
     .container {
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
-      padding: 0 20px;
+      padding: 0 30px;
+    }
+
+    /* Particle Background */
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
     }
 
     /* Header Styles */
     header {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      background: rgba(15, 23, 42, 0.8);
       color: white;
       padding: 1rem 0;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      width: 100%;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      transition: var(--transition);
+    }
+
+    header.scrolled {
+      padding: 0.5rem 0;
+      background: rgba(10, 14, 26, 0.95);
     }
 
     .topbar {
@@ -67,6 +112,23 @@
       justify-content: space-between;
       align-items: center;
       padding: 0 20px;
+    }
+
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--tech-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 15px rgba(108, 92, 231, 0.5);
+    }
+
+    .logo span {
+      color: var(--accent);
     }
 
     .left-controls {
@@ -77,11 +139,11 @@
     .left-controls button {
       padding: 8px 16px;
       border-radius: 50px;
-      border: none;
+      border: 1px solid rgba(255, 255, 255, 0.2);
       cursor: pointer;
       font-weight: 600;
       transition: var(--transition);
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.1);
       color: white;
       display: flex;
       align-items: center;
@@ -89,8 +151,9 @@
     }
 
     .left-controls button:hover {
-      background: rgba(255, 255, 255, 0.3);
+      background: var(--primary);
       transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
     }
 
     .right-nav {
@@ -103,51 +166,205 @@
       font-weight: 600;
       padding: 8px 16px;
       border-radius: 50px;
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.1);
       color: white;
       transition: var(--transition);
       display: flex;
       align-items: center;
       gap: 5px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     .right-nav a:hover {
       background: var(--accent);
       transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 210, 255, 0.4);
     }
 
+    /* Hero Section */
     .hero {
       text-align: center;
-      padding: 60px 20px;
+      padding: 180px 20px 100px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
     }
 
     .hero h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      background: linear-gradient(to right, #fff, #ffd700);
+      font-size: 4.5rem;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(to right, #fff, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+      animation: glow 3s infinite alternate;
+      letter-spacing: 2px;
+    }
+
+    .hero p {
+      font-size: 1.4rem;
+      max-width: 700px;
+      margin: 0 auto 2.5rem;
+      opacity: 0.9;
+      font-weight: 300;
+    }
+
+    .hero-cta {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .cta-button {
+      padding: 15px 40px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.1rem;
+      transition: var(--transition);
+      display: inline-block;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .cta-primary {
+      background: var(--tech-gradient);
+      color: white;
+      box-shadow: 0 5px 20px rgba(108, 92, 231, 0.5);
+    }
+
+    .cta-primary:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(108, 92, 231, 0.7);
+    }
+
+    .cta-secondary {
+      background: transparent;
+      color: white;
+      border: 2px solid var(--accent);
+      box-shadow: 0 5px 20px rgba(0, 210, 255, 0.3);
+    }
+
+    .cta-secondary:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 210, 255, 0.5);
+      background: rgba(0, 210, 255, 0.1);
+    }
+
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 50px;
+    }
+
+    .countdown-item {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 20px;
+      border-radius: 15px;
+      min-width: 100px;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      transition: var(--transition);
+    }
+
+    .countdown-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .countdown-number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      font-family: 'Orbitron', sans-serif;
+      background: var(--tech-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .hero p {
-      font-size: 1.2rem;
-      max-width: 600px;
-      margin: 0 auto;
-      opacity: 0.9;
+    .countdown-label {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 5px;
+      color: var(--accent);
+    }
+
+    /* Holographic Effect */
+    .holographic-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 15px;
+      transition: var(--transition);
+    }
+
+    .holographic-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: var(--transition-slow);
+    }
+
+    .holographic-card:hover::before {
+      left: 100%;
     }
 
     /* Book Gallery */
+    .section-title {
+      text-align: center;
+      margin: 80px 0 50px;
+      position: relative;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 2.5rem;
+      padding: 0 20px;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 5px;
+      background: var(--tech-gradient);
+      border-radius: 3px;
+    }
+
     .gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 30px;
-      margin: 50px auto;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 40px;
+      margin: 60px auto;
     }
 
     .book-card {
       perspective: 1000px;
-      height: 380px;
+      height: 400px;
       cursor: pointer;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .book-card:hover {
+      transform: translateY(-15px) rotateX(5deg);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(108, 92, 231, 0.5);
     }
 
     .book-inner {
@@ -168,8 +385,7 @@
       width: 100%;
       height: 100%;
       backface-visibility: hidden;
-      border-radius: 12px;
-      box-shadow: var(--shadow-light);
+      border-radius: 15px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -177,9 +393,8 @@
       overflow: hidden;
     }
 
-    body.dark-mode .book-front,
-    body.dark-mode .book-back {
-      box-shadow: var(--shadow-dark);
+    .book-front {
+      background: var(--dark-bg);
     }
 
     .book-front img {
@@ -190,14 +405,14 @@
     }
 
     .book-card:hover .book-front img {
-      transform: scale(1.05);
+      transform: scale(1.1);
     }
 
     .book-back {
-      background: var(--primary);
+      background: var(--tech-gradient3);
       color: white;
       transform: rotateY(180deg);
-      padding: 20px;
+      padding: 25px;
       text-align: center;
       display: flex;
       flex-direction: column;
@@ -205,133 +420,200 @@
     }
 
     .book-title {
-      font-weight: 700;
-      margin-bottom: 10px;
-      font-size: 1.3rem;
+      font-weight: 800;
+      margin-bottom: 15px;
+      font-size: 1.5rem;
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     }
 
     .book-description {
-      font-size: 0.95rem;
-      line-height: 1.5;
+      font-size: 1rem;
+      line-height: 1.6;
+      font-weight: 300;
     }
 
     /* Quotes Section */
     .quotes {
-      max-width: 800px;
-      margin: 60px auto;
+      max-width: 900px;
+      margin: 80px auto;
       text-align: center;
-      font-size: 1.4rem;
+      font-size: 1.6rem;
       font-style: italic;
-      padding: 30px;
-      background: var(--card-light);
-      border-radius: 12px;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
       color: inherit;
       transition: opacity 0.5s ease;
-      box-shadow: var(--shadow-light);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+      font-weight: 300;
     }
 
-    body.dark-mode .quotes {
-      background: var(--card-dark);
-      box-shadow: var(--shadow-dark);
+    .quotes::before {
+      content: '"';
+      position: absolute;
+      top: -30px;
+      left: 30px;
+      font-size: 10rem;
+      opacity: 0.1;
+      font-family: serif;
     }
 
     /* Info Section */
     .info-section {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
-      margin: 60px auto;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin: 80px auto;
     }
 
     .info-card {
-      background: var(--card-light);
-      padding: 25px;
-      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 30px;
+      border-radius: 20px;
       text-align: center;
-      box-shadow: var(--shadow-light);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
       transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
     }
 
-    body.dark-mode .info-card {
-      background: var(--card-dark);
-      box-shadow: var(--shadow-dark);
+    .info-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: var(--tech-gradient);
     }
 
     .info-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3), 0 0 30px rgba(108, 92, 231, 0.3);
     }
 
     .info-card i {
-      font-size: 2.5rem;
-      color: var(--primary);
-      margin-bottom: 15px;
+      font-size: 3rem;
+      background: var(--tech-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 20px;
     }
 
     .info-card h3 {
-      margin-bottom: 15px;
-      font-size: 1.3rem;
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+      color: var(--accent);
+    }
+
+    .info-card p {
+      font-weight: 300;
+      line-height: 1.7;
     }
 
     /* Submit Section */
     .submit-summary {
       text-align: center;
-      margin: 60px auto;
-      padding: 40px;
-      background: var(--card-light);
-      border-radius: 12px;
-      box-shadow: var(--shadow-light);
+      margin: 100px auto;
+      padding: 60px;
+      background: var(--tech-gradient3);
+      border-radius: 25px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+      position: relative;
+      overflow: hidden;
     }
 
-    body.dark-mode .submit-summary {
-      background: var(--card-dark);
-      box-shadow: var(--shadow-dark);
+    .submit-summary::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+      transform: rotate(30deg);
     }
 
     .submit-summary h2 {
-      margin-bottom: 15px;
+      margin-bottom: 20px;
+      font-size: 2.5rem;
+      position: relative;
+      z-index: 2;
     }
 
     .submit-summary p {
-      margin-bottom: 25px;
-      max-width: 600px;
+      margin-bottom: 35px;
+      max-width: 700px;
       margin-left: auto;
       margin-right: auto;
+      font-size: 1.2rem;
+      font-weight: 300;
+      position: relative;
+      z-index: 2;
     }
 
     .submit-summary a {
-      padding: 15px 35px;
-      background: var(--primary);
-      color: white;
+      padding: 18px 45px;
+      background: white;
+      color: var(--primary);
       border-radius: 50px;
       text-decoration: none;
-      font-size: 1.1rem;
-      font-weight: 600;
-      box-shadow: var(--shadow-light);
+      font-size: 1.2rem;
+      font-weight: 700;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
       transition: var(--transition);
       display: inline-block;
+      position: relative;
+      z-index: 2;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
     .submit-summary a:hover {
-      background: var(--primary-dark);
-      transform: translateY(-3px);
-      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+      background: var(--accent2);
+      color: white;
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     }
 
     /* Footer */
     footer {
       text-align: center;
-      padding: 30px;
-      margin-top: 50px;
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      padding: 60px 30px;
+      margin-top: 100px;
+      background: rgba(10, 14, 26, 0.95);
       color: white;
+      position: relative;
+      overflow: hidden;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--tech-gradient);
+    }
+
+    footer p {
+      position: relative;
+      z-index: 2;
+      font-size: 1.1rem;
     }
 
     /* Chatbot Styles */
     #chatbot-container {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
+      bottom: 30px;
+      right: 30px;
       z-index: 1000;
     }
 
@@ -340,11 +622,11 @@
       color: white;
       border: none;
       border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      font-size: 24px;
+      width: 70px;
+      height: 70px;
+      font-size: 28px;
       cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
       transition: var(--transition);
       display: flex;
       justify-content: center;
@@ -353,48 +635,41 @@
 
     #chat-toggle:hover {
       background: var(--primary-dark);
-      transform: scale(1.05);
+      transform: scale(1.1) rotate(10deg);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
     }
 
     #chat-toggle.pulse {
-      animation: pulse 1.5s infinite;
-    }
-
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.7); }
-      70% { box-shadow: 0 0 0 10px rgba(79, 70, 229, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0); }
+      animation: pulse 2s infinite;
     }
 
     #chat-window {
       display: none;
       flex-direction: column;
       position: absolute;
-      bottom: 70px;
+      bottom: 85px;
       right: 0;
-      width: 350px;
-      height: 450px;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+      width: 380px;
+      height: 500px;
+      background: rgba(15, 23, 42, 0.95);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
       overflow: hidden;
       transition: var(--transition);
-    }
-
-    body.dark-mode #chat-window {
-      background: var(--card-dark);
-      color: var(--dark-text);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .chat-header {
-      background: var(--primary);
+      background: var(--tech-gradient);
       color: white;
-      padding: 15px;
+      padding: 20px;
       text-align: center;
-      font-weight: 600;
+      font-weight: 700;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      font-size: 1.2rem;
     }
 
     .chat-header button {
@@ -402,29 +677,30 @@
       border: none;
       color: white;
       cursor: pointer;
-      font-size: 18px;
+      font-size: 20px;
+      transition: var(--transition);
+    }
+
+    .chat-header button:hover {
+      transform: rotate(90deg);
     }
 
     #chat-messages {
       flex: 1;
-      padding: 15px;
+      padding: 20px;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      gap: 20px;
     }
 
     .message {
       max-width: 80%;
-      padding: 12px 16px;
-      border-radius: 18px;
-      line-height: 1.4;
-      animation: fadeIn 0.3s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+      padding: 15px 20px;
+      border-radius: 20px;
+      line-height: 1.5;
+      animation: fadeIn 0.4s ease;
+      position: relative;
     }
 
     .user-message {
@@ -436,42 +712,34 @@
 
     .bot-message {
       align-self: flex-start;
-      background: #f1f5f9;
-      color: #334155;
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--light-text);
       border-bottom-left-radius: 5px;
-    }
-
-    body.dark-mode .bot-message {
-      background: #475569;
-      color: #e2e8f0;
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .chat-input-container {
       display: flex;
-      padding: 15px;
-      border-top: 1px solid #e2e8f0;
-      background: #f8fafc;
-    }
-
-    body.dark-mode .chat-input-container {
-      background: #1e293b;
-      border-top: 1px solid #475569;
+      padding: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(15, 23, 42, 0.8);
     }
 
     #chat-input {
       flex: 1;
-      padding: 12px;
-      border: 1px solid #cbd5e1;
-      border-radius: 20px;
+      padding: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50px;
       outline: none;
-      font-size: 14px;
-      background: white;
+      font-size: 16px;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      transition: var(--transition);
     }
 
-    body.dark-mode #chat-input {
-      background: #374151;
-      border-color: #4b5563;
-      color: #e2e8f0;
+    #chat-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
     }
 
     #send-btn {
@@ -479,79 +747,186 @@
       color: white;
       border: none;
       border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      margin-left: 10px;
+      width: 50px;
+      height: 50px;
+      margin-left: 15px;
       cursor: pointer;
       display: flex;
       justify-content: center;
       align-items: center;
+      transition: var(--transition);
     }
 
     #send-btn:hover {
       background: var(--primary-dark);
+      transform: rotate(15deg);
+    }
+
+    /* Glitch Effect */
+    .glitch {
+      position: relative;
+      display: inline-block;
+    }
+
+    .glitch::before,
+    .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.8;
+    }
+
+    .glitch::before {
+      animation: glitch 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+      color: #ff00ff;
+      z-index: -1;
+    }
+
+    .glitch::after {
+      animation: glitch 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both infinite;
+      color: #00ffff;
+      z-index: -2;
     }
 
     /* Responsive Design */
+    @media (max-width: 1200px) {
+      .hero h1 {
+        font-size: 3.5rem;
+      }
+    }
+
+    @media (max-width: 992px) {
+      .gallery {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 30px;
+      }
+      
+      .hero h1 {
+        font-size: 3rem;
+      }
+      
+      .countdown {
+        flex-wrap: wrap;
+      }
+    }
+
     @media (max-width: 768px) {
       .topbar {
         flex-direction: column;
         gap: 15px;
       }
       
+      .logo {
+        margin-bottom: 10px;
+        font-size: 1.8rem;
+      }
+      
       .left-controls, .right-nav {
         width: 100%;
         justify-content: center;
+        flex-wrap: wrap;
       }
       
-      .gallery {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: 20px;
+      .hero {
+        padding: 150px 20px 80px;
       }
       
       .hero h1 {
-        font-size: 2.2rem;
+        font-size: 2.5rem;
+      }
+      
+      .hero p {
+        font-size: 1.2rem;
+      }
+      
+      .hero-cta {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .countdown-item {
+        min-width: 80px;
+        padding: 15px;
+      }
+      
+      .countdown-number {
+        font-size: 2rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
       }
       
       .quotes {
-        font-size: 1.2rem;
-        padding: 20px;
+        font-size: 1.3rem;
+        padding: 30px;
       }
       
       #chat-window {
-        width: 300px;
+        width: 320px;
         right: -10px;
       }
     }
 
-    @media (max-width: 480px) {
+    @media (max-width: 576px) {
+      .container {
+        padding: 0 20px;
+      }
+      
+      .hero h1 {
+        font-size: 2rem;
+      }
+      
       .gallery {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+      
+      .book-card {
+        height: 380px;
+      }
+      
+      .countdown {
         gap: 15px;
       }
       
-      .left-controls {
-        flex-wrap: wrap;
+      .countdown-item {
+        min-width: 70px;
+        padding: 12px;
+      }
+      
+      .countdown-number {
+        font-size: 1.8rem;
       }
       
       .info-section {
         grid-template-columns: 1fr;
       }
       
-      #chat-window {
-        width: 280px;
-        height: 400px;
+      .submit-summary {
+        padding: 40px 20px;
       }
       
-      .hero h1 {
-        font-size: 1.8rem;
+      #chat-window {
+        width: 300px;
+        height: 450px;
       }
     }
   </style>
 </head>
 <body>
-  <header>
+  <!-- Particle Background -->
+  <div id="particles-js"></div>
+
+  <header id="main-header">
     <div class="topbar">
+      <div class="logo">
+        <i class="fas fa-microchip"></i>
+        Nexus<span>Verse</span>
+      </div>
       <div class="left-controls">
         <button id="langToggle"><i class="fas fa-language"></i> <span>हिंदी</span></button>
         <button id="modeToggle"><i class="fas fa-moon"></i> <span>Dark Mode</span></button>
@@ -562,18 +937,43 @@
         <a href="about.html"><i class="fas fa-info-circle"></i> <span data-en="About Us" data-hi="हमारे बारे में">About Us</span></a>
       </nav>
     </div>
-
-    <div class="hero">
-      <h1 data-en="Welcome to BookHub" data-hi="बुकहब में आपका स्वागत है">Welcome to BookHub</h1>
-      <p data-en="Explore life-changing books with short and meaningful summaries" data-hi="संक्षिप्त और सार्थक सारांश के साथ जीवन बदलने वाली किताबें खोजें">
-        Explore life-changing books with short and meaningful summaries
-      </p>
-    </div>
   </header>
 
+  <div class="hero">
+    <div class="hero-content">
+      <h1 class="glitch" data-text="NEXUSVERSE TECHFEST 2023">NEXUSVERSE TECHFEST 2023</h1>
+      <p data-en="Where Technology Meets Imagination: Experience the Future Today" data-hi="जहाँ प्रौद्योगिकी कल्पना से मिलती है: भविष्य को आज अनुभव करें">
+        Where Technology Meets Imagination: Experience the Future Today
+      </p>
+      <div class="hero-cta">
+        <a href="#" class="cta-button cta-primary" data-en="Register Now" data-hi="अभी पंजीकरण करें">Register Now</a>
+        <a href="#" class="cta-button cta-secondary" data-en="View Schedule" data-hi="अनुसूची देखें">View Schedule</a>
+      </div>
+      <div class="countdown">
+        <div class="countdown-item">
+          <div class="countdown-number" id="days">00</div>
+          <div class="countdown-label" data-en="Days" data-hi="दिन">Days</div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-number" id="hours">00</div>
+          <div class="countdown-label" data-en="Hours" data-hi="घंटे">Hours</div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-number" id="minutes">00</div>
+          <div class="countdown-label" data-en="Minutes" data-hi="मिनट">Minutes</div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-number" id="seconds">00</div>
+          <div class="countdown-label" data-en="Seconds" data-hi="सेकंड">Seconds</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="container">
+    <h2 class="section-title" data-en="Featured Tech Books" data-hi="फीचर्ड टेक बुक्स">Featured Tech Books</h2>
     <section class="gallery">
-      <div class="book-card">
+      <div class="book-card holographic-card">
         <div class="book-inner">
           <div class="book-front">
             <img src="https://m.media-amazon.com/images/I/81l3rZK4lnL.jpg" alt="Ikigai: The Japanese Secret to a Long and Happy Life">
@@ -587,7 +987,7 @@
         </div>
       </div>
       
-      <div class="book-card">
+      <div class="book-card holographic-card">
         <div class="book-inner">
           <div class="book-front">
             <img src="https://m.media-amazon.com/images/I/91bYsX41DVL.jpg" alt="Atomic Habits: An Easy & Proven Way to Build Good Habits & Break Bad Ones">
@@ -601,7 +1001,7 @@
         </div>
       </div>
       
-      <div class="book-card">
+      <div class="book-card holographic-card">
         <div class="book-inner">
           <div class="book-front">
             <img src="https://m.media-amazon.com/images/I/81s6DUyQCZL.jpg" alt="Think Like a Monk: Train Your Mind for Peace and Purpose Every Day">
@@ -615,7 +1015,7 @@
         </div>
       </div>
       
-      <div class="book-card">
+      <div class="book-card holographic-card">
         <div class="book-inner">
           <div class="book-front">
             <img src="https://m.media-amazon.com/images/I/71aFt4+OTOL.jpg" alt="The Alchemist by Paulo Coelho">
@@ -629,7 +1029,7 @@
         </div>
       </div>
       
-      <div class="book-card">
+      <div class="book-card holographic-card">
         <div class="book-inner">
           <div class="book-front">
             <img src="https://m.media-amazon.com/images/I/81bsw6fnUiL.jpg" alt="Rich Dad Poor Dad: What the Rich Teach Their Kids About Money That the Poor and Middle Class Do Not!">
@@ -644,75 +1044,76 @@
       </div>
     </section>
 
-    <section class="quotes" id="quoteBox" data-en='"A reader lives a thousand lives before he dies." – George R.R. Martin' data-hi='"एक पाठक मरने से पहले हज़ार जीवन जीता है।" – जॉर्ज आर.आर. मार्टिन'>
-      "A reader lives a thousand lives before he dies." – George R.R. Martin
+    <section class="quotes" id="quoteBox" data-en='"The future belongs to those who learn more skills and combine them in creative ways." – Robert Greene' data-hi='"भविष्य उनका है जो अधिक कौशल सीखते हैं और उन्हें रचनात्मक तरीकों से जोड़ते हैं।" – रॉबर्ट ग्रीन'>
+      "The future belongs to those who learn more skills and combine them in creative ways." – Robert Greene
     </section>
 
+    <h2 class="section-title" data-en="Why Join NexusVerse?" data-hi="नेक्ससवर्स में क्यों शामिल हों?">Why Join NexusVerse?</h2>
     <section class="info-section">
-      <div class="info-card">
-        <i class="fas fa-hourglass-half"></i>
-        <h3 data-en="Save Time" data-hi="समय बचाएँ">Save Time</h3>
-        <p data-en="Get the key insights of great books in minutes instead of hours." data-hi="घंटों के बजाय मिनटों में महान किताबों की मुख्य बातें जानें।">
-          Get the key insights of great books in minutes instead of hours.
-        </p>
-      </div>
-      
-      <div class="info-card">
+      <div class="info-card holographic-card">
         <i class="fas fa-brain"></i>
-        <h3 data-en="Learn Faster" data-hi="तेज़ी से सीखें">Learn Faster</h3>
-        <p data-en="Summaries highlight lessons you can apply in real life quickly." data-hi="सारांश उन पाठों को उजागर करते हैं जिन्हें आप जल्दी अपने जीवन में लागू कर सकते हैं।">
-          Summaries highlight lessons you can apply in real life quickly.
+        <h3 data-en="Expand Your Mind" data-hi="अपने मन का विस्तार करें">Expand Your Mind</h3>
+        <p data-en="Discover cutting-edge ideas that will transform your thinking and approach to technology." data-hi="अत्याधुनिक विचारों की खोज करें जो आपकी सोच और प्रौद्योगिकी के दृष्टिकोण को बदल देंगे।">
+          Discover cutting-edge ideas that will transform your thinking and approach to technology.
         </p>
       </div>
       
-      <div class="info-card">
-        <i class="fas fa-binoculars"></i>
-        <h3 data-en="Discover More" data-hi="और खोजें">Discover More</h3>
-        <p data-en="Explore books before deciding to read the full version." data-hi="पूर्ण संस्करण पढ़ने से पहले किताबों का अन्वेषण करें।">
-          Explore books before deciding to read the full version.
+      <div class="info-card holographic-card">
+        <i class="fas fa-network-wired"></i>
+        <h3 data-en="Connect with Innovators" data-hi="नवप्रवर्तकों के साथ जुड़ें">Connect with Innovators</h3>
+        <p data-en="Meet visionaries and creators who are shaping the future of technology and literature." data-hi="उन दूरदर्शियों और रचनाकारों से मिलें जो प्रौद्योगिकी और साहित्य के भविष्य को आकार दे रहे हैं।">
+          Meet visionaries and creators who are shaping the future of technology and literature.
         </p>
       </div>
       
-      <div class="info-card">
-        <i class="fas fa-seedling"></i>
-        <h3 data-en="Grow Every Day" data-hi="हर दिन बढ़ें">Grow Every Day</h3>
-        <p data-en="Expand your knowledge and mindset step by step." data-hi="अपने ज्ञान और मानसिकता को कदम दर कदम बढ़ाएँ।">
-          Expand your knowledge and mindset step by step.
+      <div class="info-card holographic-card">
+        <i class="fas fa-rocket"></i>
+        <h3 data-en="Launch Your Ideas" data-hi="अपने विचारों को लॉन्च करें">Launch Your Ideas</h3>
+        <p data-en="Get inspired and gain the tools you need to bring your innovative concepts to life." data-hi="प्रेरित हों और अपने innovative concepts को जीवन में लाने के लिए आवश्यक tools प्राप्त करें।">
+          Get inspired and gain the tools you need to bring your innovative concepts to life.
+        </p>
+      </div>
+      
+      <div class="info-card holographic-card">
+        <i class="fas fa-globe"></i>
+        <h3 data-en="Global Perspective" data-hi="वैश्विक परिप्रेक्ष्य">Global Perspective</h3>
+        <p data-en="Gain insights from international thought leaders across the tech and literary worlds." data-hi="टेक और साहित्यिक दुनिया भर के अंतर्राष्ट्रीय thought leaders से insights प्राप्त करें।">
+          Gain insights from international thought leaders across the tech and literary worlds.
         </p>
       </div>
     </section>
 
-    <section class="submit-summary">
-      <h2 data-en="Submit Your Summary" data-hi="अपना सारांश सबमिट करें">Submit Your Summary</h2>
-      <p data-en="Have a favorite book? Share your own summary with us and get featured!" data-hi="क्या आपकी कोई पसंदीदा किताब है? अपना सारांश हमारे साथ साझा करें और फीचर पाएं!">
-        Have a favorite book? Share your own summary with us and get featured!
+    <section class="submit-summary holographic-card">
+      <h2 data-en="Submit Your Project" data-hi="अपना प्रोजेक्ट सबमिट करें">Submit Your Project</h2>
+      <p data-en="Have an innovative tech project or book concept? Share it with us for a chance to be featured at NexusVerse!" data-hi="क्या आपके पास एक innovative tech project या book concept है? इसे NexusVerse में featured होने के मौके के लिए हमारे साथ साझा करें!">
+        Have an innovative tech project or book concept? Share it with us for a chance to be featured at NexusVerse!
       </p>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdDQVbyCEyDv03QfrDQjlMy8it75LlQBgIGALN1eACL7hUFWw/viewform?usp=preview" target="_blank" data-en="Submit Here" data-hi="यहाँ सबमिट करें">Submit Here</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdDQVbyCEyDv03QfrDQjlMy8it75LlQBgIGALN1eACL7hUFWw/viewform?usp=preview" target="_blank" data-en="Submit Innovation" data-hi="नवाचार सबमिट करें">Submit Innovation</a>
     </section>
   </div>
 
   <footer>
-    <p data-en="Created with passion by Piyush, Prince & Deepak" data-hi="पियूष, प्रिंस और दीपक द्वारा उत्साह के साथ बनाया गया">
-      Created with passion by Piyush, Prince & Deepak
+    <p data-en="Crafted with 💙 by Piyush, Prince & Deepak | NexusVerse TechFest 2023" data-hi="पियूष, प्रिंस और दीपक द्वारा 💙 के साथ तैयार | नेक्ससवर्स टेकफेस्ट 2023">
+      Crafted with 💙 by Piyush, Prince & Deepak | NexusVerse TechFest 2023
     </p>
   </footer>
 
   <!-- Enhanced Chatbot Widget -->
   <div id="chatbot-container">
     <button id="chat-toggle" class="pulse">
-      <i class="fas fa-comments"></i>
+      <i class="fas fa-robot"></i>
     </button>
     
     <div id="chat-window">
       <div class="chat-header">
-        <span>BookHub Assistant</span>
+        <span>NexusBot</span>
         <button id="chat-close">
           <i class="fas fa-times"></i>
         </button>
       </div>
       <div id="chat-messages">
         <div class="message bot-message">
-          <strong>BookBot:</strong> Hello! I'm here to help you explore our book summaries. What would you like to know?
+          <strong>NexusBot:</strong> Hello! I'm your guide to NexusVerse TechFest. How can I assist you today?
         </div>
       </div>
       <div class="chat-input-container">
@@ -724,7 +1125,52 @@
     </div>
   </div>
 
+  <!-- Particle.js CDN -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  
   <script>
+    // Initialize particles.js
+    document.addEventListener('DOMContentLoaded', function() {
+      particlesJS('particles-js', {
+        particles: {
+          number: { value: 100, density: { enable: true, value_area: 800 } },
+          color: { value: "#6c5ce7" },
+          shape: { type: "circle" },
+          opacity: { value: 0.5, random: true },
+          size: { value: 3, random: true },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: "#6c5ce7",
+            opacity: 0.4,
+            width: 1
+          },
+          move: {
+            enable: true,
+            speed: 2,
+            direction: "none",
+            random: true,
+            straight: false,
+            out_mode: "out",
+            bounce: false
+          }
+        },
+        interactivity: {
+          detect_on: "canvas",
+          events: {
+            onhover: { enable: true, mode: "grab" },
+            onclick: { enable: true, mode: "push" },
+            resize: true
+          },
+          modes: {
+            grab: { distance: 140, line_linked: { opacity: 1 } },
+            push: { particles_nb: 4 }
+          }
+        },
+        retina_detect: true
+      });
+    });
+
     // Language management
     let currentLang = 'en';
     
@@ -778,27 +1224,74 @@
       modeIcon.className = 'fas fa-sun';
     }
     
+    // Header scroll effect
+    const header = document.getElementById('main-header');
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+    
+    // Countdown timer
+    function updateCountdown() {
+      // Set the date we're counting down to (2 weeks from now)
+      const countDownDate = new Date();
+      countDownDate.setDate(countDownDate.getDate() + 14);
+      
+      // Update the count down every 1 second
+      const countdownFunction = setInterval(function() {
+        // Get today's date and time
+        const now = new Date().getTime();
+        
+        // Find the distance between now and the count down date
+        const distance = countDownDate - now;
+        
+        // Time calculations for days, hours, minutes and seconds
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+        // Output the result in elements with id="days", "hours", "minutes", "seconds"
+        document.getElementById("days").innerHTML = days.toString().padStart(2, '0');
+        document.getElementById("hours").innerHTML = hours.toString().padStart(2, '0');
+        document.getElementById("minutes").innerHTML = minutes.toString().padStart(2, '0');
+        document.getElementById("seconds").innerHTML = seconds.toString().padStart(2, '0');
+        
+        // If the count down is over, write some text 
+        if (distance < 0) {
+          clearInterval(countdownFunction);
+          document.getElementById("days").innerHTML = "00";
+          document.getElementById("hours").innerHTML = "00";
+          document.getElementById("minutes").innerHTML = "00";
+          document.getElementById("seconds").innerHTML = "00";
+        }
+      }, 1000);
+    }
+    
     // Quotes carousel
     const quotes = [
       {
-        en: `"A reader lives a thousand lives before he dies." – George R.R. Martin`,
-        hi: `"एक पाठक मरने से पहले हज़ार जीवन जीता है।" – जॉर्ज आर.आर. मार्टिन`
+        en: `"The future belongs to those who learn more skills and combine them in creative ways." – Robert Greene`,
+        hi: `"भविष्य उनका है जो अधिक कौशल सीखते हैं और उन्हें रचनात्मक तरीकों से जोड़ते हैं।" – रॉबर्ट ग्रीन`
       },
       {
-        en: `"So many books, so little time." – Frank Zappa`,
-        hi: `"इतनी किताबें, इतना कम समय।" – फ्रैंक ज़ैपा`
+        en: `"The most powerful tool we have as developers is automation." – Scott Hanselman`,
+        hi: `"डेवलपर्स के रूप में हमारे पास सबसे शक्तिशाली उपकरण automation है।" – स्कॉट हैंसलमैन`
       },
       {
         en: `"Reading is essential for those who seek to rise above the ordinary." – Jim Rohn`,
         hi: `"जो साधारण से ऊपर उठना चाहते हैं, उनके लिए पढ़ना जरूरी है।" – जिम रॉन`
       },
       {
-        en: `"The man who does not read has no advantage over the man who cannot read." – Mark Twain`,
-        hi: `"जो आदमी नहीं पढ़ता, उसका उस आदमी पर कोई फायदा नहीं होता जो पढ़ नहीं सकता।" – मार्क ट्वेन`
+        en: `"The Web as I envisaged it, we have not seen it yet. The future is still so much bigger than the past." – Tim Berners-Lee`,
+        hi: `"जैसा कि मैंने वेब की कल्पना की थी, हमने अभी तक इसे नहीं देखा है। भविष्य अभी भी अतीत से कहीं अधिक बड़ा है।" – टिम बर्नर्स-ली`
       },
       {
-        en: `"Once you learn to read, you will be forever free." – Frederick Douglass`,
-        hi: `"एक बार जब आप पढ़ना सीख जाते हैं, तो आप हमेशा के लिए आज़ाद हो जाते हैं।" – फ्रेडरिक डगलस`
+        en: `"Technology is nothing. What's important is that you have faith in people, that they're basically good and smart." – Steve Jobs`,
+        hi: `"प्रौद्योगिकी कुछ भी नहीं है। जो महत्वपूर्ण है वह यह है कि आप लोगों में विश्वास रखें, कि वे मूल रूप से अच्छे और smart हैं।" – स्टीव जॉब्स`
       }
     ];
     
@@ -814,8 +1307,6 @@
         quoteIndex = (quoteIndex + 1) % quotes.length;
       }, 500);
     }
-    
-    setInterval(updateQuote, 5000);
     
     // Enhanced Chatbot functionality
     const toggleBtn = document.getElementById("chat-toggle");
@@ -862,7 +1353,7 @@
       messageEl.classList.add("message", `${sender}-message`);
       
       if (sender === 'bot') {
-        messageEl.innerHTML = `<strong>BookBot:</strong> ${text}`;
+        messageEl.innerHTML = `<strong>NexusBot:</strong> ${text}`;
       } else {
         messageEl.innerHTML = `<strong>You:</strong> ${text}`;
       }
@@ -877,52 +1368,51 @@
       // Greeting detection
       if (lowerText.includes('hi') || lowerText.includes('hello') || lowerText.includes('hey')) {
         return currentLang === 'en' 
-          ? "Hello! How can I help you with book summaries today?" 
-          : "नमस्ते! मैं आज आपकी पुस्तक सारांश में कैसे मदद कर सकता हूँ?";
+          ? "Hello! Welcome to NexusVerse TechFest. How can I assist you today?" 
+          : "नमस्ते! नेक्ससवर्स टेकफेस्ट में आपका स्वागत है। मैं आज आपकी कैसे सहायता कर सकता हूँ?";
+      }
+      
+      // Event information
+      if (lowerText.includes('event') || lowerText.includes('nexusverse') || lowerText.includes('techfest')) {
+        return currentLang === 'en' 
+          ? "NexusVerse TechFest is a groundbreaking festival celebrating the intersection of technology and literature. We feature innovative tech demonstrations, book summaries, tech talks, and workshops on the future of digital reading and AI-assisted literature." 
+          : "नेक्ससवर्स टेकफेस्ट प्रौद्योगिकी और साहित्य के प्रतिच्छेदन का जश्न मनाने वाला एक groundbreaking उत्सव है। हम innovative tech demonstrations, पुस्तक सारांश, तकनीकी वार्ताएं और डिजिटल पठन तथा AI-सहायता प्राप्त साहित्य के भविष्य पर कार्यशालाएं प्रदान करते हैं।";
       }
       
       // Book-specific queries
       if (lowerText.includes('ikigai')) {
         return currentLang === 'en' 
-          ? "Ikigai is a Japanese concept that means 'a reason for being'. This book explores the secrets to longevity and happiness from the residents of Okinawa." 
-          : "इकिगाई एक जापानी अवधारणा है जिसका अर्थ है 'अस्तित्व का कारण'। यह पुस्तक ओकिनावा के निवासियों से दीर्घायु और खुशहाल जीवन के रहस्यों का पता लगाती है।";
+          ? "Ikigai is a Japanese concept that means 'a reason for being'. This book explores the secrets to longevity and happiness from the residents of Okinawa, who have some of the longest life expectancies in the world." 
+          : "इकिगाई एक जापानी अवधारणा है जिसका अर्थ है 'अस्तित्व का कारण'। यह पुस्तक ओकिनावा के निवासियों से दीर्घायु और खुशहाल जीवन के रहस्यों का पता लगाती है, जिनकी दुनिया में सबसे लंबी life expectancies में से एक है।";
       }
       
       if (lowerText.includes('atomic') || lowerText.includes('habit')) {
         return currentLang === 'en' 
-          ? "Atomic Habits teaches how tiny changes can grow into remarkable results. James Clear provides practical strategies for forming good habits and breaking bad ones." 
-          : "ऐटमिक हैबिट्स सिखाती है कि कैसे छोटे बदलाव उल्लेखनीय परिणाम दे सकते हैं। जेम्स क्लियर अच्छी आदतें बनाने और बुरी आदतों को तोड़ने के लिए व्यावहारिक रणनीतियाँ प्रदान करते हैं।";
-      }
-      
-      if (lowerText.includes('monk')) {
-        return currentLang === 'en' 
-          ? "In Think Like a Monk, Jay Shetty shares how to apply monk wisdom to everyday life. He teaches how to overcome negativity and find purpose." 
-          : "थिंक लाइक अ मोंक में, जय शेट्टी बताते हैं कि कैसे मठ के ज्ञान को रोजमर्रा की जिंदगी में लागू किया जाए। वह सिखाते हैं कि नकारात्मकता को कैसे दूर किया जाए और उद्देश्य कैसे पाया जाए।";
-      }
-      
-      if (lowerText.includes('alchemist')) {
-        return currentLang === 'en' 
-          ? "The Alchemist is a philosophical novel about a young shepherd who travels to Egypt in search of treasure. The story teaches about following your dreams." 
-          : "द अलकेमिस्ट एक दार्शनिक उपन्यास है जो एक युवा चरवाहे के बारे में है जो खजाने की तलाश में मिस्र की यात्रा करता है। कहानी अपने सपनों का पालन करने के बारे में सिखाती है।";
-      }
-      
-      if (lowerText.includes('rich') || lowerText.includes('poor') || lowerText.includes('dad')) {
-        return currentLang === 'en' 
-          ? "Rich Dad Poor Dad is Robert Kiyosaki's story of growing up with two dads. The book explains how to make money work for you, rather than working for money." 
-          : "रिच डैड पुअर डैड रॉबर्ट कियोसाकी की दो पिता के साथ बड़े होने की कहानी है। किताब बताती है कि पैसे को अपने लिए कैसे काम करना है, बजाय पैसे के लिए काम करने के।";
+          ? "Atomic Habits teaches how tiny changes can grow into remarkable results. James Clear provides practical strategies for forming good habits, breaking bad ones, and mastering the tiny behaviors that lead to remarkable results." 
+          : "ऐटमिक हैबिट्स सिखाती है कि कैसे छोटे बदलाव उल्लेखनीय परिणाम दे सकते हैं। जेम्स क्लियर अच्छी आदतें बनाने, बुरी आदतों को तोड़ने और उन छोटे behaviors में महारत हासिल करने के लिए व्यावहारिक रणनीतियाँ प्रदान करते हैं जो उल्लेखनीय परिणाम देते हैं।";
       }
       
       // Default response
       return currentLang === 'en' 
-        ? "I'm not sure how to answer that. I can tell you about our book summaries though! Try asking about a specific book like 'Ikigai' or 'Atomic Habits'." 
-        : "मुझे यकीन नहीं है कि इसका जवाब कैसे दूं। हालाँकि, मैं आपको हमारे पुस्तक सारांशों के बारे में बता सकता हूँ! 'इकिगाई' या 'ऐटमिक हैबिट्स' जैसी किसी विशिष्ट पुस्तक के बारे में पूछने का प्रयास करें।";
+        ? "I'm not sure how to answer that. I can tell you about our NexusVerse TechFest event and featured books though! Try asking about the event or a specific book." 
+        : "मुझे यकीन नहीं है कि इसका जवाब कैसे दूं। हालाँकि, मैं आपको हमारे नेक्ससवर्स टेकफेस्ट कार्यक्रम और फीचर्ड पुस्तकों के बारे में बता सकता हूँ! कार्यक्रम या किसी विशिष्ट पुस्तक के बारे में पूछने का प्रयास करें।";
     }
     
-    // Initialize page with a slight delay for a polished feel
+    // Initialize everything when page loads
     document.addEventListener('DOMContentLoaded', function() {
+      updateCountdown();
+      setInterval(updateQuote, 6000);
+      
       setTimeout(() => {
         document.body.style.opacity = 1;
       }, 100);
+      
+      // Add floating animation to elements
+      const floatingElements = document.querySelectorAll('.holographic-card');
+      floatingElements.forEach((el, index) => {
+        el.style.animation = `float ${6 + index * 0.5}s ease-in-out infinite`;
+        el.style.animationDelay = `${index * 0.3}s`;
+      });
     });
   </script>
 </body>
