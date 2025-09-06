@@ -3,23 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Book Summaries - BookHub</title>
+  <title>Book Summaries - PDPBookhub</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Exo+2:wght@100;200;300;400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #4f46e5;
-      --primary-dark: #4338ca;
-      --accent: #f97316;
-      --light-bg: #f8fafc;
-      --dark-bg: #0f172a;
-      --light-text: #1e293b;
-      --dark-text: #f1f5f9;
-      --card-light: #ffffff;
-      --card-dark: #1e293b;
+      --primary: #6c5ce7;
+      --primary-dark: #5649c9;
+      --accent: #00d2ff;
+      --accent2: #ff3860;
+      --accent3: #ffcc00;
+      --accent4: #9d4edd;
+      --light-bg: #0f172a;
+      --dark-bg: #0a0e1a;
+      --light-text: #f1f5f9;
+      --dark-text: #cbd5e1;
+      --tech-gradient: linear-gradient(135deg, #6c5ce7 0%, #00d2ff 100%);
+      --tech-gradient2: linear-gradient(135deg, #ff3860 0%, #ffcc00 100%);
+      --tech-gradient3: linear-gradient(135deg, #9d4edd 0%, #4cc9f0 100%);
       --shadow-light: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
       --shadow-dark: 0 4px 6px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.2);
       --transition: all 0.3s ease;
+      --transition-slow: all 0.7s ease;
     }
 
     * {
@@ -29,37 +34,77 @@
     }
 
     body {
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'Exo 2', sans-serif;
       background: var(--light-bg);
       color: var(--light-text);
       line-height: 1.6;
       transition: var(--transition);
       min-height: 100vh;
+      opacity: 0;
+      animation: fadeIn 1.2s ease forwards;
+      overflow-x: hidden;
     }
 
-    body.dark-mode {
-      background: var(--dark-bg);
-      color: var(--dark-text);
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes glitch {
+      0% { transform: translate(0); }
+      20% { transform: translate(-2px, 2px); }
+      40% { transform: translate(-2px, -2px); }
+      60% { transform: translate(2px, 2px); }
+      80% { transform: translate(2px, -2px); }
+      100% { transform: translate(0); }
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(108, 92, 231, 0.7); }
+      70% { box-shadow: 0 0 0 15px rgba(108, 92, 231, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(108, 92, 231, 0); }
     }
 
     h1, h2, h3, h4, h5 {
-      font-family: 'Merriweather', serif;
+      font-family: 'Orbitron', sans-serif;
       font-weight: 700;
       margin-bottom: 1rem;
     }
 
     .container {
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
-      padding: 0 20px;
+      padding: 0 30px;
+    }
+
+    /* Particle Background */
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
     }
 
     /* Header Styles */
     header {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      background: rgba(15, 23, 42, 0.8);
       color: white;
       padding: 1rem 0;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      width: 100%;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      transition: var(--transition);
+    }
+
+    header.scrolled {
+      padding: 0.5rem 0;
+      background: rgba(10, 14, 26, 0.95);
     }
 
     .topbar {
@@ -69,7 +114,24 @@
       padding: 0 20px;
     }
 
-    .left-controls {
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--tech-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 15px rgba(108, 92, 231, 0.5);
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .left-controls { 
       display: flex;
       gap: 10px;
     }
@@ -77,11 +139,11 @@
     .left-controls button {
       padding: 8px 16px;
       border-radius: 50px;
-      border: none;
+      border: 1px solid rgba(255, 255, 255, 0.2);
       cursor: pointer;
       font-weight: 600;
       transition: var(--transition);
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.1);
       color: white;
       display: flex;
       align-items: center;
@@ -89,8 +151,9 @@
     }
 
     .left-controls button:hover {
-      background: rgba(255, 255, 255, 0.3);
+      background: var(--primary);
       transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
     }
 
     .right-nav {
@@ -103,38 +166,51 @@
       font-weight: 600;
       padding: 8px 16px;
       border-radius: 50px;
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.1);
       color: white;
       transition: var(--transition);
       display: flex;
       align-items: center;
       gap: 5px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     .right-nav a:hover {
       background: var(--accent);
       transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 210, 255, 0.4);
     }
 
     /* Hero Section */
     .hero {
       text-align: center;
-      padding: 60px 20px;
+      padding: 180px 20px 100px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
     }
 
     .hero h1 {
-      font-size: 2.8rem;
-      margin-bottom: 1rem;
-      background: linear-gradient(to right, var(--primary), var(--accent));
+      font-size: 4.5rem;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(to right, #fff, var(--accent), var(--accent2));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+      animation: glow 3s infinite alternate;
+      letter-spacing: 2px;
     }
 
     .hero p {
-      font-size: 1.2rem;
-      max-width: 600px;
-      margin: 0 auto;
+      font-size: 1.4rem;
+      max-width: 700px;
+      margin: 0 auto 2.5rem;
       opacity: 0.9;
+      font-weight: 300;
     }
 
     /* Search Box */
@@ -148,23 +224,18 @@
       width: 100%;
       padding: 15px 20px;
       border-radius: 50px;
-      border: 2px solid #e2e8f0;
+      border: 2px solid rgba(255, 255, 255, 0.2);
       font-size: 1rem;
       outline: none;
       transition: var(--transition);
-      box-shadow: var(--shadow-light);
-    }
-
-    body.dark-mode .search-box input {
-      background: var(--card-dark);
-      border-color: #475569;
-      color: var(--dark-text);
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
       box-shadow: var(--shadow-dark);
     }
 
     .search-box input:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.3);
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(0, 210, 255, 0.3);
     }
 
     .search-box i {
@@ -175,43 +246,61 @@
       color: #94a3b8;
     }
 
+    /* Section Title */
+    .section-title {
+      text-align: center;
+      margin: 80px 0 50px;
+      position: relative;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 2.5rem;
+      padding: 0 20px;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 5px;
+      background: var(--tech-gradient);
+      border-radius: 3px;
+    }
+
     /* Book Grid */
     .book-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 30px;
-      margin: 50px auto;
+      gap: 40px;
+      margin: 60px auto;
     }
 
     .book-card {
-      background: var(--card-light);
-      border-radius: 12px;
+      perspective: 1000px;
+      height: 450px;
+      cursor: pointer;
+      border-radius: 15px;
       overflow: hidden;
-      box-shadow: var(--shadow-light);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
       transition: var(--transition);
-    }
-
-    body.dark-mode .book-card {
-      background: var(--card-dark);
-      box-shadow: var(--shadow-dark);
+      position: relative;
     }
 
     .book-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      transform: translateY(-15px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(108, 92, 231, 0.5);
     }
 
     .book-img {
       height: 250px;
       overflow: hidden;
-      background-color: #f1f5f9;
+      background-color: rgba(255, 255, 255, 0.05);
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-
-    body.dark-mode .book-img {
-      background-color: #334155;
     }
 
     .book-img img {
@@ -226,93 +315,182 @@
     }
 
     .book-info {
-      padding: 20px;
+      padding: 25px;
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(10px);
+      height: 200px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .book-info h3 {
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       margin-bottom: 10px;
-      color: var(--primary);
-    }
-
-    body.dark-mode .book-info h3 {
       color: var(--accent);
+      font-family: 'Orbitron', sans-serif;
     }
 
     .book-info p {
-      color: #64748b;
+      color: #cbd5e1;
       margin-bottom: 15px;
       font-size: 0.95rem;
       line-height: 1.5;
-    }
-
-    body.dark-mode .book-info p {
-      color: #cbd5e1;
+      flex-grow: 1;
     }
 
     .book-info a {
       display: inline-block;
       padding: 10px 20px;
-      background: var(--primary);
+      background: var(--tech-gradient);
       color: white;
       border-radius: 50px;
       text-decoration: none;
       font-weight: 600;
-      box-shadow: var(--shadow-light);
+      box-shadow: var(--shadow-dark);
       transition: var(--transition);
+      text-align: center;
     }
 
     .book-info a:hover {
       background: var(--primary-dark);
       transform: translateY(-2px);
-      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Holographic Effect */
+    .holographic-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 15px;
+      transition: var(--transition);
+    }
+
+    .holographic-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: var(--transition-slow);
+    }
+
+    .holographic-card:hover::before {
+      left: 100%;
     }
 
     /* Footer */
     footer {
       text-align: center;
-      padding: 30px;
-      margin-top: 50px;
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      padding: 60px 30px;
+      margin-top: 100px;
+      background: rgba(10, 14, 26, 0.95);
       color: white;
+      position: relative;
+      overflow: hidden;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--tech-gradient);
+    }
+
+    footer p {
+      position: relative;
+      z-index: 2;
+      font-size: 1.1rem;
     }
 
     /* Responsive Design */
+    @media (max-width: 1200px) {
+      .hero h1 {
+        font-size: 3.5rem;
+      }
+    }
+
+    @media (max-width: 992px) {
+      .book-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 30px;
+      }
+      
+      .hero h1 {
+        font-size: 3rem;
+      }
+    }
+
     @media (max-width: 768px) {
       .topbar {
         flex-direction: column;
         gap: 15px;
       }
       
+      .logo {
+        margin-bottom: 10px;
+        font-size: 1.8rem;
+      }
+      
       .left-controls, .right-nav {
         width: 100%;
         justify-content: center;
+        flex-wrap: wrap;
+      }
+      
+      .hero {
+        padding: 150px 20px 80px;
       }
       
       .hero h1 {
-        font-size: 2.2rem;
+        font-size: 2.5rem;
       }
       
-      .book-grid {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        gap: 20px;
+      .hero p {
+        font-size: 1.2rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
       }
     }
 
-    @media (max-width: 480px) {
-      .book-grid {
-        grid-template-columns: 1fr;
+    @media (max-width: 576px) {
+      .container {
+        padding: 0 20px;
       }
       
       .hero h1 {
-        font-size: 1.8rem;
+        font-size: 2rem;
+      }
+      
+      .book-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+      
+      .book-card {
+        height: 420px;
       }
     }
   </style>
 </head>
 <body>
-  <header>
+  <!-- Particle Background -->
+  <div id="particles-js"></div>
+
+  <header id="main-header">
     <div class="topbar">
+      <div class="logo">
+        <i class="fas fa-microchip"></i>
+        PDP<span>Bookhub</span>
+      </div>
       <div class="left-controls">
         <button id="langToggle"><i class="fas fa-language"></i> <span>हिंदी</span></button>
         <button id="modeToggle"><i class="fas fa-moon"></i> <span>Dark Mode</span></button>
@@ -323,14 +501,16 @@
         <a href="about.html"><i class="fas fa-info-circle"></i> <span data-en="About Us" data-hi="हमारे बारे में">About Us</span></a>
       </nav>
     </div>
+  </header>
 
-    <div class="hero">
-      <h1 data-en="Book Summaries" data-hi="पुस्तक सारांश">Book Summaries</h1>
+  <div class="hero">
+    <div class="hero-content">
+      <h1 class="glitch" data-text="Book Summaries">Book Summaries</h1>
       <p data-en="Discover key insights from the world's best books" data-hi="दुनिया की सर्वश्रेष्ठ पुस्तकों से मुख्य अंतर्दृष्टि खोजें">
         Discover key insights from the world's best books
       </p>
     </div>
-  </header>
+  </div>
 
   <div class="container">
     <div class="search-box">
@@ -338,9 +518,11 @@
       <i class="fas fa-search"></i>
     </div>
 
+    <h2 class="section-title" data-en="All Book Summaries" data-hi="सभी पुस्तक सारांश">All Book Summaries</h2>
+    
     <div class="book-grid">
       <!-- Book 1 -->
-      <div class="book-card">
+      <div class="book-card holographic-card">
         <div class="book-img">
           <img src="https://m.media-amazon.com/images/I/81l3rZK4lnL.jpg" alt="Ikigai">
         </div>
@@ -354,7 +536,7 @@
       </div>
 
       <!-- Book 2 -->
-      <div class="book-card">
+      <div class="book-card holographic-card">
         <div class="book-img">
           <img src="https://m.media-amazon.com/images/I/91bYsX41DVL.jpg" alt="Atomic Habits">
         </div>
@@ -368,7 +550,7 @@
       </div>
 
       <!-- Book 3 -->
-      <div class="book-card">
+      <div class="book-card holographic-card">
         <div class="book-img">
           <img src="https://m.media-amazon.com/images/I/81s6DUyQCZL.jpg" alt="Think Like a Monk">
         </div>
@@ -382,7 +564,7 @@
       </div>
 
       <!-- Book 4 -->
-      <div class="book-card">
+      <div class="book-card holographic-card">
         <div class="book-img">
           <img src="https://m.media-amazon.com/images/I/71aFt4+OTOL.jpg" alt="The Alchemist">
         </div>
@@ -396,7 +578,7 @@
       </div>
 
       <!-- Book 5 -->
-      <div class="book-card">
+      <div class="book-card holographic-card">
         <div class="book-img">
           <img src="https://m.media-amazon.com/images/I/81bsw6fnUiL.jpg" alt="Rich Dad Poor Dad">
         </div>
@@ -410,7 +592,7 @@
       </div>
 
       <!-- Book 6 -->
-      <div class="book-card">
+      <div class="book-card holographic-card">
         <div class="book-img">
           <img src="https://m.media-amazon.com/images/I/71vk6p-+ZrL.jpg" alt="Wings of Fire">
         </div>
@@ -424,7 +606,7 @@
       </div>
 
       <!-- Book 7 -->
-      <div class="book-card">
+      <div class="book-card holographic-card">
         <div class="book-img">
           <img src="https://m.media-amazon.com/images/I/71+2iNnQeNL.jpg" alt="The Power of Now">
         </div>
@@ -438,7 +620,7 @@
       </div>
       
       <!-- Book 8 -->
-      <div class="book-card">
+      <div class="book-card holographic-card">
         <div class="book-img">
           <img src="https://m.media-amazon.com/images/I/81gC7sG1+SL.jpg" alt="The Bhagavad Gita">
         </div>
@@ -450,8 +632,9 @@
           <a href="summary8.html" data-en="Read Summary" data-hi="सारांश पढ़ें">Read Summary</a>
         </div>
       </div>
-
-      <!-- Book 9 -->
+    </div>
+  </div>
+    <!-- Book 9 -->
       <div class="book-card">
         <div class="book-img">
           <img src="https://m.media-amazon.com/images/I/71M7NgQcreL.jpg" alt="The Diary of a Young Girl">
@@ -565,13 +748,59 @@
     </div>
   </div>
 
+
   <footer>
-    <p data-en="Created with passion by Piyush, Prince & Deepak" data-hi="पियूष, प्रिंस और दीपक द्वारा उत्साह के साथ बनाया गया">
-      Created with passion by Piyush, Prince & Deepak
+    <p data-en="Crafted with 💙 by Piyush, Prince & Deepak | PDPbookhub" data-hi="पियूष, प्रिंस और दीपक द्वारा 💙 के साथ तैयार |PDPbookhub">
+      Crafted with 💙 by Piyush, Prince & Deepak | PDPbookhub
     </p>
   </footer>
 
+  <!-- Particle.js CDN -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  
   <script>
+    // Initialize particles.js
+    document.addEventListener('DOMContentLoaded', function() {
+      particlesJS('particles-js', {
+        particles: {
+          number: { value: 100, density: { enable: true, value_area: 800 } },
+          color: { value: "#6c5ce7" },
+          shape: { type: "circle" },
+          opacity: { value: 0.5, random: true },
+          size: { value: 3, random: true },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: "#6c5ce7",
+            opacity: 0.4,
+            width: 1
+          },
+          move: {
+            enable: true,
+            speed: 2,
+            direction: "none",
+            random: true,
+            straight: false,
+            out_mode: "out",
+            bounce: false
+          }
+        },
+        interactivity: {
+          detect_on: "canvas",
+          events: {
+            onhover: { enable: true, mode: "grab" },
+            onclick: { enable: true, mode: "push" },
+            resize: true
+          },
+          modes: {
+            grab: { distance: 140, line_linked: { opacity: 1 } },
+            push: { particles_nb: 4 }
+          }
+        },
+        retina_detect: true
+      });
+    });
+
     // Language management
     let currentLang = 'en';
     
@@ -634,6 +863,16 @@
       modeIcon.className = 'fas fa-sun';
     }
     
+    // Header scroll effect
+    const header = document.getElementById('main-header');
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+    
     // Search functionality
     const searchInput = document.getElementById("searchInput");
     searchInput.addEventListener("keyup", searchBooks);
@@ -653,6 +892,20 @@
         }
       });
     }
+
+    // Initialize everything when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(() => {
+        document.body.style.opacity = 1;
+      }, 100);
+      
+      // Add floating animation to elements
+      const floatingElements = document.querySelectorAll('.holographic-card');
+      floatingElements.forEach((el, index) => {
+        el.style.animation = `float ${6 + index * 0.5}s ease-in-out infinite`;
+        el.style.animationDelay = `${index * 0.3}s`;
+      });
+    });
   </script>
 </body>
 </html>
